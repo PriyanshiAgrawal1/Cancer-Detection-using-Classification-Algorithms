@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Beat The Cancer!</title>
+  <!-- <link rel="shortcut icon" href="{% static "images/favicon1.ico" %}" /> -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static "images/title_bar_logo.png" %}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+  <style>
+  .a {
+    padding-top: 150px;
+  }
+
+  .chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: lightgrey;
+  }
+
+  .chip img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+  body, html {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+.content {
+  position: absolute;
+  left:450px;
+  bottom:0px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(13, 48, 79, 0.8); /* Black background with 0.5 opacity */
+  color: #232323;
+  width: 35%;
+  height:100%;
+  padding: 20px;
+}
+
+.content1 {
+  position: absolute;
+  top:0px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(13, 48, 79, 0.6); /* Black background with 0.5 opacity */
+  width: 29.5%;
+  height:70%;
+  padding: 20px;
+}
+
+.content2 {
+  position: absolute;
+  bottom:0px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(238, 139, 197, 0.4); /* Black background with 0.5 opacity */
+  width: 64%;
+  height:57%;
+  padding: 20px;
+}
+
+.content3 {
+  position: absolute;
+  bottom:0px;
+  left:985px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(215, 165, 194, 0.5); /* Black background with 0.5 opacity */
+  width: 8%;
+  height:100%;
+  padding: 20px;
+}
+
+.content4 {
+  position: absolute;
+  bottom:0px;
+  left:985px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(13, 48, 79, 0.4); /* Black background with 0.5 opacity */
+  width: 37%;
+  height:65%;
+  padding: 20px;
+}
+
+.content5 {
+  position: absolute;
+  top:0px;
+  left:985px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(238, 139, 197, 0.4); /* Black background with 0.5 opacity */
+  width: 37%;
+  height:50%;
+  padding: 20px;
+}
+
+.bg {
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+  </style>
+</head>
+<body>
+
+<!-- <div class="bg"> -->
+  <img src="{% static "images/c2.jpg" %}" class="bg" alt="" style="width:100%;">
+  <div class="content1">
+  </div>
+  <div class="content2">
+  </div>
+  <div class="content3">
+  </div>
+  <div class="content4">
+  </div>
+  <div class="content5">
+  </div>
+  <div class="content">
+    <div class="chip">
+      <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+      <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong>
+    </div>
+    <div class="row" style="padding-top:60px;padding-left:170px;">
+      <h3 style="color:lavender;font-family:'Acme';font-size: 25px;">#IAmAndIWill</h3>
+    </div>
+    <div class="a">
+      <div class="container">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+                <span class="glyphicon" style="font-size:24px;color:lavender;padding-left:30px;">&#xe008;</span>
+              </div>
+              <div class="col-md-11">
+                <input type="text" class="form-control" placeholder="" id="email" style="width: 310px;background-color:lavender;padding-left:15px;" name="email">
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="row">
+                <div class="col-md-1">
+                  <i style="font-size:24px;color:lavender;padding-left:30px;" class="fa">&#xf084;</i>
+                </div>
+                <div class="col-md-11">
+                  <input type="password" class="form-control" placeholder="" id="pwd" style="width:310px;background-color:lavender;padding-left:15px;" name="pwd">
+                  <br>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+              <button type="submit" class="btn" style="background-color:lavender; font-family:'Acme';padding-left: 20px; padding-right:20px" onclick="determine();">Login</button>
+            </div>
+          </div>
+          <br>
+          <br>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script>
+function determine(){
+  var id = document.getElementById("email").value;
+  var pswd = document.getElementById("pwd").value;
+  if(id=="admin")
+  {
+    if(pswd=="admin")
+    {
+        ad_login = "tr";
+       // {{admin_login}} = "tr";
+       // alert({{admin_login}});
+       document.location.href ="{% url 'welcomeAdmin'%}"
+       $(document).ready(function(){
+         $.ajax(
+     {
+         type:"GET",
+         url: "{% url 'welcomeAdmin' %}",
+         data:{
+                  admin: ad_login
+         },
+         success: function( data )
+         {
+             alert("Success!");
+         }
+      });
+    });
+
+    }
+    else {
+      window.location="http://127.0.0.1:8000/cancer_app/login/";
+    }
+  }
+  else if(id=="lab")
+  {
+    if(pswd=="lab")
+    {
+      window.location="http://127.0.0.1:8000/cancer_app/welcomeLab/";
+    }
+    else {
+      window.location="http://127.0.0.1:8000/cancer_app/login/";
+    }
+  }
+  else{
+    window.location="http://127.0.0.1:8000/cancer_app/login/";
+  }
+}
+</script>
+</html>

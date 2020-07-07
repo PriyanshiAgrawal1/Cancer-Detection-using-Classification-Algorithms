@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>Patients Tested</title>
+  <link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial;
+  background-color: #925569;
+}
+
+
+.row1 {
+  margin: 8px -16px;
+}
+
+.row1,
+.row1 > .column1 {
+  padding: 16px;
+}
+
+/* Create four equal columns that floats next to each other */
+.column1 {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after rows */
+.row1:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Content */
+
+.container {
+  max-width:1360px;
+  margin:auto;
+}
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px) {
+  .column1 {
+    width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column1 {
+    width: 100%;
+  }
+}
+
+
+
+/* .column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+} */
+
+
+.card {
+  /* box-shadow: 0 4px 8px 0 rgba(234, 231, 220, 0.6); */
+  box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.6);
+  padding-left: 20px;
+}
+
+.card-text{
+  font-family:Abel;
+  font-size:16px;
+  text-align: left;
+}
+
+.jumbotron{
+  left: 50px;
+  width: 1340px;
+  background-color: white;
+  height: 120px;
+}
+
+.chip {
+  position: absolute;
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: lightgrey;
+  top:65px;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+/* Clear floats after the columns */
+/* .row:after {
+  content: "";
+  display: table;
+  clear: both;
+} */
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(108, 102, 104, 0.8); /* Black see-through */
+  color: #f1f1f1;
+  width: 338px;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 15px;
+  padding: 20px;
+  text-align: center;
+  height:20px;
+}
+
+.content6 {
+  position: absolute;
+  position: fixed;
+  bottom: 0;
+  background:  rgb(1, 1, 1);
+  background: rgba(244,244,243,0.4);
+  left:35px;
+  width:10%;
+  height: 100%;
+}
+.content7 {
+  position: absolute;
+  position: fixed;
+  top:50px;
+  background:  rgb(1, 1, 1);
+  background: rgba(244,244,243,0.4);
+  left:0;
+  width:100%;
+  height: 10%;
+}
+</style>
+</head>
+<body>
+
+<!-- The four columns -->
+<div class="container">
+  <div class="content6">
+  </div>
+  <div class="content7">
+    <div style="padding-right:25px;padding-top:23px;" align="right">
+      <button type="button" name="button" class="btn btn-sm" style="background-color:whitesmoke;color:black;" onclick="window.location='http://127.0.0.1:8000/cancer_app/welcomeAdmin/'"><i style='font-size:20px' class='fas'>&#xf30a;</i></button>
+    </div>
+  </div>
+  &nbsp&nbsp<div class="jumbotron">
+  <div class="container">
+    <div class="chip">
+      <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+      <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong></div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span style="font-family:Acme;font-size:25px;position:absolute;top:75px;">LIST OF PATIENTS</span>
+  </div>
+</div>
+<div class="row1">
+    {% if patient_info %}
+      {% for var in patient_info %}
+        <div class="column1" onload="calc_age();">
+          <div class="card" style="width:420px;height:390px;padding-top:20px;">
+            <div class="card-body">
+              <div class="overlay"><p style="position:absolute;top:10px;left:80px;">Tested for {{var.test_type}}</p></div>
+              {% if var.result == "MALIGNANT" %}
+                {% if var.test_type == "Prostate Cancer" %}
+                <div class="row">
+                  <div class="col-md-6">
+                    <br><br>
+                    <p id="result" style="font-size:23px;font-family:Acme;color:red;padding-left:30px;">{{var.result}}</p>
+                    <h4 class="card-text" style="text-transform:capitalize;font-weight:bold;font-family:Acme;font-size:18px;padding-left:30px;">{{var.first_name}} {{var.last_name}}</h4>
+                  </div>
+                  <div class="col-md-6">
+                    <img src="{% static "images/blue_patient.jpg" %}" alt="Prostate Positive" height="150" width="150">
+                  </div>
+                </div>
+                {% elif var.test_type == "Breast Cancer" %}
+                  <div class="row">
+                    <div class="col-md-6">
+                      <br><br>
+                      <p id="result" style="font-size:23px;font-family:Acme;color:red;padding-left:30px;">{{var.result}}</p>
+                      <h4 class="card-text" style="text-transform:capitalize;font-weight:bold;font-family:Acme;font-size:18px;padding-left:30px;">{{var.first_name}} {{var.last_name}}</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <img src="{% static "images/pink_patient.jpg" %}" alt="Breast Positive" height="150" width="150">
+                    </div>
+                  </div>
+                {% endif %}
+                {% elif var.result == "BENIGN" %}
+                  <div class="row">
+                    <div class="col-md-6">
+                      <br><br>
+                      <p id="result" style="font-size:23px;font-family:Acme;color:grey;padding-left:30px;">{{var.result}}</p>
+                      <h4 class="card-text" style="text-transform:capitalize;font-weight:bold;font-family:Acme;font-size:18px;padding-left:30px;">{{var.first_name}} {{var.last_name}}</h4>
+                    </div>
+                    <div class="col-md-6">
+                      <img src="{% static "images/title_logo.jpg" %}" alt="Negative" height="150" width="150">
+                    </div>
+                  </div>
+                {% endif %}
+                <!-- {% if var.gender == "Male" %}
+                  <img  style="border-radius:50%" src="{% static "images/male_icon.jpg" %}" alt="Card image" height="120" width="120" >
+                {% elif var.gender == "Female" %}
+                  <img style="border-radius:50%" src="{% static "images/female_icon.jpg" %}" alt="Card image" height="120" width="120">
+                {% else %}
+                  <img style="border-radius:50%" src="{% static "images/others_icon.jpg" %}" alt="Card image" height="120" width="120">
+                {% endif %} -->
+              <p class="card-text" style="color:black;font-weight:bold">-------------------------------------------------------------------------</p>
+              <p class="card-text">DOB: &nbsp&nbsp{{var.dob}}</p>
+              <p class="card-text">Gender: &nbsp&nbsp{{var.gender}}</p>
+              <p class="card-text">Blood Group: &nbsp&nbsp{{var.blood_grp}}</p>
+              {% if var.parents_name %}
+                <p class="card-text" style="text-transform:capitalize">Parent's name: &nbsp&nbsp{{var.parents_name}}</p>
+              {% else %}
+                <p class="card-text" style="text-transform:capitalize">Spouse name: &nbsp&nbsp{{var.spouse_name}}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% else %}
+        <p>NO RECORDS FOUND</p>
+      {% endif %}
+    </div>
+</div>
+<script type="text/javascript">
+function calc_age()
+{
+    var input = document.getElementById("dob").value;
+    var dob = new Date(input);
+    var today = new Date();
+    var today_year = today.getYear();
+    var dob_year = dob.getYear();
+    var age = today.getYear() - dob.getYear();
+    document.getElementById('age_calc').innerHTML = age;
+}
+</script>
+
+</body>
+</html>

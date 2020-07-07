@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<title>Beat The Cancer!</title>
+<link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<style>
+body
+{
+  font-family: "Lato", sans-serif;
+  font-weight: lighter;
+  overflow-x: hidden;
+  background-color:snow;
+  /* background-color: #e0e2e4; */
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+}
+.sidenav {
+  height: 100%;
+  width: 230px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #e0e2e4;
+  overflow-x: hidden;
+  padding-top: 20px;
+  border-right: 1px solid #437991;
+}
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+}
+.sidenav a:hover {
+  color: #437991;
+}
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.main {
+  /* margin-left: 230px; /* Same as the width of the sidenav */ */
+  background-color: #b0d1e2;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.circle {
+  height: 200px;
+  width: 200px;
+  background-color: #8E8D8A;
+  border-radius: 50%;
+}
+/*
+.back{
+  position: absolute;
+  left: 0;
+  width:100%;
+  top:50px;
+
+} */
+.centered {
+  position: absolute;
+  top: 70%;
+  left: 52%;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(44, 93, 112, 0.7);
+  transform: translate(-50%, -50%);
+}
+.tab {
+  overflow: hidden;
+  border: 1px solid #8E8D8A;
+  background-color: #EAE7DC;
+  width:415px;
+  color:white;
+  padding-left: 15px;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  transition 0.3s;
+  font-size: 17px;
+  font-family: Acme;
+}
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: lavenderblush;
+}
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #8E8D8A;
+}
+.tab1 {
+  overflow: hidden;
+  border: 1px solid #8E8D8A;
+  background-color: #EAE7DC;
+  width:415px;
+  color:white;
+  padding-left: 15px;
+}
+/* Style the buttons inside the tab */
+.tab1 button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  transition 0.3s;
+  font-size: 17px;
+  font-family: Acme;
+}
+/* Change background color of buttons on hover */
+.tab1 button:hover {
+  background-color: #73b4ed;
+}
+/* Create an active/current tablink class */
+.tab1 button.active {
+  background-color: #8E8D8A;
+}
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #8E8D8A;
+  border-top: none;
+  font-family: Abhaya Libre;
+  font-size: 17px;
+  width:415px;
+}
+.content1 {
+  position: absolute;
+  top:50px;
+  left:810px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(42, 98, 115, 0.5);
+  width: 17%;
+  height:64%;
+  padding: 20px;
+}
+.content2 {
+  position: absolute;
+  top:300px;
+  left:1000px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(13, 48, 79, 0.4); /* Black background with 0.5 opacity */
+  width: 37%;
+  height:31%;
+  padding: 20px;
+}
+.content3 {
+  position: absolute;
+  top:50px;
+  left:1000px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(238, 139, 197, 0.4); /* Black background with 0.5 opacity */
+  width: 37%;
+  height:50%;
+  padding: 20px;
+}
+.content4 {
+  position: absolute;
+  left:0px;
+  background:  rgb(1, 1, 1);
+  background: rgba(244,244,243,0.4);
+  top:250px;
+  width:1540px;
+  height: 15%;
+}
+#underline:hover{
+  border-bottom: 2px solid #437991;
+  color: #437991;
+}
+.hide_canvas1{
+  position: absolute;
+  top:180px;
+  width:85px;
+  background-color: snow;
+  height:10px;
+  right:0;
+}
+.hide_canvas2{
+  position: absolute;
+  top:178px;
+  width:85px;
+  background-color: snow;
+  height:10px;
+  left:0;
+}
+
+.footer_card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  text-align: center;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(32, 32, 32, 0.6);
+  color: white;
+  height: 170px;
+}
+
+.footer_column {
+  float: left;
+  width: 25%;
+  padding: 0 5px;
+}
+.footer_row {margin: 0 -5px;}
+.footer_row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+<body>
+<div class="main">
+  <div class="row" style="padding-top:10px;">
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-1">
+      <a id="underline" style="font-family:Acme;text-decoration:none;color:black;padding-top:20px;" data-toggle="modal" data-target="#myModal" href="#">ABOUT</a>
+    </div>
+    <div class="col-md-1">
+      <a id="underline" style="font-family:Acme;text-decoration:none;color:black;" href="http://127.0.0.1:8000/cancer_app/result_chart/">RESULTS</a>
+    </div>
+    <div class="col-md-3">
+      <a id="underline" style="font-family:Acme;text-decoration:none;color:black;" href="#scrollContact">CONTACT US</a>
+    </div>
+    <div class="col-md-1">
+      <a id="underline" style="font-family:Acme;text-decoration:none;color:black;" href="http://127.0.0.1:8000/cancer_app/login/">SIGN OUT</a>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
+  <img class="back" src="{% static "images/lab_back.jpg" %}" alt="" height="500" width="1540px" style="padding-top:15px;">
+  <div class="chip" style="position:absolute;top:70px;left:20px;">
+    <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+    <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong></div>
+  <div class="content1">
+  </div>
+  <div class="content2">
+  </div>
+  <div class="content3">
+  </div>
+  <div class="content4">
+  </div>
+
+  <!-- cards -->
+  <br><br>
+  <div class="row" style="padding-left:30px;">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-4">
+      <div id="chartContainer" style="height: 190px; width: 100%;"></div>
+      <div class="hide_canvas1">
+      </div>
+      <div class="hide_canvas2">
+      </div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
+    <div class="col-md-4">
+      <div id="chartContainer1" style="height: 190px; width: 100%;"></div>
+      <div class="hide_canvas1">
+      </div>
+      <div class="hide_canvas2">
+      </div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+  <div class="centered circle">
+    <p style="padding-top:49px;padding-left:20px;font-family:Sofia;font-size:20px;color:white;"><span style="padding-left:25px;">If you choose</span> <br> <span style="padding-left:45px;">HOPE,</span> <br>anything's possible.</p>
+  </div>
+  <div class="row" style="padding-top:50px; padding-left:360px;">
+    <div class="col-md-5">
+      <div class="card" style="width:350px;border-right: 5px solid #8E8D8A; border-bottom: 5px solid #8E8D8A;">
+        <img class="card-img-top" src="{% static "images/breast_back1.jpg" %}" alt="Card image" style="height:230px;">
+        <div class="card-body">
+          <h6 class="card-title" style="text-align:center"><strong>Breast Cancer</strong></h6>
+          <p class="card-text"></p>
+          <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+              &nbsp&nbsp<a href="#" class="btn" style="background-color:lavenderblush; border:1px solid black; font-family:'Acme'" data-toggle="modal" data-target="#test_modal_breast">Test</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-4">
+        <div class="card" style="width:350px;border-right: 5px solid #8E8D8A; border-bottom: 5px solid #8E8D8A;">
+          <img class="card-img-top" src="{% static "images/prostate_back1.jpg" %}" alt="Card image" style="height:230px;">
+          <div class="card-body">
+            <h6 class="card-title" style="text-align:center"><strong>Prostate Cancer<strong></h6>
+            <p class="card-text"></p>
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-8">
+                &nbsp&nbsp<a href="#" class="btn" style="background-color:lavender; border:1px solid black; font-family:'Acme'" data-toggle="modal" data-target="#test_modal_prostate">Test</a>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+      </div>
+  </div>
+  <br><br>
+
+<!-- this is for test modal breast -->
+
+<div class="modal" id="test_modal_breast">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:3px solid #232323">
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<div class="chip">
+          <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+          <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong>
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="background-color:whitesmoke">
+        <div class="" align="center">
+          <p>Enter the patient information:</p><br>
+        </div>
+        <form action="{% url 'patient_detail_B' %}" method="post">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="b_p_fname"><p>First Name<span style="color:red">*</span>:</p></label>
+                <input type="text" class="form-control" placeholder="Enter first name" id="p_name" required style="width:250px;" name="b_p_fname" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="b_p_lname"><p>Last Name<span style="color:red">*</span>:</p></label>
+                <input type="text" class="form-control" placeholder="Enter last name" id="p_name" required style="width:250px;" name="b_p_lname" required>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="b_p_gender"><p>Gender<span style="color:red">*</span>:</p></label>&nbsp&nbsp&nbsp
+                <select class="" name="b_p_gender" id="b_p_gender" style="height:35px;" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="b_p_bg"><p>Blood Group<span style="color:red">*</span>:</p></label>&nbsp&nbsp&nbsp
+                <select class="" name="b_p_bg" id="b_p_bg" style="height:35px;" required>
+                  <option value="A+">A+</option>
+                  <option value="B+">B+</option>
+                  <option value="AB+">AB+</option>
+                  <option value="O+">O+</option>
+                  <option value="A+">A-</option>
+                  <option value="B+">B-</option>
+                  <option value="AB+">AB-</option>
+                  <option value="O+">O-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="b_p_dob"><p>DOB<span style="color:red">*</span>:</p></label>
+                  </div>
+                  <div class="col-md-9">
+                  <input type="date" name="b_p_dob" class="form-control" required style="width:170px;border:1px solid lightgray;" id="b_p_dob" onchange="b_calcage()" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <div class="row">
+                  <div class="col-md-2">
+                    <label for="b_p_age"><p>Age<span style="color:red">*</span>:</p></label>
+                  </div>
+                  <div class="col-md-2">
+                    <p id="b_p_age" style="font-size:15px;"></p>
+                  </div>
+                  <div class="col-md-8">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-group" style="padding-left:20px;">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-11">
+                <div class="row">
+                  <div class="col-md-2">
+                    <label for="">Patient ID<span style="color:red">*</span>:</label>
+                  </div>
+                  <div class="col-md-10">
+                    <input type="text" name="b_patient_id" value="" class="form-control" style="width:131px;" placeholder="Enter ID">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-11">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="b_p_ms"><p>Marital Status<span style="color:red">*</span>:</p></label><br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <input type="radio" name="b_ms" value="Unmarried" id="b_unmarried_option" required>&nbsp&nbsp&nbsp<label for="b_u">Unmarried</label><br>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" id="b_parents_name">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <label for="b_pn">Parents Name:</label>
+                        </div>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control" placeholder="Enter parent's name" id="b_sn" style="width:250px;" name="b_pn">
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+                </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <input type="radio" name="b_ms" value="Married" id="b_married_option" required>&nbsp&nbsp&nbsp<label for="b_m">Married</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" id="b_spouse_name">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <label for="b_sn">Spouse Name:</label>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Enter spouse name" id="b_sn" style="width:250px;" name="b_sn">
+                      </div>
+                      <div class="col-md-1">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="" align="center">
+            <button type="button" name="button" data-toggle="modal" data-target="#genome_modal_b" class="btn" style="background-color:white;color:grey;border:1px solid lightgrey" >&nbsp&nbsp&nbsp<i style='font-size:24px' class='fas'>&#xf492;</i>&nbsp&nbspTo Enter Genome Data, Click Here&nbsp&nbsp&nbsp</button>
+          </div>
+          <br>
+          <div class="" align="center">
+            <div class="custom-file mb-3" style="width:300px;">
+              <input type="file" name="b_genome_csv" class="custom-file-input" id="b_genome_csv" required onchange="csvfile()">
+              <label class="custom-file-label" for="customFile" align="left" style="color:grey">Upload .csv file</label>
+            </div>
+          </div>
+          <br>
+          <div class="" align="center">
+            <button type="submit" class="btn" style="background-color:#232323;border:1px solid black;color:white">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- this is for test modal prostate -->
+<div class="modal" id="test_modal_prostate">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:3px solid #232323">
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <div class="chip">
+          <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+          <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong>
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="background-color:whitesmoke">
+        <div class="" align="center">
+          <!-- <p>Prostate Cancer</p> -->
+          <p>Enter the patient information:</p><br>
+        </div>
+        <form action="{% url 'patient_detail_P' %}" method="post">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="p_p_fname"><p>First Name<span style="color:red">*</span>:</p></label>
+                <input type="text" class="form-control" placeholder="Enter first name" id="p_name" required style="width:250px;" name="p_p_fname" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="p_p_lname"><p>Last Name<span style="color:red">*</span>:</p></label>
+                <input type="text" class="form-control" placeholder="Enter last name" id="p_name" required style="width:250px;" name="p_p_lname" required>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="p_p_gender"><p>Gender<span style="color:red">*</span>:</p></label>&nbsp&nbsp&nbsp
+                <select class="" name="p_p_gender" id="p_p_gender" style="height:35px;" required>
+                  <option value="Male">Male</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="p_p_bg"><p>Blood Group<span style="color:red">*</span>:</p></label>&nbsp&nbsp&nbsp
+                <select class="" name="p_p_bg" id="p_p_bg" style="height:35px;" required>
+                  <option value="A+">A+</option>
+                  <option value="B+">B+</option>
+                  <option value="AB+">AB+</option>
+                  <option value="O+">O+</option>
+                  <option value="A+">A-</option>
+                  <option value="B+">B-</option>
+                  <option value="AB+">AB-</option>
+                  <option value="O+">O-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="p_p_dob"><p>DOB<span style="color:red">*</span>:</p></label>
+                  </div>
+                  <div class="col-md-9">
+                  <input type="date" name="p_p_dob" class="form-control" required style="width:170px;border:1px solid lightgray;" id="p_p_dob" onchange="p_calcage()" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group" style ="padding-left:20px;">
+                <div class="row">
+                  <div class="col-md-2">
+                    <label for="p_p_age"><p>Age<span style="color:red">*</span>:</p></label>
+                  </div>
+                  <div class="col-md-2">
+                    <p id="p_p_age" style="font-size:15px;" name="p_p_age"></p>
+                  </div>
+                  <div class="col-md-8">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-group" style="padding-left:20px;">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="">Patient ID<span style="color:red">*</span>:</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" name="p_patient_id" class="form-control" placeholder="Enter ID" style="width:121px;">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <button type="button" name="button" class="btn" style="background-color:white;color:grey;border:1px solid lightgrey;">Enter Genome Data</button>
+              </div>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-11">
+              <div class="form-group" style ="padding-left:20px;">
+                <label for="p_p_ms"><p>Marital Status<span style="color:red">*</span>:</p></label><br>
+                <div class="row">
+                  <div class="col-md-3">
+                    <input type="radio" name="p_ms" value="Unmarried" id="p_unmarried_option" required>&nbsp&nbsp&nbsp<label for="p_u">Unmarried</label><br>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group" id="p_parents_name">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <label for="p_pn">Parents Name:</label>
+                        </div>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control" placeholder="Enter parent's name" id="p_sn" style="width:250px;" name="p_pn">
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+                </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <input type="radio" name="p_ms" value="Married" id="p_married_option" required>&nbsp&nbsp&nbsp<label for="p_m">Married</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" id="p_spouse_name">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <label for="p_sn">Spouse Name:</label>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Enter spouse name" id="p_sn" style="width:250px;" name="p_sn">
+                      </div>
+                      <div class="col-md-1">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="" align="center">
+            <button type="button" name="button" data-toggle="modal" data-target="#genome_modal" class="btn" style="background-color:white;color:grey;border:1px solid lightgrey" >&nbsp&nbsp&nbsp<i style='font-size:24px' class='fas'>&#xf492;</i>&nbsp&nbspTo Enter Genome Data, Click Here&nbsp&nbsp&nbsp</button>
+          </div>
+          <br>
+          <div class="" align="center">
+            <div class="custom-file mb-3" style="width:300px;">
+              <input type="file" name="p_genome_csv" class="custom-file-input" id="genome_csv" required onchange="csvfile_p()">
+              <label class="custom-file-label" for="customFile" align="left" style="color:grey">Upload .csv file</label>
+            </div>
+          </div>
+          <br>
+          <div class="" align="center">
+            <button type="submit" class="btn" style="background-color:#232323;border:1px solid black;color:white">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="genome_modal_b" style="background-color:rgba(1,1,1,0.4);">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:2px solid #232323">
+        <h4 class="modal-title" style="font-family:Acme">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspGenome Data</h4>
+        <button type="button" class="close" data-dismiss="modal"><i style='font-size:20px' class='fas'>&#xf30a;</i></button>
+      </div>
+      <div class="modal-body" style="background-color:whitesmoke">
+        <form class="" action="{% url 'test2' %}" method="post">
+          {% csrf_token %}
+          <br>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-2" style="padding-top:6px;">
+                <label>Patient - ID<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="b_patient_id" value="" style="width:121px;" placeholder="Enter ID" id="b_patient_id" required>
+              </div>
+            </div>
+          </div><br>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Radius<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="b_radius" value="" style="width:200px;" placeholder="Enter Radius" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    6.98
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#ecb7bf;height:25px;width:70px;">
+                      <span style="color:black;font-size:13px;">µm</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    28.1
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Texture<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="b_texture" value="" style="width:200px;" placeholder="Enter Texture" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    9.71
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#ead3d7;height:25px;width:70px;">
+                      <span style="color:black;font-size:13px;">-</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    39.3
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Perimeter<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="b_perimeter" value="" style="width:200px;" placeholder="Enter Perimeter" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    43.8
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#ecb7bf;height:25px;width:70px;">
+                      <span style="color:black;font-size:13px;">µm</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    189
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Area<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="b_area" value="" style="width:200px;" placeholder="Enter Area" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    144
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#ead3d7;height:25px;width:70px;">
+                      <span style="color:black;font-size:12px;">µm<sup>2</sup></span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    2500
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Smoothness<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="b_smoothness" value="" style="width:200px;" placeholder="Enter Smoothness" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    0.05
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#ecb7bf;height:25px;width:70px;">
+                      <span style="color:black;font-size:13px;">-</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    0.16
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Compactness<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="b_compactness" value="" style="width:200px;" placeholder="Enter Compactness" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    0.02
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#ead3d7;height:25px;width:70px;">
+                      <span style="color:black;font-size:13px;">-</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    0.35
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Symmetry<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="b_symmetry" value="" style="width:200px;" placeholder="Enter Symmetry" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    0.11
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#ecb7bf;height:25px;width:70px;">
+                      <span style="color:black;font-size:13px;">-</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    0.3
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Fractal Dimension<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="b_fd" value="" style="width:200px;" placeholder="Enter Fractal Dimension" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    0.05
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#ead3d7;height:25px;width:70px;">
+                      <span style="color:black;font-size:13px;">D</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    0.1
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="" align="center">
+            <button type="submit" name="button" class="btn" style="background-color:#232323;color:whitesmoke"><i style='font-size:20px' class='fas'>&#xf56d;</i>&nbsp&nbspDownload .csv</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="genome_modal" style="background-color:rgba(1,1,1,0.4);">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:2px solid #232323">
+        <h4 class="modal-title" style="font-family:Acme">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspGenome Data</h4>
+        <button type="button" class="close" data-dismiss="modal"><i style='font-size:20px' class='fas'>&#xf30a;</i></button>
+      </div>
+      <div class="modal-body" style="background-color:whitesmoke">
+        <form class="" action="{% url 'test1' %}" method="post">
+          {% csrf_token %}
+          <br>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-2" style="padding-top:6px;">
+                <label>Patient - ID<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="p_patient_id" value="" style="width:121px;" placeholder="Enter ID"  id="p_patient_id" required>
+              </div>
+            </div>
+          </div><br>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Radius<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="p_radius" value="" style="width:200px;" placeholder="Enter Radius" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    9
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#52b7e9;height:25px;width:70px;">
+                      <span style="color:white;font-size:13px;">µm</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    25
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Texture<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="p_texture" value="" style="width:200px;" placeholder="Enter Texture" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    11
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#2e5984;height:25px;width:70px;">
+                      <span style="color:white;font-size:13px;">-</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    27
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Perimeter<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="p_perimeter" value="" style="width:200px;" placeholder="Enter Perimeter" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    52
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#52b7e9;height:25px;width:70px;">
+                      <span style="color:white;font-size:13px;">µm</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    172
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Area<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="p_area" value="" style="width:200px;" placeholder="Enter Area" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    202
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#2e5984;height:25px;width:70px;">
+                      <span style="color:white;font-size:12px;">µm<sup>2</sup></span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    1878
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Smoothness<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="p_smoothness" value="" style="width:200px;" placeholder="Enter Smoothness" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    0.07
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#52b7e9;height:25px;width:70px;">
+                      <span style="color:white;font-size:13px;">-</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    0.14
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Compactness<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="p_compactness" value="" style="width:200px;" placeholder="Enter Compactness" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    0.04
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#2e5984;height:25px;width:70px;">
+                      <span style="color:white;font-size:13px;">-</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    0.34
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Symmetry<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="p_symmetry" value="" style="width:200px;" placeholder="Enter Symmetry" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    0.14
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#52b7e9;height:25px;width:70px;">
+                      <span style="color:white;font-size:13px;">-</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    0.3
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3" style="padding-top:6px;">
+                <label>Fractal Dimension<span style="color:red">*</span>:</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="p_fd" value="" style="width:200px;" placeholder="Enter Fractal Dimension" required>
+              </div>
+              <div class="col-md-5" align="center" style="padding-top:6px;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-2">
+                    0.05
+                  </div>
+                  <div class="col-md-3">
+                    <div class="" style="background-color:#2e5984;height:25px;width:70px;">
+                      <span style="color:white;font-size:13px;">D</span>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    0.1
+                  </div>
+                  <div class="col-md-1">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="" align="center">
+            <button type="submit" name="button" class="btn" style="background-color:#232323;color:whitesmoke"><i style='font-size:20px' class='fas'>&#xf56d;</i>&nbsp&nbspDownload .csv</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <div class="container">
+    <div class="modal" id="myModal">
+       <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+         <div class="modal-content">
+           <div class="modal-body" style="background-color:whitesmoke;">
+             <div class="row" align="left">
+               <div class="col-md-6" style="padding-left:90px;">
+                 <div class="card" style="width:460px; border:1px solid black;padding-left:20px;padding-bottom:10px;">
+                   <div class="card-body">
+                     <h3 class="card-title" style="text-align:center;font-family:Sofia"><strong>Breast Cancer</strong></h3>
+                   </div>
+                   <div class="row">
+                     <div class="col-md-4">
+                        <p style="font-size:18px;font-family:Sofia"><br><br>There can be life after breast cancer, the prerequisite is early detection and not being afraid of it.</p>
+                     </div>
+                     <div class="col-md-8" style="padding-top:20px;padding-right:25px;">
+                       <img class="card-img-top" src="{% static "images/info_modal_b2.jpg" %}" alt="Card image" height="250" width="100" style="border:1px solid white;border-radius:50%">
+                     </div>
+                   </div>
+                   <br>
+                   <p style="text-decoration:none;">------------------------------------------------------------------------------</p>
+
+                   <div class="tab">
+                     <button class="tablinks" onclick="openCity(event, 'b_Symptoms')">Symptoms</button>
+                     <button class="tablinks" onclick="openCity(event, 'b_Stages')">Stages</button>
+                     <button class="tablinks" onclick="openCity(event, 'b_Types')">Types</button>
+                     <button class="tablinks" onclick="openCity(event, 'b_Risks')">Risks</button>
+                   </div>
+
+                   <div id="b_Symptoms" class="tabcontent">
+                     <br>
+                     <h4 style="font-family:Acme">Symptoms</h4>
+                     <p>
+                           <ul>
+                             <li>Breast Pain</li>
+                             <li>Inverted Nipple</li>
+                             <li>Bloddy discharge from nipple</li>
+                             <li>Breast Lumps</li>
+                             <li>Breast Swelling</li>
+                           </ul>
+                     </p>
+                   </div>
+
+                   <div id="b_Stages" class="tabcontent">
+                     <br>
+                     <h4 style="font-family:Acme">Stages</h4>
+                     <p>
+                       Breast Cancer has 5 stages:
+                       <ul>
+                         <li><strong>Stage 0 </strong>(DCIS)</li>
+                         <li><strong>Stage 1</strong>
+                           <ul>
+                             <li><strong>Stage 1A </strong>:Lymph nodes are not affected</li>
+                             <li><strong>Stage 1B </strong>:Tumor found nearby Lymph nodes</li>
+                           </ul>
+                         </li>
+                         <li><strong>Stage 2</strong>
+                           <ul>
+                             <li><strong>Stage 2A</strong> :Tumor measures less than 2cms</li>
+                             <li><strong>Stage 2B </strong> :Tumor measures between 2cms and 5cms</li>
+                           </ul>
+                         </li>
+                         <li><strong>Stage 3</strong>
+                           <ul>
+                             <li><strong>Stage 3A</strong> :Tumor measures more than 5cms</li>
+                             <li><strong>Stage 3B </strong> :Tumor invades chest wall</li>
+                             <li><strong>Stage 3C</strong> :Tumor found in more than 10 lymph nodes</li>
+                           </ul>
+                         </li>
+                         <li><strong>Stage 4 </strong> :Tumor has spread to distant lymph nodes and organs</li>
+                       </ul>
+                     </p>
+                   </div>
+
+                   <div id="b_Types" class="tabcontent">
+                     <br>
+                     <h4 style="font-family:Acme">Types</h4>
+                     <p>
+                       Breast Cancers fall under :
+                       <ul>
+                         <li>Invasive</li>
+                         <li>Non-Invasive</li>
+                       </ul>
+                       These categories are used to describe the following types:
+                       <ul>
+                         <li>Ductal Carcinoma In Situ</li>
+                         <li>Lobular Carcinoma In Situ</li>
+                         <li>Invasive Ductal Carcinoma</li>
+                         <li>Invasive Lobular Carcinoma</li>
+                       </ul>
+                     </p>
+                   </div>
+                  <div class="tabcontent" id="b_Risks">
+                    <br>
+                    <h4 style="font-family:Acme">Risks</h4>
+                    <p>
+                      <ul>
+                        <li><strong>Getting older: </strong>The risk for breast cancer increases with age; most breast cancers are diagnosed after age 50.</li>
+                        <li><strong>Genetic mutations:</strong> Inherited changes (mutations) to certain genes, such as BRCA1 and BRCA2. Women who have inherited these genetic changes are at higher risk of breast and ovarian cancer.</li>
+                        <li><strong>Personal history of breast cancer or certain non-cancerous breast diseases:</strong> Women who have had breast cancer are more likely to get breast cancer a second time. Some non-cancerous breast diseases such as atypical hyperplasia or lobular carcinoma in situ are associated with a higher risk of getting breast cancer.</li>
+                        <li><strong>Family history of breast cancer:</strong> A woman’s risk for breast cancer is higher if she has a mother, sister, or daughter (first-degree relative) or multiple family members on either her mother’s or father’s side of the family who have had breast cancer.</li>
+                      </ul>
+                   </p>
+                  </div>
+                  <br>
+                 </div>
+               </div>
+               <div class="col-md-6">
+                 <div class="card" style="width:460px; border:1px solid black;padding-left:20px;padding-right:10px;padding-bottom:10px;">
+                   <div class="card-body">
+                     <h3 class="card-title" style="text-align:center;font-family:Sofia"><strong>Prostate Cancer</strong></h3>
+                   </div>
+                   <div class="row">
+                     <div class="col-md-4">
+                        <p style="font-size:18px;font-family:Sofia"><br><br>While you may not have chosen to have prostate cancer, you can choose how you want to be treated!</p>
+                     </div>
+                     <div class="col-md-8" style="padding-top:20px;">
+                       <img class="card-img-top" src="{% static "images/info_modal_pros.jpg" %}" alt="Card image" height="250" width="100" style="border:1px solid white;border-radius:50%">
+                     </div>
+                   </div>
+                   <br>
+                   <p style="text-decoration:none;">------------------------------------------------------------------------------</p>
+
+                   <div class="tab1">
+                     <button class="tablinks" onclick="openCity(event, 'p_Symptoms')">Symptoms</button>
+                     <button class="tablinks" onclick="openCity(event, 'p_Stages')">Stages</button>
+                     <button class="tablinks" onclick="openCity(event, 'p_Types')">Types</button>
+                     <button class="tablinks" onclick="openCity(event, 'p_Risks')">Risks</button>
+                   </div>
+
+                   <div id="p_Symptoms" class="tabcontent">
+                     <br>
+                     <h4 style="font-family:Acme">Symptoms</h4>
+                     <p>
+                       <ul>
+                         <li>Painful urination</li>
+                         <li>Bloody discharge in urine</li>
+                         <li>Difficulty in maintaining erection</li>
+                         <li>Frequent urge to urinate</li>
+                         <li>Pain or discomfort while sitting</li>
+                       </ul>
+                     </p>
+                   </div>
+
+                   <div id="p_Stages" class="tabcontent">
+                     <br>
+                     <h4 style="font-family:Acme">Stages</h4>
+                     <p>
+                       The stages of prostate cancer can inform the appropriate decisions for the rightful treatment.<br>
+                       <ul>
+                         <li><strong>Stage 0</strong>: Presence of pre-cancerous cells</li>
+                         <li><strong>Stage 1</strong> (Localized): Cancer present only in the prostate gland</li>
+                         <li><strong>Stage 2-3</strong> (Regional): Cancer spreads to nearby tissues</li>
+                         <li><strong>Stage 4</strong> (Distant): Cancer can spread to other parts of the body</li>
+                       </ul>
+                     </p>
+                   </div>
+
+                   <div id="p_Types" class="tabcontent">
+                     <br>
+                     <h4 style="font-family:Acme">Types</h4>
+                     <p>
+                       <ul>
+                         <li>Adenocarcinomas <strong>(Common)</strong></li>
+                         <li>Transitional cell carcinomas <strong>(Rare)</strong></li>
+                         <li>Small cell carcinomas <strong>(Rare)</strong></li>
+                         <li>Neuroendocrime Tumors <strong>(Rare)</strong></li>
+                       </ul>
+                     </p>
+                   </div>
+
+                   <div class="tabcontent" id="p_Risks">
+                     <br>
+                     <h4 style="font-family:Acme">Risks</h4>
+                     <p>
+                       <ul>
+                         <li><strong>Age</strong>: The risk increases after the age of 50. Rare before the age of 45. </li>
+                         <li><strong>Race</strong> (or) <strong>Ethinicity</strong>: It is more common in black males than white males.</li>
+                         <li><strong>Family History</strong>: If prostate cancer exists in the family history, one is more likely to have it in the further generations.</li>
+                         <li><strong>Genetic Factors</strong>: The presence of some inherant fetaures such as BRCA1 and BRCA2 increases the risk of prostate cancer.</li>
+                       </ul>
+                     </p>
+                  </div>
+                  <br>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+  </div>
+  <br><br><br>
+  <div class="container" id="scrollContact" style="padding-left:35px;">
+    <hr style="border:2px solid #202020;opacity:0.5">
+    <br>
+    <div class="container">
+      <div class="footer_row">
+      <div class="footer_column">
+        <div class="footer_card">
+          <p><i class="fa fa-user" style="font-size:25px"></i></p>
+          <p style="color:white;font-family:Quicksand;font-size:13px">Phone No: +91-7975320552 <br> E-Mail: choosehope@gmail.com</p>
+          <p style="font-family:Quicksand;color:Lightsalmon">Contact Us</p>
+        </div>
+      </div>
+      <div class="footer_column">
+        <div class="footer_card">
+          <p><i class="fa fa-check" style="font-size:25px"></i></p>
+          <h3 style="font-family:Quicksand;color:Lightsalmon">100+</h3>
+          <p style="font-family:Quicksand">Tests Conducted</p>
+        </div>
+      </div>
+      <div class="footer_column">
+        <div class="footer_card">
+          <p><i class="fa fa-smile-o" style="font-size:25px"></i></p>
+          <h3 style="color:Lightsalmon;font-family:Quicksand">96%</h3>
+          <p style="font-family:Quicksand">Accuracy</p>
+        </div>
+      </div>
+      <div class="footer_column">
+        <div class="footer_card">
+          <p><i class="fa fa-coffee" style="font-size:25px"></i></p>
+          <p style="font-family:Quicksand;font-size:13px;">Choose Hope Labs, NB 017 <br>MVIT, Bengaluru</p>
+          <p style="font-family:Quicksand;color:Lightsalmon">Visit</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <br>
+    <hr style="border:2px solid #202020;opacity:0.5">
+    <br><br>
+  </div>
+</div>
+  <script>
+
+  function csvfile() {
+    var patient_id = document.getElementById('b_patient_id').value;
+    var filename = "TB_".concat(patient_id).concat(".csv");
+    var uploaded_file = document.getElementById('b_genome_csv').value;
+    var file_name = uploaded_file.replace(/^.*[\\\/]/, '');
+    var array = file_name.split("_");
+    var file_array = array[0];
+    // alert(patient_id);
+    if(patient_id==="")
+    {
+      if(file_array=="TP")
+      {
+        alert("You have uploaded a Prostate Cancer Genome data, kindly choose the right file");
+        document.getElementById('b_genome_csv').value="";
+      }
+      else {
+        alert("Existing Patient?");
+      }
+    }
+    else
+    {
+      if(file_array=="TP")
+      {
+        alert("You have uploaded a Prostate Cancer Genome data, kindly choose the right file");
+        document.getElementById('genome_csv').value="";
+      }
+      else if(file_name.localeCompare(filename)==0)
+      {
+        ;
+      }
+      else {
+        alert("Are you sure, you are uploading the current patient's genome file?");
+      }
+    }
+  }
+
+  function csvfile_p() {
+    var patient_id = document.getElementById('p_patient_id').value;
+    var filename = "TP_".concat(patient_id).concat(".csv");
+    var uploaded_file = document.getElementById('genome_csv').value;
+    var file_name = uploaded_file.replace(/^.*[\\\/]/, '');
+    var array = file_name.split("_");
+    var file_array = array[0];
+      // alert(patient_id);
+    if(patient_id==="")
+    {
+      if(file_array=="TB")
+      {
+        alert("You have uploaded a Breast Cancer Genome data, kindly choose the right file");
+        document.getElementById('genome_csv').value="";
+      }
+      else {
+        alert("Existing Patient?");
+      }
+    }
+    else
+    {
+      if(file_array=="TB")
+      {
+        alert("You have uploaded a Breast Cancer Genome data, kindly choose the right file");
+        document.getElementById('genome_csv').value="";
+      }
+      else if(file_name.localeCompare(filename)==0)
+      {
+        ;
+      }
+      else {
+        alert("Are you sure, you are uploading the current patient's genome file?");
+      }
+    }
+  }
+
+  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+  window.onload = function () {
+    CanvasJS.addColorSet("greyShades",
+               [
+               "#ce897b",
+               "#fbd2d7"
+               ]);
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	animationEnabled: true,
+    backgroundColor: "snow",
+    colorSet: "greyShades",
+  	legend:{
+  		itemclick: explodePie
+  	},
+  	data: [{
+  		type: "pie",
+  		showInLegend: true,
+  		toolTipContent: "{name}: <strong>{y}%</strong>",
+  		indexLabel: "{name} - {y}%",
+  		dataPoints: [
+  			{ y: {{test_B_M}}, name: "Malignant", exploded: true },
+  			{ y: 100-{{test_B_M}}, name: "Benign" }
+  		]
+  	}]
+  });
+  chart.render();
+
+  function explodePie (e) {
+  	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+  		e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+  	} else {
+  		e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+  	}
+  	e.chart.render();
+  }
+  CanvasJS.addColorSet("greyShades",
+             [
+             "#1c4966",
+             "#45b6fe"
+             ]);
+  var chart1 = new CanvasJS.Chart("chartContainer1", {
+  	// exportEnabled: true,
+  	animationEnabled: true,
+    backgroundColor: "snow",
+    colorSet: "greyShades",
+  	// title:{
+  	// 	text: "State Operating Funds"
+  	// },
+  	legend:{
+  		// cursor: "pointer",
+  		itemclick: explodePie
+  	},
+  	data: [{
+  		type: "pie",
+  		showInLegend: true,
+  		toolTipContent: "{name}: <strong>{y}%</strong>",
+  		indexLabel: "{name} - {y}%",
+  		dataPoints: [
+  			{ y: {{test_P_M}}, name: "Malignant", exploded: true },
+  			{ y: 100-{{test_P_M}}, name: "Benign" }
+  		]
+  	}]
+  });
+  chart1.render();
+  }
+
+  function explodePie (e) {
+  	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+  		e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+  	} else {
+  		e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+  	}
+  	e.chart1.render();
+  }
+  function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+  $("#b_types_details").hide();
+  $("#b_stages_details").hide();
+  $("#b_symptoms_details").hide();
+  $("#p_types_details").hide();
+  $("#p_stages_details").hide();
+  $("#p_symptoms_details").hide();
+  $("#p_risk_factors").hide();
+  $("#b_spouse_name").hide();
+  $("#p_spouse_name").hide();
+  $("#p_parents_name").hide();
+  $("#b_parents_name").hide();
+//   $("#b_p_dob").datepicker({
+//     maxDate: 0
+// });
+  $(document).ready(function(){
+    $("#b_symptoms").click(function(){
+      $("#b_types_details").hide();
+      $("#b_stages_details").hide();
+      $("#b_symptoms_details").show();
+    });
+    });
+    $(document).ready(function(){
+      $("#b_types").click(function(){
+        $("#b_symptoms_details").hide();
+        $("#b_stages_details").hide();
+        $("#b_types_details").show();
+      });
+      });
+      $(document).ready(function(){
+        $("#b_stages").click(function(){
+          $("#b_types_details").hide();
+          $("#b_symptoms_details").hide();
+          $("#b_stages_details").show();
+        });
+        });
+        $(document).ready(function(){
+          $("#p_types").click(function(){
+            $("#p_types_details").show();
+            $("#p_stages_details").hide();
+            $("#p_risk_factors").hide();
+            $("#p_symptoms_details").hide();
+          });
+          });
+          $(document).ready(function(){
+            $("#p_symptoms").click(function(){
+              $("#p_types_details").hide();
+              $("#p_stages_details").hide();
+              $("#p_risk_factors").hide();
+              $("#p_symptoms_details").show();
+            });
+            });
+            $(document).ready(function(){
+              $("#p_stages").click(function(){
+                $("#p_types_details").hide();
+                $("#p_stages_details").show();
+                $("#p_risk_factors").hide();
+                $("#p_symptoms_details").hide();
+              });
+              });
+              $(document).ready(function(){
+                $("#p_risk").click(function(){
+                  $("#p_types_details").hide();
+                  $("#p_stages_details").hide();
+                  $("#p_symptoms_details").hide();
+                  $("#p_risk_factors").show();
+                });
+                });
+                $(document).ready(function(){
+                  $("#b_married_option").click(function(){
+                    $("#b_spouse_name").show();
+                    $("#b_parents_name").hide();
+                  });
+                  });
+                  $(document).ready(function(){
+                    $("#p_married_option").click(function(){
+                      $("#p_spouse_name").show();
+                      $("#p_parents_name").hide();
+                    });
+                    });
+                  $(document).ready(function(){
+                    $("#b_unmarried_option").click(function(){
+                      $("#b_spouse_name").hide();
+                      $("#b_parents_name").show();
+                    });
+                    });
+                    $(document).ready(function(){
+                      $("#p_unmarried_option").click(function(){
+                        $("#p_spouse_name").hide();
+                        $("#p_parents_name").show();
+                      });
+                      });
+      function b_calcage()
+      {
+          var input = document.getElementById("b_p_dob").value;
+          var dob = new Date(input);
+          var today = new Date();
+          var today_year = today.getYear();
+          var dob_year = dob.getYear();
+          var age = today.getYear() - dob.getYear();
+          document.getElementById('b_p_age').innerHTML = age;
+      }
+      function p_calcage()
+      {
+          var input = document.getElementById("p_p_dob").value;
+          var dob = new Date(input);
+          var today = new Date();
+          var today_year = today.getYear();
+          var dob_year = dob.getYear();
+          var age = today.getYear() - dob.getYear();
+          document.getElementById('p_p_age').innerHTML = age;
+      }
+    </script>
+</div>
+</body>
+</html>

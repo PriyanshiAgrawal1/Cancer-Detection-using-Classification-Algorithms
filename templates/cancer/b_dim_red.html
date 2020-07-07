@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Dimensionality Reduction - Breast Accuracy</title>
+    <link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <style>
+      body {
+        overflow-x : hidden;
+        background-color: snow;
+      }
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      .heading {
+        border-top:1px solid #232323;
+        border-bottom:1px solid #232323;
+        height: 45px;
+        width:1268px;
+        position:relative;
+        left:130px;
+        background-color: #ecebf6;
+      }
+      #span_css {
+        position: absolute;
+        padding-top:10px;
+        font-weight:bold;
+      }
+      .chip {
+        position: absolute;
+        display: inline-block;
+        padding: 0 25px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 50px;
+        border-radius: 25px;
+        background-color: lightgrey;
+        top:70px;
+      }
+
+      .chip img {
+        float: left;
+        margin: 0 10px 0 -25px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+  .my-custom-scrollbar
+  {
+    position: relative;
+    height: 247px;
+    overflow: auto;
+  }
+  .table-wrapper-scroll-y
+  {
+    display: block;
+  }
+
+  thead{
+    background-color: #ecebf6;
+  }
+
+  .content6 {
+    position: absolute;
+    bottom: 0;
+    background:  rgb(1, 1, 1);
+    background: rgba(251,210,215,0.5);
+    left:35px;
+    width:5.5%;
+    height: 100%;
+    position: fixed;
+  }
+  .content7 {
+    position: absolute;
+    top:60px;
+    background:  rgb(1, 1, 1);
+    background: rgba(234,211,215,0.7);
+    left:0;
+    width:13.5%;
+    height: 10%;
+  }
+
+    </style>
+  </head>
+  <body>
+    <br>
+    <div class="content6">
+    </div>
+    <div class="container">
+    <div class="jumbotron">
+    <div class="container">
+      <div class="chip">
+        <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+        <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong></div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id= "span_css" style="font-family:Acme;font-size:25px;position:absolute;top:70px;">DIMENSIONALLY REDUCED ACCURACIES</span>
+    </div>
+  </div>
+  </div>
+  <div class="content7">
+  </div>
+  <div class="content7" style="left:1314px;width:15%;">
+    <div style="padding-left:70px;padding-top:23px;">
+      <button type="button" name="button" class="btn btn-sm" style="background-color:whitesmoke;color:black;" onclick="window.location='http://127.0.0.1:8000/cancer_app/breastAccuracy/'"><i style='font-size:20px' class='fas'>&#xf30a;</i>&nbsp&nbspBACK</button>
+    </div>
+  </div>
+      <br><br>
+      <div class="container" align="center">
+        <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      </div>
+      <br><br>
+        <div class="heading">
+          <span style="left:480px;" id= "span_css">SUPPORT VECTOR MACHINE ALGORITHM<span>
+        </div>
+        <br><br>
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+          <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+            <h6 style="padding-top:22px;text-align:center;color:black;"><b>Without Fold</b></h6>
+            <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_0_svm}} %</p>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+            <h6 style="padding-top:22px;text-align:center;color:black;"><b>5 Folds</b></h6>
+            <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_5_svm}} %</p>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+            <h6 style="padding-top:22px;text-align:center;color:black;"><b>10 Folds</b></h6>
+            <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_10_svm}} %</p>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+            <h6 style="padding-top:22px;text-align:center;color:black;"><b>15 Folds</b></h6>
+            <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_15_svm}} %</p>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+            <h6 style="padding-top:22px;text-align:center;color:black;"><b>20 Folds</b></h6>
+            <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_20_svm}} %</p>
+          </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+      </div>
+      <br><br>
+      <div class="container">
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+          <table class="table table-bordered" style="text-align:center;background-color:white;">
+          {% if svmBD_list %}
+            <thead>
+              <tr>
+                <th>0 Fold</th>
+                <th>5 Folds</th>
+                <th>10 Folds</th>
+                <th>15 Folds</th>
+                <th>20 Folds</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for var in svmBD_list %}
+                  <tr>
+                    <td>{{var.svmBD_fold_0}} %</td>
+                    <td>{{var.svmBD_fold_5}} %</td>
+                    <td>{{var.svmBD_fold_10}} %</td>
+                    <td>{{var.svmBD_fold_15}} %</td>
+                    <td>{{var.svmBD_fold_20}} %</td>
+                  </tr>
+              {% endfor %}
+            </tbody>
+          {% else %}
+            <p>NO RECORDS FOUND</p>
+          {% endif %}
+          </table>
+        </div>
+      </div>
+      <br><br>
+      <div class="container">
+        <div class="card" style="background:whitesmoke;height:290px;border:1px solid lavender">
+          <h6 style="padding-top:22px;text-align:center;color:black;"><b>Average Accuracies</b></h6><br>
+          <div class="row" align="center">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2">
+              <label for="" style="font-weight:bold">0 Fold <br> -----------</label>
+              <p>&nbsp&nbsp{{avg_svmBD_0}} %</p>
+            </div>
+            <div class="col-md-2">
+              <label for="" style="font-weight:bold">5 Folds <br> -----------</label>
+              <p>&nbsp&nbsp{{avg_svmBD_0}} %</p>
+            </div>
+            <div class="col-md-2">
+              <label for="" style="font-weight:bold">10 Folds <br> -----------</label>
+              <p>&nbsp&nbsp{{avg_svmBD_0}} %</p>
+            </div>
+            <div class="col-md-2">
+              <label for="" style="font-weight:bold">15 Folds <br> -----------</label>
+              <p>&nbsp&nbsp{{avg_svmBD_0}} %</p>
+            </div>
+            <div class="col-md-2">
+              <label for="" style="font-weight:bold">20 Folds <br> -----------</label>
+              <p>&nbsp&nbsp{{avg_svmBD_0}} %</p>
+            </div>
+          </div>
+          <h6 style="padding-top:22px;text-align:center;color:black;"><b>Final Average Accuracy</b></h6><br>
+          <p style="text-align:center">&nbsp&nbsp{{svm_final_avg_BD}} %</p>
+        </div>
+      </div>
+      <br><br>
+
+      <div class="heading">
+        <span style="left:530px;" id= "span_css">DECISION TREE ALGORITHM<span>
+      </div>
+      <br><br>
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-2">
+        <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+          <h6 style="padding-top:22px;text-align:center;color:black;"><b>Without Fold</b></h6>
+          <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_0_dt}} %</p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+          <h6 style="padding-top:22px;text-align:center;color:black;"><b>5 Folds</b></h6>
+          <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_5_dt}} %</p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+          <h6 style="padding-top:22px;text-align:center;color:black;"><b>10 Folds</b></h6>
+          <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_10_dt}} %</p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+          <h6 style="padding-top:22px;text-align:center;color:black;"><b>15 Folds</b></h6>
+          <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_15_dt}} %</p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+          <h6 style="padding-top:22px;text-align:center;color:black;"><b>20 Folds</b></h6>
+          <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_20_dt}} %</p>
+        </div>
+      </div>
+      <div class="col-md-1">
+      </div>
+    </div>
+    <br><br>
+    <div class="container">
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table class="table table-bordered" style="text-align:center;background-color:white;">
+        {% if dtBD_list %}
+          <thead>
+            <tr>
+              <th>0 Fold</th>
+              <th>5 Folds</th>
+              <th>10 Folds</th>
+              <th>15 Folds</th>
+              <th>20 Folds</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for var in dtBD_list %}
+                <tr>
+                  <td>{{var.dtBD_fold_0}} %</td>
+                  <td>{{var.dtBD_fold_5}} %</td>
+                  <td>{{var.dtBD_fold_10}} %</td>
+                  <td>{{var.dtBD_fold_15}} %</td>
+                  <td>{{var.dtBD_fold_20}} %</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        {% else %}
+          <p>NO RECORDS FOUND</p>
+        {% endif %}
+        </table>
+      </div>
+    </div>
+    <br><br>
+    <div class="container">
+      <div class="card" style="background:whitesmoke;height:290px;border:1px solid lavender">
+        <h6 style="padding-top:22px;text-align:center;color:black;"><b>Average Accuracies</b></h6><br>
+        <div class="row" align="center">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-2">
+            <label for="" style="font-weight:bold">0 Fold <br> -----------</label>
+            <p>&nbsp&nbsp{{avg_dtBD_0}} %</p>
+          </div>
+          <div class="col-md-2">
+            <label for="" style="font-weight:bold">5 Folds <br> -----------</label>
+            <p>&nbsp&nbsp{{avg_dtBD_0}} %</p>
+          </div>
+          <div class="col-md-2">
+            <label for="" style="font-weight:bold">10 Folds <br> -----------</label>
+            <p>&nbsp&nbsp{{avg_dtBD_0}} %</p>
+          </div>
+          <div class="col-md-2">
+            <label for="" style="font-weight:bold">15 Folds <br> -----------</label>
+            <p>&nbsp&nbsp{{avg_dtBD_0}} %</p>
+          </div>
+          <div class="col-md-2">
+            <label for="" style="font-weight:bold">20 Folds <br> -----------</label>
+            <p>&nbsp&nbsp{{avg_dtBD_0}} %</p>
+          </div>
+        </div>
+        <h6 style="padding-top:22px;text-align:center;color:black;"><b>Final Average Accuracy</b></h6><br>
+        <p style="text-align:center">&nbsp&nbsp{{dt_final_avg_BD}} %</p>
+      </div>
+    </div>
+    <br><br>
+
+
+    <div class="heading">
+      <span style="left:510px;" id= "span_css">LOGISTIC REGRESSION ALGORITHM<span>
+    </div>
+    <br><br>
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
+      <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+        <h6 style="padding-top:22px;text-align:center;color:black;"><b>Without Fold</b></h6>
+        <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_0_lr}} %</p>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+        <h6 style="padding-top:22px;text-align:center;color:black;"><b>5 Folds</b></h6>
+        <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_5_lr}} %</p>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+        <h6 style="padding-top:22px;text-align:center;color:black;"><b>10 Folds</b></h6>
+        <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_10_lr}} %</p>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+        <h6 style="padding-top:22px;text-align:center;color:black;"><b>15 Folds</b></h6>
+        <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_15_lr}} %</p>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+        <h6 style="padding-top:22px;text-align:center;color:black;"><b>20 Folds</b></h6>
+        <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_20_lr}} %</p>
+      </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
+  <br><br>
+  <div class="container">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <table class="table table-bordered" style="text-align:center;background-color:white;">
+      {% if lrBD_list %}
+        <thead>
+          <tr>
+            <th>0 Fold</th>
+            <th>5 Folds</th>
+            <th>10 Folds</th>
+            <th>15 Folds</th>
+            <th>20 Folds</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for var in lrBD_list %}
+              <tr>
+                <td>{{var.lrBD_fold_0}} %</td>
+                <td>{{var.lrBD_fold_5}} %</td>
+                <td>{{var.lrBD_fold_10}} %</td>
+                <td>{{var.lrBD_fold_15}} %</td>
+                <td>{{var.lrBD_fold_20}} %</td>
+              </tr>
+          {% endfor %}
+        </tbody>
+      {% else %}
+        <p>NO RECORDS FOUND</p>
+      {% endif %}
+      </table>
+    </div>
+  </div>
+  <br><br>
+  <div class="container">
+    <div class="card" style="background:whitesmoke;height:290px;border:1px solid lavender">
+      <h6 style="padding-top:22px;text-align:center;color:black;"><b>Average Accuracies</b></h6><br>
+      <div class="row" align="center">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+          <label for="" style="font-weight:bold">0 Fold <br> -----------</label>
+          <p>&nbsp&nbsp{{avg_lrBD_0}} %</p>
+        </div>
+        <div class="col-md-2">
+          <label for="" style="font-weight:bold">5 Folds <br> -----------</label>
+          <p>&nbsp&nbsp{{avg_lrBD_0}} %</p>
+        </div>
+        <div class="col-md-2">
+          <label for="" style="font-weight:bold">10 Folds <br> -----------</label>
+          <p>&nbsp&nbsp{{avg_lrBD_0}} %</p>
+        </div>
+        <div class="col-md-2">
+          <label for="" style="font-weight:bold">15 Folds <br> -----------</label>
+          <p>&nbsp&nbsp{{avg_lrBD_0}} %</p>
+        </div>
+        <div class="col-md-2">
+          <label for="" style="font-weight:bold">20 Folds <br> -----------</label>
+          <p>&nbsp&nbsp{{avg_lrBD_0}} %</p>
+        </div>
+      </div>
+      <h6 style="padding-top:22px;text-align:center;color:black;"><b>Final Average Accuracy</b></h6><br>
+      <p style="text-align:center">&nbsp&nbsp{{lr_final_avg_BD}} %</p>
+    </div>
+  </div>
+  <br><br>
+
+
+
+
+  <div class="heading">
+    <span style="left:530px;" id= "span_css">RANDOM FOREST ALGORITHM<span>
+  </div>
+  <br><br>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-2">
+    <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+      <h6 style="padding-top:22px;text-align:center;color:black;"><b>Without Fold</b></h6>
+      <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_0_rf}} %</p>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+      <h6 style="padding-top:22px;text-align:center;color:black;"><b>5 Folds</b></h6>
+      <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_5_rf}} %</p>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+      <h6 style="padding-top:22px;text-align:center;color:black;"><b>10 Folds</b></h6>
+      <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_10_rf}} %</p>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+      <h6 style="padding-top:22px;text-align:center;color:black;"><b>15 Folds</b></h6>
+      <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_15_rf}} %</p>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+      <h6 style="padding-top:22px;text-align:center;color:black;"><b>20 Folds</b></h6>
+      <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_20_rf}} %</p>
+    </div>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+<br><br>
+<div class="container">
+  <div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-bordered" style="text-align:center;background-color:white;">
+    {% if rfBD_list %}
+      <thead>
+        <tr>
+          <th>0 Fold</th>
+          <th>5 Folds</th>
+          <th>10 Folds</th>
+          <th>15 Folds</th>
+          <th>20 Folds</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for var in rfBD_list %}
+            <tr>
+              <td>{{var.rfBD_fold_0}} %</td>
+              <td>{{var.rfBD_fold_5}} %</td>
+              <td>{{var.rfBD_fold_10}} %</td>
+              <td>{{var.rfBD_fold_15}} %</td>
+              <td>{{var.rfBD_fold_20}} %</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    {% else %}
+      <p>NO RECORDS FOUND</p>
+    {% endif %}
+    </table>
+  </div>
+</div>
+<br><br>
+<div class="container">
+  <div class="card" style="background:whitesmoke;height:290px;border:1px solid lavender">
+    <h6 style="padding-top:22px;text-align:center;color:black;"><b>Average Accuracies</b></h6><br>
+    <div class="row" align="center">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-2">
+        <label for="" style="font-weight:bold">0 Fold <br> -----------</label>
+        <p>&nbsp&nbsp{{avg_rfBD_0}} %</p>
+      </div>
+      <div class="col-md-2">
+        <label for="" style="font-weight:bold">5 Folds <br> -----------</label>
+        <p>&nbsp&nbsp{{avg_rfBD_0}} %</p>
+      </div>
+      <div class="col-md-2">
+        <label for="" style="font-weight:bold">10 Folds <br> -----------</label>
+        <p>&nbsp&nbsp{{avg_rfBD_0}} %</p>
+      </div>
+      <div class="col-md-2">
+        <label for="" style="font-weight:bold">15 Folds <br> -----------</label>
+        <p>&nbsp&nbsp{{avg_rfBD_0}} %</p>
+      </div>
+      <div class="col-md-2">
+        <label for="" style="font-weight:bold">20 Folds <br> -----------</label>
+        <p>&nbsp&nbsp{{avg_rfBD_0}} %</p>
+      </div>
+    </div>
+    <h6 style="padding-top:22px;text-align:center;color:black;"><b>Final Average Accuracy</b></h6><br>
+    <p style="text-align:center">&nbsp&nbsp{{rf_final_avg_BD}} %</p>
+  </div>
+</div>
+<br><br>
+
+
+<div class="heading">
+  <span style="left:550px;" id= "span_css">NAIVE BAYES ALGORITHM<span>
+</div>
+<br><br>
+<div class="row">
+<div class="col-md-1">
+</div>
+<div class="col-md-2">
+  <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+    <h6 style="padding-top:22px;text-align:center;color:black;"><b>Without Fold</b></h6>
+    <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_0_nb}} %</p>
+  </div>
+</div>
+<div class="col-md-2">
+  <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+    <h6 style="padding-top:22px;text-align:center;color:black;"><b>5 Folds</b></h6>
+    <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_5_nb}} %</p>
+  </div>
+</div>
+<div class="col-md-2">
+  <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+    <h6 style="padding-top:22px;text-align:center;color:black;"><b>10 Folds</b></h6>
+    <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_10_nb}} %</p>
+  </div>
+</div>
+<div class="col-md-2">
+  <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+    <h6 style="padding-top:22px;text-align:center;color:black;"><b>15 Folds</b></h6>
+    <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_15_nb}} %</p>
+  </div>
+</div>
+<div class="col-md-2">
+  <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+    <h6 style="padding-top:22px;text-align:center;color:black;"><b>20 Folds</b></h6>
+    <p style="text-align:center;padding-top: 5px;color:black;">{{my_dict.bd_20_nb}} %</p>
+  </div>
+</div>
+<div class="col-md-1">
+</div>
+</div>
+<br><br>
+<div class="container">
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+  <table class="table table-bordered" style="text-align:center;background-color:white;">
+  {% if nbBD_list %}
+    <thead>
+      <tr>
+        <th>0 Fold</th>
+        <th>5 Folds</th>
+        <th>10 Folds</th>
+        <th>15 Folds</th>
+        <th>20 Folds</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for var in nbBD_list %}
+          <tr>
+            <td>{{var.nbBD_fold_0}} %</td>
+            <td>{{var.nbBD_fold_5}} %</td>
+            <td>{{var.nbBD_fold_10}} %</td>
+            <td>{{var.nbBD_fold_15}} %</td>
+            <td>{{var.nbBD_fold_20}} %</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  {% else %}
+    <p>NO RECORDS FOUND</p>
+  {% endif %}
+  </table>
+</div>
+</div>
+<br><br>
+<div class="container">
+<div class="card" style="background:whitesmoke;height:290px;border:1px solid lavender">
+  <h6 style="padding-top:22px;text-align:center;color:black;"><b>Average Accuracies</b></h6><br>
+  <div class="row" align="center">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
+      <label for="" style="font-weight:bold">0 Fold <br> -----------</label>
+      <p>&nbsp&nbsp{{avg_nbBD_0}} %</p>
+    </div>
+    <div class="col-md-2">
+      <label for="" style="font-weight:bold">5 Folds <br> -----------</label>
+      <p>&nbsp&nbsp{{avg_nbBD_0}} %</p>
+    </div>
+    <div class="col-md-2">
+      <label for="" style="font-weight:bold">10 Folds <br> -----------</label>
+      <p>&nbsp&nbsp{{avg_nbBD_0}} %</p>
+    </div>
+    <div class="col-md-2">
+      <label for="" style="font-weight:bold">15 Folds <br> -----------</label>
+      <p>&nbsp&nbsp{{avg_nbBD_0}} %</p>
+    </div>
+    <div class="col-md-2">
+      <label for="" style="font-weight:bold">20 Folds <br> -----------</label>
+      <p>&nbsp&nbsp{{avg_nbBD_0}} %</p>
+    </div>
+  </div>
+  <h6 style="padding-top:22px;text-align:center;color:black;"><b>Final Average Accuracy</b></h6><br>
+  <p style="text-align:center">&nbsp&nbsp{{nb_final_avg_BD}} %</p>
+</div>
+</div>
+<br><br>
+<div class="container" align="center">
+  <p><b style="font-size:20px;">Breast Cancer - Final Average Accuracies</b></p><br>
+  <div id="chartContainer" style="height: 370px; width: 50%;"></div>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+</div>
+<br><br>
+  </body>
+  <script type="text/javascript">
+  window.onload = function () {
+    CanvasJS.addColorSet("greyShades",
+               [
+               "#D3D3D3",
+               "#C0C0C0",
+               "#A9A9A9",
+               "#808080",
+               "#696969"
+               ]);
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	animationEnabled: true,
+    exportEnabled: true,
+    dataPointWidth: 25,
+    axisY: {
+    minimum: 80,
+    title: "Accuracy %",
+    },
+    colorSet: "greyShades",
+  	data: [
+  	{
+  		type: "column",
+  		dataPoints: [
+  			{ label: "Support Vector",  y: {{svm_final_avg_BD}} },
+  			{ label: "Decision Tree", y: {{dt_final_avg_BD}}  },
+        { label: "Logistic Regression", y: {{lr_final_avg_BD}}  },
+  			{ label: "Random Forest",  y: {{rf_final_avg_BD}}  },
+  			{ label: "Naive Bayes",  y: {{nb_final_avg_BD}}  }
+  		]
+  	}
+  	]
+  });
+  chart.render();
+  var chart1 = new CanvasJS.Chart("chartContainer1", {
+    animationEnabled: true,
+    dataPointWidth: 25,
+    exportEnabled: true,
+    axisY: {
+      title: "Accuracy %",
+      minimum:80,
+    },
+    legend: {
+      cursor:"pointer",
+      itemclick : toggleDataSeries,
+    },
+    toolTip: {
+      shared: true,
+      content: toolTipFormatter,
+      fontSize: 10,
+    },
+    data: [{
+      type: "column",
+      showInLegend: true,
+      name: "0-Fold",
+      color: "#E4A199",
+      dataPoints: [
+        { y: {{avg_svmBD_0}}, label: "Support Vector Machine" },
+        { y: {{avg_dtBD_0}}, label: "Decision Tree" },
+        { y: {{avg_lrBD_0}}, label: "Logistic Regression" },
+        { y: {{avg_rfBD_0}}, label: "Random Forest" },
+        { y: {{avg_nbBD_0}}, label: "Naive Bayes" },
+      ]
+    },
+    {
+      type: "column",
+      showInLegend: true,
+      name: "5-Folds",
+      color: "#CE897B",
+      dataPoints: [
+        { y: {{avg_svmBD_5}}, label: "Support Vector Machine" },
+        { y: {{avg_dtBD_5}}, label: "Decision Tree" },
+        { y: {{avg_lrBD_5}}, label: "Logistic Regression" },
+        { y: {{avg_rfBD_5}}, label: "Random Forest" },
+        { y: {{avg_nbBD_5}}, label: "Naive Bayes" },
+      ]
+    },
+
+    {
+      type: "column",
+      showInLegend: true,
+      name: "10-Folds",
+      color: "#FBD2D7",
+      dataPoints: [
+        { y: {{avg_svmBD_10}}, label: "Support Vector Machine" },
+        { y: {{avg_dtBD_10}}, label: "Decision Tree" },
+        { y: {{avg_lrBD_10}}, label: "Logistic Regression" },
+        { y: {{avg_rfBD_10}}, label: "Random Forest" },
+        { y: {{avg_nbBD_10}}, label: "Naive Bayes" },
+      ]
+    },
+
+    {
+      type: "column",
+      showInLegend: true,
+      name: "15-Folds",
+      color: "#ECB7BF",
+      dataPoints: [
+        { y: {{avg_svmBD_15}}, label: "Support Vector Machine" },
+        { y: {{avg_dtBD_15}}, label: "Decision Tree" },
+        { y: {{avg_lrBD_15}}, label: "Logistic Regression" },
+        { y: {{avg_rfBD_15}}, label: "Random Forest" },
+        { y: {{avg_nbBD_15}}, label: "Naive Bayes" },
+      ]
+    },
+
+    {
+      type: "column",
+      showInLegend: true,
+      name: "20-Folds",
+      color: "#EAD3D7",
+      dataPoints: [
+        { y: {{avg_svmBD_20}}, label: "Support Vector Machine" },
+        { y: {{avg_dtBD_20}}, label: "Decision Tree" },
+        { y: {{avg_lrBD_20}}, label: "Logistic Regression" },
+        { y: {{avg_rfBD_20}}, label: "Random Forest" },
+        { y: {{avg_nbBD_20}}, label: "Naive Bayes" },
+      ]
+    },
+  ]
+  });
+  chart1.render();
+
+  function toolTipFormatter(e) {
+  	var str = "";
+  	var total = 0 ;
+  	var str3;
+  	var str2 ;
+  	for (var i = 0; i < e.entries.length; i++){
+  		var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "% </strong><br/>" ;
+  		total = e.entries[i].dataPoint.y + total;
+  		str = str.concat(str1);
+  	}
+  	str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
+  	str3 = "<span style = \"color:Tomato\">Average: </span><strong>" + Math.round(total/5) + "% </strong><br/>";
+  	return (str2.concat(str)).concat(str3);
+  }
+
+  function toggleDataSeries(e) {
+  	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+  		e.dataSeries.visible = false;
+  	}
+  	else {
+  		e.dataSeries.visible = true;
+  	}
+  	chart.render();
+  }
+
+  }
+  </script>
+
+</html>

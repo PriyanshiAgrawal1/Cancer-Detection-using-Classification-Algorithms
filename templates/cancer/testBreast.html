@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<meta charset="utf-8">
+<title>Test Breast Cancer!</title>
+<link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(1, 1, 1, 0.2);
+  border: 3px solid #ec8bbc;
+  background-color: whitesmoke;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url("{% static "images/breast_back1.jpg" %}");
+
+  /* Add the blur effect */
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: black;
+  font-weight: bold;
+  border: 3px solid whitesmoke;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 700px;
+  height: 550px;
+  padding: 20px;
+}
+
+.card-text{
+  font-family:Abhaya Libre;
+  font-size:16px;
+  text-align: left;
+}
+
+h2{
+  font-family: Abel;
+  font-size:25px;
+  color:whitesmoke;
+  font-weight: bold;
+}
+tr{
+  height: 10px;
+}
+
+.container{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+
+td{
+  font-size:15px;
+  font-family: Abel;
+}
+</style>
+</head>
+<body onload="calc_age();">
+<div class="bg-image"></div>
+
+<div class="bg-text" align="center">
+  <h2>Test Breast Cancer</h2>
+  <br>
+  <div class="row">
+    <div class="col-md-5" style="padding-left:30px;">
+      <div class="card" style="width:320px;height:300px" >
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-5">
+              {% if patient_detail_Bdict.gender == "Male" %}
+                <img  style="border-radius:50%" src="{% static "images/male_icon.jpg" %}" alt="Card image" height="120" width="120" >
+              {% elif patient_detail_Bdict.gender == "Female" %}
+                <img style="border-radius:50%" src="{% static "images/female_icon.jpg" %}" alt="Card image" height="120" width="120">
+              {% else %}
+              <img style="border-radius:50%" src="{% static "images/others_icon.png" %}" alt="Card image" height="120" width="120">
+              {% endif %}
+            </div>
+            <div class="col-md-7" style="padding-left:30px;">
+              <br><br>
+              <h4 class="card-text" style="text-transform:capitalize;font-weight:bold;font-family:Acme;font-size:18px">{{patient_detail_Bdict.first_name}} {{patient_detail_Bdict.last_name}}</h4>
+            </div>
+          </div>
+          <hr style="border:1px solid #232323">
+          <div class="row" style="padding-bottom:14px;">
+            <div class="col-md-7">
+              <p class="card-text">Gender: &nbsp&nbsp{{patient_detail_Bdict.gender}}</p>
+            </div>
+            <div class="col-md-5">
+              <input type="hidden" name="" value="{{patient_detail_Bdict.dob}}" id="b_dob">
+              <p class="card-text" id="age_calc"></p>
+            </div>
+          </div>
+          <p class="card-text">Blood Group: &nbsp&nbsp{{patient_detail_Bdict.blood_grp}}</p>
+          {% if patient_detail_Bdict.parents_name %}
+            <p class="card-text" style="text-transform:capitalize">Parent's name: &nbsp&nbsp{{patient_detail_Bdict.parents_name}}</p>
+          {% else %}
+            <p class="card-text" style="text-transform:capitalize">Spouse name: &nbsp&nbsp{{patient_detail_Bdict.spouse_name}}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-6">
+      <br><br>
+      <label for="" style="color:whitesmoke;font-family:Abel;font-size:22px;">Result</label>
+      <br>
+      {% if result_breast == "BENIGN" %}
+        <p id="result_b" style="font-size:30px;font-family:Acme; color:whitesmoke">{{result_breast}}</p>
+      {% else %}
+        <p id="result_b" style="font-size:30px;font-family:Acme; color:red">{{result_breast}}</p>
+      {% endif %}
+      <br><br>
+      <button type="button" name="button" class="btn" style="padding: 3px 20px;background-color:whitesmoke" id="result_b1" data-toggle="modal" data-target="#breast_report">View Report</button>
+    </div>
+  </div>
+  <br><br>
+  <!-- &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="file" name="" value="" style="width:250px;color:white" id="chosen_file" onchange="display_test()"><br><br> -->
+  <button type="button" name="button" class="btn" style="padding: 3px 15px;background-color:whitesmoke" onclick="display_result()" id="test_btn">Test</button>
+  <!-- <p id="test_text" style="color:whitesmoke">Choose Correct File</p> -->
+  <br>
+  <div style="position:absolute;top:17px;left:650px;">
+    <button type="button" name="button" class="btn btn-sm" style="background-color:whitesmoke;color:black;" onclick="window.location='http://127.0.0.1:8000/cancer_app/welcomeLab/'"><i style='font-size:20px' class='fas'>&#xf30a;</i></button>
+  </div>
+</div>
+<div class="modal" id="breast_report">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div  id="content">
+        <div class="container">
+          <br>
+          {% if result_breast == "BENIGN" %}
+            <div class="" style="background-color:black;height:25px;">
+              <div class="row" style="font-family:Abel">
+                <div class="col-md-6">
+                  <p id="disp_date" style="color:white;position:absolute;top:5px;font-size:12px;left:30px;"></p>
+                </div>
+                <div class="col-md-6" align="right">
+                  <p id="disp_time" style="color:white;position:absolute;top:5px;font-size:12px;left:310px;"></p>
+                </div>
+              </div>
+            </div>
+            <br>
+          {% else %}
+            <div class="" style="background-color:#ecb7bf;height:25px;">
+              <div class="row" style="font-family:Abel">
+                <div class="col-md-6">
+                  <p id="disp_date" style="color:white;position:absolute;top:5px;font-size:12px;left:30px;"></p>
+                </div>
+                <div class="col-md-6" align="right">
+                  <p id="disp_time" style="color:white;position:absolute;top:5px;font-size:12px;left:310px;"></p>
+                </div>
+              </div>
+            </div>
+            <br>
+          {% endif %}
+          <div class="row" style="font-size:14px;padding-top:10px;font-family:Abel">
+            <div class="col-md-4">
+              <p>Choose Hope Labs <br> NB 017, MVIT <br> Bengaluru <br> Phone No.: +91-7975320552 </p>
+            </div>
+            <div class="col-md-5" style="padding-left:40px;">
+              &nbsp&nbsp<div class="chip">
+                <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+                <strong style="font-size:15px;font-family:'Acme'">Choose Hope</strong>
+              </div>
+              <p style="padding-top:10px;">&nbspE-Mail: choosehope@gmail.com <br> &nbsp&nbsp&nbspVisit: www.choosehope.com</p>
+            </div>
+            <div class="col-md-3" style="padding-left:30px;">
+              <p><strong>{{patient_detail_Bdict.first_name}} {{patient_detail_Bdict.last_name}}</strong> <br> Gender: {{patient_detail_Bdict.gender}} <br> DOB: {{patient_detail_Bdict.dob}} <br>
+                {% if patient_detail_Bdict.parents_name %}
+                  Parent: {{patient_detail_Bdict.parents_name}}
+                {% else %}
+                  Spouse: {{patient_detail_Bdict.spouse_name}}
+                {% endif %}
+              </p>
+            </div>
+          </div>
+          <hr style="border:1px solid black;">
+          <br>
+          <div class="" style="border-top:1px solid black;border-bottom:1px solid black;">
+            <p align="center" style="font-family:Abel;font-size:15px;position:relative;top:10px;font-weight:bold;">DIAGNOSIS</p>
+          </div>
+          <p style="font-size:15px;font-family:Abel;padding-top:13px;"><strong>Patient ID:</strong> {{patient_id}}</p>
+          <table class=" table table-bordered">
+            <thead>
+              <tr>
+                <th colspan="3" style="text-align:center;background-color:whitesmoke;font-family:Abel">Breast Cancer</th>
+              </tr>
+              <tr style="text-align:center;font-family:Abel">
+                <th colspan="2" style="width:100px;">Fields</th>
+                <th style="color:white">ABCDEFGHIJKLMNOPQRSTUVWXYZ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                  <strong>Radius:</strong> {{patient_detail_Bdict.radius}} µm
+                </td>
+                <td rowspan="8">
+                    <div class="row" style="padding-top:5px;">
+                      <div class="col-md-4">
+                        <img src="{% static "images/radius1.png" %}" alt="" style="height:120px;width:120px;">
+                      </div>
+                      <div class="col-md-4">
+                        <img src="{% static "images/texture1.png" %}" alt="" style="height:120px;width:120px;">
+                      </div>
+                      <div class="col-md-4">
+                        <img src="{% static "images/Perimeter1.png" %}" alt="" style="height:120px;width:120px;">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row" style="padding-top:5px;">
+                      <div class="col-md-4">
+                        <img src="{% static "images/Area1.png" %}" alt="" style="height:120px;width:120px;">
+                      </div>
+                      <div class="col-md-4">
+                        <img src="{% static "images/Smoothness1.png" %}" alt="" style="height:120px;width:120px;">
+                      </div>
+                      <div class="col-md-4">
+                        <img src="{% static "images/Compactness1.png" %}" alt="" style="height:120px;width:120px;">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row" align="center" style="padding-top:5px;">
+                      <div class="col-md-1">
+                      </div>
+                      <div class="col-md-5">
+                        <img src="{% static "images/Symmetry1.png" %}" alt="" style="height:120px;width:120px;">
+                      </div>
+                      <div class="col-md-5">
+                        <img src="{% static "images/Fractal_Dimension1.png" %}" alt="" style="height:120px;width:120px;">
+                      </div>
+                      <div class="col-md-1">
+                      </div>
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                  <strong>Texture:</strong> {{patient_detail_Bdict.texture}}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                  <strong>Perimeter:</strong> {{patient_detail_Bdict.perimeter}} µm
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                  <strong>Area:</strong> {{patient_detail_Bdict.area}} µm<sup>2</sup>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                  <strong>Smoothness:</strong> {{patient_detail_Bdict.smoothness}}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                  <strong>Compactness:</strong> {{patient_detail_Bdict.compactness}}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                  <strong>Symmetry:</strong> {{patient_detail_Bdict.symmetry}}
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align:center">
+                  <strong>Fractal_Dimension:</strong> {{patient_detail_Bdict.fractal_dimension}} D
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th style="font-family:Abel;background-color:whitesmoke;text-align:center;font-weight:bold">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td align="center">
+                    <strong>Type:</strong>
+                    {% if result_breast == "BENIGN" %}
+                      <span style="color:grey;">{{result_breast}}</span>
+                    {% else %}
+                      <span style="color:red;">{{result_breast}}</span>
+                    {% endif %}
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+          <p style="font-family:Abel;font-size:14px;text-align:center">This is an electronically generated report and needs no signature. Any alterations will make the report void.</p>
+          {% if result_breast == "BENIGN" %}
+            <div class="" style="background-color:black;height:25px;">
+            </div>
+            <br>
+          {% else %}
+            <div class="" style="background-color:#ecb7bf;height:25px;">
+            </div>
+          {% endif %}
+          <br>
+        </div>
+      </div>
+        <br>
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-8" style="padding-left:60px">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$("#result_b").hide();
+$("#result_b1").hide();
+// $("#test_btn").hide();
+// $("#test_text").hide();
+
+
+  // function display_test()
+  // {
+  //   var file_path = document.getElementById('chosen_file').value;
+  //   var file_name = file_path.replace(/^.*[\\\/]/, '');
+  //   if(file_name == "Breast_Cancer.csv")
+  //   {
+  //     $("#test_btn").show();
+  //     $("#test_text").hide();
+  //   }
+  //   else {
+  //       $("#test_text").show();
+  //       $("#test_btn").hide();
+  //       $("#result_b").hide();
+  //       $("#result_b1").hide();
+  //   }
+  // }
+  function display_result()
+  {
+      $("#result_b").show();
+      $("#result_b1").show();
+  }
+    function calc_age() {
+      var date=document.getElementById('b_dob').value;
+      var dob_date = new Date(date);
+      var today_date = new Date();
+      var today_year = today_date.getYear();
+      var dob_year = dob_date.getYear();
+      var age = today_year - dob_year;
+      document.getElementById('age_calc').innerHTML = "Age: " +age+" years";
+      var date_div = new Date();
+      var day_div = date_div.getDay();
+      if(day_div==1)
+      {
+        day_div = "Mon";
+      }
+      else if(day_div==2)
+      {
+        day_div = "Tue";
+      }
+      else if(day_div==3)
+      {
+        day_div = "Wed";
+      }
+      else if(day_div==4)
+      {
+        day_div = "Thr";
+      }
+      else if(day_div==5)
+      {
+        day_div = "Fri";
+      }
+      else if(day_div==6)
+      {
+        day_div = "Sat";
+      }
+      else {
+        day_div = "Sun";
+      }
+      var date_div1 = date_div.getDate();
+      var month_div = date_div.getMonth();
+      var year_div = date_div.getFullYear();
+      var hours_div = date_div.getHours();
+      var min_div = date_div.getMinutes();
+      if(min_div<10)
+      {
+        min_div = "0"+min_div;
+      }
+      else {
+        ;
+      }
+      var sec_div = date_div.getSeconds();
+      if(sec_div<10)
+      {
+        sec_div = "0"+sec_div;
+      }
+      else {
+        ;
+      }
+      document.getElementById('disp_date').innerHTML = day_div + "," + date_div1 + "/" + (month_div+1) + "/" + year_div;
+      document.getElementById('disp_time').innerHTML = hours_div +":"+ min_div +":"+sec_div ;
+    }
+</script>
+</body>
+</html>

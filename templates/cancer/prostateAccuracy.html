@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<title>Prostate Cancer - Accuracy</title>
+<link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+  overflow-x: hidden;
+}
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* .column {
+  float: left;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+} */
+
+@media screen and (max-width: 650px) {
+  /* .column {
+    width: 100%;
+    display: block;
+  } */
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width:85%;
+  padding-left: 20px;
+}
+/*
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+} */
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: black;
+  float: none;
+  background-color: lightgrey;
+  text-align: center;
+  cursor: pointer;
+  width: auto;
+  border:1px solid black;
+}
+
+.button:hover {
+  background-color: whitesmoke;
+}
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.sidenav {
+  height: 100%;
+  width: 230px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 20px;
+  border-right: 6px solid darkgrey;
+}
+
+.sidenav a {
+  /* padding: 6px 8px 6px 16px; */
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #808080;
+}
+
+.main {
+  margin-left: 230px;
+  font-size: 28px;
+  padding: 0px 10px;
+  background-color: lavender;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.modal-body{
+  font-size: 20px;
+  font-family: "Times New Roman";
+  text-align: justify;
+  text-justify: inter-word;
+}
+.modal-title{
+  font-size: 25px;
+  font-weight: bold;
+}
+.modal-header{
+  text-align: center;
+  font-family: Acme;
+  border-bottom: 2px solid black;
+}
+
+.dropdown{
+  font-size:16px;
+  padding: 9px 6px;
+  background-color: lightgrey;
+  border: 1px solid black;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 0 0 10px #E8E8E8 inset;
+  margin: 0 0 0 25px;
+}
+.select {
+  background: #fff;
+}
+
+.content6 {
+  position: absolute;
+  top: 0;
+  background:  rgb(1, 1, 1);
+  background: rgba(128,128,128,0.4);
+  left:1400px;
+  width:5%;
+  height: 100%;
+  position: fixed;
+}
+.content7 {
+  position: absolute;
+  top:40px;
+  background:  rgb(1, 1, 1);
+  background: rgba(128,128,128,0.6);
+  left:0;
+  width:100%;
+  height: 9%;
+  /* position: fixed; */
+}
+
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-10">
+      <div class="chip">
+        <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+        <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong>
+      </div>
+    </div>
+  </div>
+  <br><br>
+<br><br><br>
+  <a href="{% url 'prostate_chart' %}" style="text-align:center;font-family:'Acme';font-size:20px"><i  class="fa">&#xf080;</i>&nbsp&nbspSTATISTICS</a><br><br>
+  <a href="{% url 'p_dim_red' %}" style="text-align:center;font-family:'Acme';font-size:20px;"><i class="material-icons">&#xe8e5;</i>&nbsp&nbspREDUCE DIMENSIONS</a><br><br><br><br><br><br><br>
+  <a href="http://127.0.0.1:8000/cancer_app/welcomeAdmin/" style="text-align:center;font-family:'Acme';font-size:20px;"><i style='font-size:20px' class='fas'>&#xf30a;</i>&nbsp&nbspBACK</a><br><br>
+</div>
+<div class="main">
+  <br>
+  <div class="content6">
+  </div>
+  <div class="content7">
+  </div>
+<br><br><br>
+  <!-- Support vector machine -->
+    <div class="" style="padding-left:100px;padding-bottom:45px;">
+      <div class="card" style="border:1px solid black;height:200px;">
+        <div class="row">
+          <div class="col-md-3">
+            <a href="#" style="text-decoration:none;" data-toggle="modal" data-target="#modal_svm">
+              <br>
+              <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+                  <h6 style="padding-top:40px;text-align:left;color:black;"><b>&nbspSupport Vector Machine</b></h6>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <br>
+                <p class="" style="font-size:15px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDataset: <span style="color:grey">ProstateCancer.csv</span></p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <select id="p_mySelect_svm" class="dropdown">
+                      <option value="0" style="background-color:lavender;">0-Fold</option>
+                      <option value="5" style="background-color:lavender">5-Fold</option>
+                      <option value="10" style="background-color:lavender">10-Fold</option>
+                      <option value="15" style="background-color:lavender">15-Fold</option>
+                      <option value="20" style="background-color:lavender">20-Fold</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <p><button class="button btn-sm" align="center" onclick="myFunction_svm()">Examine</button></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <br><br>
+                <label for="svm"><p style="font-size:18px;">Accuracy Obtained:</p></label>&nbsp&nbsp&nbsp
+                <input type="text" name="svm" value="{{my_dict.p_0_svm}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_0_svm">
+                <input type="text" name="svm" value="{{my_dict.p_5_svm}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_5_svm">
+                <input type="text" name="svm" value="{{my_dict.p_10_svm}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_10_svm">
+                <input type="text" name="svm" value="{{my_dict.p_15_svm}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_15_svm">
+                <input type="text" name="svm" value="{{my_dict.p_20_svm}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_20_svm">
+                <br>
+
+              </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+              <div class="col-md-12"  align="right" style="padding-bottom:0px;">
+                <button type="button" name="button" class="card" style="width:40px;background-color:whitesmoke;padding-left:8px;" data-toggle="modal" data-target="#svmP_modal"><i class="material-icons">&#xe8ef;</i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Modal for svm accuracies -->
+  <div class="modal" id="svmP_modal">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupport Vector Machine Accuracy Chart</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" style="text-align:center">
+          {% if svmP_list %}
+          <div class="container">
+            <table class="table table-bordered table-striped">
+              <thead style="background-color:lavender;color:black;border:1px solid black;">
+                <th>0 Fold</th>
+                <th>5 Folds</th>
+                <th>10 Folds</th>
+                <th>15 Folds</th>
+                <th>20 Folds</th>
+              </thead>
+              <tbody>
+                {% for var in svmP_list %}
+                <tr>
+                    <td>{{ var.svmP_fold_0 }} %</td>
+                    <td>{{ var.svmP_fold_5 }} %</td>
+                    <td>{{ var.svmP_fold_10 }} %</td>
+                    <td>{{ var.svmP_fold_15 }} %</td>
+                    <td>{{ var.svmP_fold_20 }} %</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <br>
+            <label for="" style="font-weight:bold;font-size:23px;">Average Accuracies</label>
+            <br>
+            <div class="row" style="padding-top:12px;">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-2">
+                <label for="">SVM Fold 0</label>
+                <input type="text" name="" value="{{avg_svmP_0}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+              </div>
+              <div class="col-md-2">
+                <label for="">SVM Folds 5</label>
+                <input type="text" name="" value="{{avg_svmP_5}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+              </div>
+              <div class="col-md-2">
+                <label for="">SVM Folds 10</label>
+                <input type="text" name="" value="{{avg_svmP_10}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+              </div>
+              <div class="col-md-2">
+                <label for="">SVM Folds 15</label>
+                <input type="text" name="" value="{{avg_svmP_15}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+              </div>
+              <div class="col-md-2">
+                <label for="">SVM Folds 20</label>
+                <input type="text" name="" value="{{avg_svmP_20}} %" style="text-align:center;width:75px;background-color:white;color:black" readonly>
+              </div>
+              <div class="col-md-1">
+              </div>
+            </div>
+          </div>
+          <br>
+          <label for="" style="font-weight:bold;font-size:23px;">Final Average</label>
+          <br>
+          <input type="text" name="" value="{{svm_final_avg}} %" style="text-align:center;width:95px;background-color:white;color:black" readonly>
+          {% else %}
+            <p>NO RECORDS FOUND</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for dt accuracies -->
+<div class="modal" id="dtP_modal">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDecision Tree Classifier Accuracy Chart</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="text-align:center">
+        {% if dtP_list %}
+        <div class="container">
+          <table class="table table-bordered table-striped">
+            <thead style="background-color:lavender;color:black;border:1px solid black;">
+              <th>0 Fold</th>
+              <th>5 Folds</th>
+              <th>10 Folds</th>
+              <th>15 Folds</th>
+              <th>20 Folds</th>
+            </thead>
+            <tbody>
+              {% for var in dtP_list %}
+              <tr>
+                  <td>{{ var.dtP_fold_0 }} %</td>
+                  <td>{{ var.dtP_fold_5 }} %</td>
+                  <td>{{ var.dtP_fold_10 }} %</td>
+                  <td>{{ var.dtP_fold_15 }} %</td>
+                  <td>{{ var.dtP_fold_20 }} %</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <br>
+          <label for="" style="font-weight:bold;font-size:23px;">Average accuracies</label>
+          <br>
+          <div class="row" style="padding-top:12px;">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2">
+              <label for="">DT Fold 0</label>
+              <input type="text" name="" value="{{avg_dtP_0}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+            </div>
+            <div class="col-md-2">
+              <label for="">DT Folds 5</label>
+              <input type="text" name="" value="{{avg_dtP_5}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+            </div>
+            <div class="col-md-2">
+              <label for="">DT Folds 10</label>
+              <input type="text" name="" value="{{avg_dtP_10}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+            </div>
+            <div class="col-md-2">
+              <label for="">DT Folds 15</label>
+              <input type="text" name="" value="{{avg_dtP_15}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+            </div>
+            <div class="col-md-2">
+              <label for="">DT Folds 20</label>
+              <input type="text" name="" value="{{avg_dtP_20}} %" style="text-align:center;width:75px;background-color:white;color:black" readonly>
+            </div>
+            <div class="col-md-1">
+            </div>
+          </div>
+        </div>
+        <br>
+        <label for="" style="font-weight:bold;font-size:23px;">Final Average</label>
+        <br>
+        <input type="text" name="" value="{{dt_final_avg}} %" style="text-align:center;width:95px;background-color:white;color:black" readonly>
+        {% else %}
+          <p>NO RECORDS FOUND</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for lr accuracies -->
+<div class="modal" id="lrP_modal">
+<div class="modal-dialog modal-xl modal-dialog-scrollable">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspLogistic Regression Accuracy Chart</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body" style="text-align:center">
+      {% if lrP_list %}
+      <div class="container">
+        <table class="table table-bordered table-striped">
+          <thead style="background-color:lavender;color:black;border:1px solid black;">
+            <th>0 Fold</th>
+            <th>5 Folds</th>
+            <th>10 Folds</th>
+            <th>15 Folds</th>
+            <th>20 Folds</th>
+          </thead>
+          <tbody>
+            {% for var in lrP_list %}
+            <tr>
+                <td>{{ var.lrP_fold_0 }} %</td>
+                <td>{{ var.lrP_fold_5 }} %</td>
+                <td>{{ var.lrP_fold_10 }} %</td>
+                <td>{{ var.lrP_fold_15 }} %</td>
+                <td>{{ var.lrP_fold_20 }} %</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+        <label for="" style="font-weight:bold;font-size:23px;">Average Accuracies</label>
+        <br>
+        <div class="row" style="padding-top:12px;">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-2">
+            <label for="">LR Fold 0</label>
+            <input type="text" name="" value="{{avg_lrP_0}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">LR Folds 5</label>
+            <input type="text" name="" value="{{avg_lrP_5}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">LR Folds 10</label>
+            <input type="text" name="" value="{{avg_lrP_10}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">LR Folds 15</label>
+            <input type="text" name="" value="{{avg_lrP_15}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">LR Folds 20</label>
+            <input type="text" name="" value="{{avg_lrP_20}} %" style="text-align:center;width:75px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-1">
+          </div>
+        </div>
+      </div>
+      <br>
+      <label for="" style="font-weight:bold;font-size:23px;">Final Average</label>
+      <br>
+      <input type="text" name="" value="{{lr_final_avg}} %" style="text-align:center;width:95px;background-color:white;color:black" readonly>
+      {% else %}
+        <p>NO RECORDS FOUND</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal for rf accuracies -->
+<div class="modal" id="rfP_modal">
+<div class="modal-dialog modal-xl modal-dialog-scrollable">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRandom Forest Classifier Accuracy Chart</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body" style="text-align:center">
+      {% if rfP_list %}
+      <div class="container">
+        <table class="table table-bordered table-striped">
+          <thead style="background-color:lavender;color:black;border:1px solid black;">
+            <th>0 Fold</th>
+            <th>5 Folds</th>
+            <th>10 Folds</th>
+            <th>15 Folds</th>
+            <th>20 Folds</th>
+          </thead>
+          <tbody>
+            {% for var in rfP_list %}
+            <tr>
+                <td>{{ var.rfP_fold_0 }} %</td>
+                <td>{{ var.rfP_fold_5 }} %</td>
+                <td>{{ var.rfP_fold_10 }} %</td>
+                <td>{{ var.rfP_fold_15 }} %</td>
+                <td>{{ var.rfP_fold_20 }} %</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+        <label for="" style="font-weight:bold;font-size:23px;">Average accuracies</label>
+        <br>
+        <div class="row" style="padding-top:12px;">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-2">
+            <label for="">RF Fold 0</label>
+            <input type="text" name="" value="{{avg_rfP_0}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">RF Folds 5</label>
+            <input type="text" name="" value="{{avg_rfP_5}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">RF Folds 10</label>
+            <input type="text" name="" value="{{avg_rfP_10}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">RF Folds 15</label>
+            <input type="text" name="" value="{{avg_rfP_15}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">RF Folds 20</label>
+            <input type="text" name="" value="{{avg_rfP_20}} %" style="text-align:center;width:75px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-1">
+          </div>
+        </div>
+      </div>
+      <br>
+      <label for="" style="font-weight:bold;font-size:23px;">Final Average</label>
+      <br>
+      <input type="text" name="" value="{{rf_final_avg}} %" style="text-align:center;width:95px;background-color:white;color:black" readonly>
+      {% else %}
+        <p>NO RECORDS FOUND</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal for nb accuracies -->
+<div class="modal" id="nbP_modal">
+<div class="modal-dialog modal-xl modal-dialog-scrollable">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNaive Bayes Classifier Accuracy Chart</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body" style="text-align:center">
+      {% if nbP_list %}
+      <div class="container">
+        <table class="table table-bordered table-striped">
+          <thead style="background-color:lavender;color:black;border:1px solid black;">
+            <th>0 Fold</th>
+            <th>5 Folds</th>
+            <th>10 Folds</th>
+            <th>15 Folds</th>
+            <th>20 Folds</th>
+          </thead>
+          <tbody>
+            {% for var in nbP_list %}
+            <tr>
+                <td>{{ var.nbP_fold_0 }} %</td>
+                <td>{{ var.nbP_fold_5 }} %</td>
+                <td>{{ var.nbP_fold_10 }} %</td>
+                <td>{{ var.nbP_fold_15 }} %</td>
+                <td>{{ var.nbP_fold_20 }} %</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+        <label for="" style="font-weight:bold;font-size:23px;">Average accuracies</label>
+        <br>
+        <div class="row" style="padding-top:12px;">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-2">
+            <label for="">NB Fold 0</label>
+            <input type="text" name="" value="{{avg_nbP_0}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">NB Folds 5</label>
+            <input type="text" name="" value="{{avg_nbP_5}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">NB Folds 10</label>
+            <input type="text" name="" value="{{avg_nbP_10}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">NB Folds 15</label>
+            <input type="text" name="" value="{{avg_nbP_15}} %" style="text-align:center;width:85px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="">NB Folds 20</label>
+            <input type="text" name="" value="{{avg_nbP_20}} %" style="text-align:center;width:75px;background-color:white;color:black" readonly>
+          </div>
+          <div class="col-md-1">
+          </div>
+        </div>
+      </div>
+      <br>
+      <label for="" style="font-weight:bold;font-size:23px;">Final Average</label>
+      <br>
+      <input type="text" name="" value="{{nb_final_avg}} %" style="text-align:center;width:95px;background-color:white;color:black" readonly>
+      {% else %}
+        <p>NO RECORDS FOUND</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+  <!-- Modal for Svm -->
+<div class="modal" id="modal_svm" style="background-color:rgba(1,1,1,0.5)">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSupport Vector Machine</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-5">
+            <img src="{% static 'images/SVM.png' %}" alt="SVM" height="200" width="200">
+          </div>
+          <div class="col-md-5">
+            <img src="{% static 'images/SVM1.png' %}" alt="SVM"  height="200" width="200">
+          </div>
+        </div>
+        <br>
+        <p>It is widely used model for classification as it produces significant accuracy with less computation power. The objective of the support vector machine algorithm is to find a hyper plane in an N-dimensional space (N -the number of features) that distinctly classifies the data points for a given data set.</p>
+        <p>Our objective is to find a plane that has the maximum margin that is the maximum distance between data points of both classes. Maximizing the margin distance makes sure that in future prediction not many data points will be wrongly classified.</p>
+        <p>Hyperplanes are decision boundaries that help to classify the data points. Data points on either side of the hyperplane are considered to belong to different classes. Also, the dimension of the hyperplane depends upon the number of features.</p>
+        <p>Support vectors are data points that are closer to the hyperplane and helps in choosing the decision boundary. Using these support vectors, we maximize the margin of the classifier. These are the points that help us build our SVM for the best or say accurate prediction of the test data set.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Decision tree -->
+<div class="modal" id="modal_dt" style="background-color:rgba(1,1,1,0.5)">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDecision Tree Classifier</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+          <p>Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features. It basically applies some if-then-else decision rules set on the given training data set and predict the target or class
+          label to which it might belong. The deeper the tree, the more complex the decision rules and the fitter the model. There are various types of decision trees such as ID3, C4.5, CART etc and these decision tress uses different split techniques such as :</p>
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+
+              <img src="{% static 'images/DT.png'%}" alt="" height="330" width="410" style="padding-top:20px;">
+            </div>
+            <div class="col-md-5">
+              <p><span style="font-weight:bold">1. Information gain:</span> <p>The attribute with the highest information gain is selected first as the root node and so on goes the further selection procedure. It is based on the concept of entropy, which is the degree of uncertainty, impurity or disorder.</p></p>
+              <p><span style="font-weight:bold">2. Gini index: </span><p>The attribute with least gini index is selected first as the root node because it measures the degree or probability of a particular variable being wrongly classified when it is randomly chosen.</p></p>
+            </div>
+            <div class="col-md-1">
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal for logistic regression -->
+<div class="modal" id="modal_lr" style="background-color:rgba(1,1,1,0.5)">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspLogistic Regression</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Logistic regression is another technique borrowed by machine learning from the field of statistics. It is the go-to method for binary classification problems (problems with two class values).
+        Logistic regression is named for the function used at the core of the method, the logistic function.
+        The logistic function, also called as the sigmoid function. It’s an S-shaped curve that can take any real-valued number and map it into a value between 0 and 1, but never exactly at those limits.</p><p>
+        <span style="font-weight:bold">1 / (1 + e^-value)</span>, where e is the base of the natural logarithms and value is the actual numerical value that you want to transform.</p>
+        <p>Logistic regression uses an equation as the representation, very much like linear regression. Input values (x) are combined linearly using weights or coefficient values to predict an output value (y).
+        A key difference from linear regression is that the output value being modeled is a binary value (0 or 1) rather than a numeric value.</p>
+        <div class="row">
+          <div class="col-md-6">
+            <br>
+            <p>Below is an example logistic regression equation:<br><br>
+              <span style="font-weight:bold;font-size:22px;padding-top:20px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspy = e^(b0 + b1*x) / (1 + e^(b0 + b1*x))</span></p>
+          </div>
+          <div class="col-md-6">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="{% static 'images/LR.png' %}" alt="" width="380">
+          </div>
+        </div>
+
+        <p><br>Where y is the predicted output, b0 is the bias or intercept term and b1 is the coefficient for the single input value (x). Each column in your input data has an associated b that must be learned from your training data.
+        The actual representation of the model that you would store in memory is the coefficients in the equation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal for random forest -->
+<div class="modal" id="modal_rf" style="background-color:rgba(1,1,1,0.5)">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspRandom Forest Classifier</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-7">
+            <img src="{% static 'images/RF.png' %}" alt="" align="center" width="600" height="400" style="padding-left:100px;">
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+        <p><br>Random forest, consists of a large number of individual decision trees that operate as an ensemble. Here ensemble means a collection or grouping of various decision tress rather than one decision tree, hence the name random forest. The training data is fed to the classifier, which then creates a bootstrap data, by randomly selecting the data and creates various decision trees.</p>
+        <p>So whenever a class needs to be predicted, each individual decision tree spits out a class label and then the class label with the majority is decided as the final predicted class. This is a lot better classifier than decision tree because there is less chance of inaccuracy and error as in a decision tree.</p>
+        <p>This classifier allows duplicity while selection of data for the bootstrap data which increases the randomization factor for that particular decision tree. A random forest also uses the same splitting techniques as that of decision tree and we can have numerous number of decision tress for better performance.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal for naive bayes classifier -->
+<div class="modal" id="modal_nb" style="background-color:rgba(1,1,1,0.5)">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNaive Bayes Classifier</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>It works on the Bayes Theorem of probability to predict the class of an unknown data set and their data points. It is best suited for problems involving huge datasets with hug rows and less number of columns that is features.
+        It is a classification technique based on Bayes Theroem with an assumption of independence among predictors. In simple terms, a Naive Bayes classifier assumes that the presence of a particular feature in a class is unrelated to the presence of any other feature. Hence the name “NAÏVE”.</p>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="{%static 'images/NB.png'%}" alt="" height="250" width="450">
+        <p style="font-weight:bold"><br>The steps to perform the Naïve Bayes classification:</p>
+        <p> Convert the data set into a frequency table.</p>
+        <p> Create Likelihood table by finding the probabilities of classes and the tuples to be classified/predicted etc.</p>
+        <p> Calculate the posterior probability with the help of the likelihood table.</p>
+        <p> Select the class with the highest prior probability and that will we the label for that test sample.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- This is decision tree -->
+    <div class="" style="padding-left:100px;padding-bottom:45px;">
+      <div class="card" style="border:1px solid black;height:200px;">
+        <div class="row">
+          <div class="col-md-3">
+            <a href="#" data-toggle="modal" data-target="#modal_dt" style="text-decoration:none;">
+              <br>
+              <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+                  <h6 style="padding-top:40px;text-align:left;color:black;"><b>&nbspDecision Tree Classifier</b></h6>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <br>
+                <p class="" style="font-size:15px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDataset: <span style="color:grey">ProstateCancer.csv</span></p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <select id="p_mySelect_dt" class="dropdown">
+                      <option value="0" style="background-color:lavender">0-Fold</option>
+                      <option value="5" style="background-color:lavender">5-Fold</option>
+                      <option value="10" style="background-color:lavender">10-Fold</option>
+                      <option value="15" style="background-color:lavender">15-Fold</option>
+                      <option value="20" style="background-color:lavender">20-Fold</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <p><button class="button btn-sm" align="center"  onclick="myFunction_dt()">Examine</button></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <br><br>
+                <label for="dt"><p style="font-size:18px;">Accuracy Obtained:</p></label>&nbsp&nbsp&nbsp
+                <input type="text" name="dt" value="{{my_dict.p_0_dt}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_0_dt">
+                <input type="text" name="dt" value="{{my_dict.p_5_dt}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_5_dt">
+                <input type="text" name="dt" value="{{my_dict.p_10_dt}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_10_dt">
+                <input type="text" name="dt" value="{{my_dict.p_15_dt}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_15_dt">
+                <input type="text" name="dt" value="{{my_dict.p_20_dt}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_20_dt">
+                <br>
+              </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+              <div class="col-md-12"  align="right" style="padding-bottom:0px;">
+                <button type="button" name="button" class="card" style="width:40px;background-color:whitesmoke;padding-left:8px;" data-toggle="modal" data-target="#dtP_modal"><i class="material-icons">&#xe8ef;</i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This is logistic regression -->
+    <div class="" style="padding-left:100px;padding-bottom:45px;">
+      <div class="card" style="border:1px solid black;height:200px;">
+        <div class="row">
+          <div class="col-md-3">
+            <a href="#" style="text-decoration:none;" data-toggle="modal" data-target="#modal_lr">
+              <br>
+              <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+                  <h6 style="padding-top:40px;text-align:left;color:black;"><b>&nbsp&nbsp&nbsp&nbspLogistic Regression</b></h6>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <br>
+                <p class="" style="font-size:15px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDataset: <span style="color:grey">ProstateCancer.csv</span></p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <select id="p_mySelect_lr" class="dropdown">
+                      <option value="0" style="background-color:lavender">0-Fold</option>
+                      <option value="5" style="background-color:lavender">5-Fold</option>
+                      <option value="10" style="background-color:lavender">10-Fold</option>
+                      <option value="15" style="background-color:lavender">15-Fold</option>
+                      <option value="20" style="background-color:lavender">20-Fold</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <p><button class="button btn-sm" align="center" onclick="myFunction_lr()">Examine</button></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <br><br>
+                <label for="lr"><p style="font-size:18px;">Accuracy Obtained:</p></label>&nbsp&nbsp&nbsp
+                <input type="text" name="lr" value="{{my_dict.p_0_lr}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_0_lr">
+                <input type="text" name="lr" value="{{my_dict.p_5_lr}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_5_lr">
+                <input type="text" name="lr" value="{{my_dict.p_10_lr}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_10_lr">
+                <input type="text" name="lr" value="{{my_dict.p_15_lr}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_15_lr">
+                <input type="text" name="lr" value="{{my_dict.p_20_lr}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_20_lr">
+                <br>
+              </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+              <div class="col-md-12"  align="right" style="padding-bottom:0px;">
+                <button type="button" name="button" class="card" style="width:40px;background-color:whitesmoke;padding-left:8px;" data-toggle="modal" data-target="#lrP_modal"><i class="material-icons">&#xe8ef;</i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This is random forest classifier -->
+    <div class="" style="padding-left:100px;padding-bottom:45px;">
+      <div class="card" style="border:1px solid black;height:200px;">
+        <div class="row">
+          <div class="col-md-3">
+            <a href="#" style="text-decoration:none;" data-toggle="modal" data-target="#modal_rf">
+              <br>
+              <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+                  <h6 style="padding-top:40px;color:black;"><b>Random Forest Classifier</b></h6>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <br>
+                <p class="" style="font-size:15px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDataset: <span style="color:grey">ProstateCancer.csv</span></p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <select id="p_mySelect_rf" class="dropdown">
+                      <option value="0" style="background-color:lavender">0-Fold</option>
+                      <option value="5" style="background-color:lavender">5-Fold</option>
+                      <option value="10" style="background-color:lavender">10-Fold</option>
+                      <option value="15" style="background-color:lavender">15-Fold</option>
+                      <option value="20" style="background-color:lavender">20-Fold</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <p><button class="button btn-sm" align="center" onclick="myFunction_rf()">Examine</button></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <br><br>
+                <label for="rf"><p style="font-size:18px;">Accuracy Obtained:</p></label>&nbsp&nbsp&nbsp
+                <input type="text" name="rf" value="{{my_dict.p_0_rf}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_0_rf">
+                <input type="text" name="rf" value="{{my_dict.p_5_rf}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_5_rf">
+                <input type="text" name="rf" value="{{my_dict.p_10_rf}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_10_rf">
+                <input type="text" name="rf" value="{{my_dict.p_15_rf}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_15_rf">
+                <input type="text" name="rf" value="{{my_dict.p_20_rf}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_20_rf">
+                <br>
+              </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+              <div class="col-md-12"  align="right" style="padding-bottom:0px;">
+                <button type="button" name="button" class="card" style="width:40px;background-color:whitesmoke;padding-left:8px;" data-toggle="modal" data-target="#rfP_modal"><i class="material-icons">&#xe8ef;</i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This is naive bayes classifier -->
+    <div class="" style="padding-left:100px;padding-bottom:45px;">
+      <div class="card" style="border:1px solid black;height:200px;">
+        <div class="row">
+          <div class="col-md-3">
+            <a href="#" style="text-decoration:none;" data-toggle="modal" data-target="#modal_nb">
+              <br>
+              <div class="card" style="background:whitesmoke;height:100px;width:235px;border:1px solid lavender">
+                  <h6 style="padding-top:40px;text-align:left;color:black;"><b>&nbsp&nbspNaive Bayes Classifier</b></h6>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <br>
+                <p class="" style="font-size:15px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDataset: <span style="color:grey">ProstateCancer.csv</span></p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <select id="p_mySelect_nb" class="dropdown">
+                      <div class="select-items" >
+                        <option value="0" style="background-color:lavender">0-Fold</option>
+                        <option value="5" style="background-color:lavender">5-Fold</option>
+                        <option value="10" style="background-color:lavender">10-Fold</option>
+                        <option value="15" style="background-color:lavender">15-Fold</option>
+                        <option value="20" style="background-color:lavender">20-Fold</option>
+                      </div>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <p><button class="button btn-sm" align="center" onclick="myFunction_nb()">Examine</button></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <br><br>
+                <label for="nb"><p style="font-size:18px;">Accuracy Obtained:</p></label>&nbsp&nbsp&nbsp
+                <input type="text" name="nb" value="{{my_dict.p_0_nb}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_0_nb">
+                <input type="text" name="nb" value="{{my_dict.p_5_nb}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_5_nb">
+                <input type="text" name="nb" value="{{my_dict.p_10_nb}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_10_nb">
+                <input type="text" name="nb" value="{{my_dict.p_15_nb}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_15_nb">
+                <input type="text" name="nb" value="{{my_dict.p_20_nb}} %" readonly style="font-size:15px;width:65px;padding:3px;text-align:center;font-weight:bold;" id="p_20_nb">
+                <br>
+              </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+              <div class="col-md-12"  align="right" style="padding-bottom:0px;">
+                <button type="button" name="button" class="card" style="width:40px;background-color:whitesmoke;padding-left:8px;" data-toggle="modal" data-target="#nbP_modal"><i class="material-icons">&#xe8ef;</i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+<script>
+$("#p_5_nb").hide();
+$("#p_10_nb").hide();
+$("#p_15_nb").hide();
+$("#p_20_nb").hide();
+
+$("#p_5_rf").hide();
+$("#p_10_rf").hide();
+$("#p_15_rf").hide();
+$("#p_20_rf").hide();
+
+$("#p_5_svm").hide();
+$("#p_10_svm").hide();
+$("#p_15_svm").hide();
+$("#p_20_svm").hide();
+
+$("#p_5_lr").hide();
+$("#p_10_lr").hide();
+$("#p_15_lr").hide();
+$("#p_20_lr").hide();
+
+$("#p_5_dt").hide();
+$("#p_10_dt").hide();
+$("#p_15_dt").hide();
+$("#p_20_dt").hide();
+
+// nb
+
+function myFunction_nb() {
+  var x = document.getElementById("p_mySelect_nb").value;
+  if(x==5)
+  {
+    $("#p_5_nb").show();
+    $("#p_0_nb").hide();
+    $("#p_10_nb").hide();
+    $("#p_15_nb").hide();
+    $("#p_20_nb").hide();
+  }
+  else if(x==10)
+  {
+    $("#p_5_nb").hide();
+    $("#p_0_nb").hide();
+    $("#p_10_nb").show();
+    $("#p_15_nb").hide();
+    $("#p_20_nb").hide();
+  }
+  else if(x==15)
+  {
+    $("#p_5_nb").hide();
+    $("#p_0_nb").hide();
+    $("#p_10_nb").hide();
+    $("#p_15_nb").show();
+    $("#p_20_nb").hide();
+  }
+  else if(x==20)
+  {
+    $("#p_5_nb").hide();
+    $("#p_0_nb").hide();
+    $("#p_10_nb").hide();
+    $("#p_15_nb").hide();
+    $("#p_20_nb").show();
+  }
+  else if(x==0)
+  {
+    $("#p_5_nb").hide();
+    $("#p_0_nb").show();
+    $("#p_10_nb").hide();
+    $("#p_15_nb").hide();
+    $("#p_20_nb").hide();
+  }
+}
+
+// rf
+
+function myFunction_rf() {
+  var x = document.getElementById("p_mySelect_rf").value;
+  if(x==5)
+  {
+    $("#p_5_rf").show();
+    $("#p_0_rf").hide();
+    $("#p_10_rf").hide();
+    $("#p_15_rf").hide();
+    $("#p_20_rf").hide();
+  }
+  else if(x==10)
+  {
+    $("#p_5_rf").hide();
+    $("#p_0_rf").hide();
+    $("#p_10_rf").show();
+    $("#p_15_rf").hide();
+    $("#p_20_rf").hide();
+  }
+  else if(x==15)
+  {
+    $("#p_5_rf").hide();
+    $("#p_0_rf").hide();
+    $("#p_10_rf").hide();
+    $("#p_15_rf").show();
+    $("#p_20_rf").hide();
+  }
+  else if(x==20)
+  {
+    $("#p_5_rf").hide();
+    $("#p_0_rf").hide();
+    $("#p_10_rf").hide();
+    $("#p_15_rf").hide();
+    $("#p_20_rf").show();
+  }
+  else if(x==0)
+  {
+    $("#p_5_rf").hide();
+    $("#p_0_rf").show();
+    $("#p_10_rf").hide();
+    $("#p_15_rf").hide();
+    $("#p_20_rf").hide();
+  }
+}
+
+// lr
+
+function myFunction_lr() {
+  var x = document.getElementById("p_mySelect_lr").value;
+  if(x==5)
+  {
+    $("#p_5_lr").show();
+    $("#p_0_lr").hide();
+    $("#p_10_lr").hide();
+    $("#p_15_lr").hide();
+    $("#p_20_lr").hide();
+  }
+  else if(x==10)
+  {
+    $("#p_5_lr").hide();
+    $("#p_0_lr").hide();
+    $("#p_10_lr").show();
+    $("#p_15_lr").hide();
+    $("#p_20_lr").hide();
+  }
+  else if(x==15)
+  {
+    $("#p_5_lr").hide();
+    $("#p_0_lr").hide();
+    $("#p_10_lr").hide();
+    $("#p_15_lr").show();
+    $("#p_20_lr").hide();
+  }
+  else if(x==20)
+  {
+    $("#p_5_lr").hide();
+    $("#p_0_lr").hide();
+    $("#p_10_lr").hide();
+    $("#p_15_lr").hide();
+    $("#p_20_lr").show();
+  }
+  else if(x==0)
+  {
+    $("#p_5_lr").hide();
+    $("#p_0_lr").show();
+    $("#p_10_lr").hide();
+    $("#p_15_lr").hide();
+    $("#p_20_lr").hide();
+  }
+}
+
+// svm
+
+function myFunction_svm() {
+  var x = document.getElementById("p_mySelect_svm").value;
+  if(x==5)
+  {
+    $("#p_5_svm").show();
+    $("#p_0_svm").hide();
+    $("#p_10_svm").hide();
+    $("#p_15_svm").hide();
+    $("#p_20_svm").hide();
+  }
+  else if(x==10)
+  {
+    $("#p_5_svm").hide();
+    $("#p_0_svm").hide();
+    $("#p_10_svm").show();
+    $("#p_15_svm").hide();
+    $("#p_20_svm").hide();
+  }
+  else if(x==15)
+  {
+    $("#p_5_svm").hide();
+    $("#p_0_svm").hide();
+    $("#p_10_svm").hide();
+    $("#p_15_svm").show();
+    $("#p_20_svm").hide();
+  }
+  else if(x==20)
+  {
+    $("#p_5_svm").hide();
+    $("#p_0_svm").hide();
+    $("#p_10_svm").hide();
+    $("#p_15_svm").hide();
+    $("#p_20_svm").show();
+  }
+  else if(x==0)
+  {
+    $("#p_5_svm").hide();
+    $("#p_0_svm").show();
+    $("#p_10_svm").hide();
+    $("#p_15_svm").hide();
+    $("#p_20_svm").hide();
+  }
+}
+
+// dt
+
+function myFunction_dt() {
+  var x = document.getElementById("p_mySelect_dt").value;
+  if(x==5)
+  {
+    $("#p_5_dt").show();
+    $("#p_0_dt").hide();
+    $("#p_10_dt").hide();
+    $("#p_15_dt").hide();
+    $("#p_20_dt").hide();
+  }
+  else if(x==10)
+  {
+    $("#p_5_dt").hide();
+    $("#p_0_dt").hide();
+    $("#p_10_dt").show();
+    $("#p_15_dt").hide();
+    $("#p_20_dt").hide();
+  }
+  else if(x==15)
+  {
+    $("#p_5_dt").hide();
+    $("#p_0_dt").hide();
+    $("#p_10_dt").hide();
+    $("#p_15_dt").show();
+    $("#p_20_dt").hide();
+  }
+  else if(x==20)
+  {
+    $("#p_5_dt").hide();
+    $("#p_0_dt").hide();
+    $("#p_10_dt").hide();
+    $("#p_15_dt").hide();
+    $("#p_20_dt").show();
+  }
+  else if(x==0)
+  {
+    $("#p_5_dt").hide();
+    $("#p_0_dt").show();
+    $("#p_10_dt").hide();
+    $("#p_15_dt").hide();
+    $("#p_20_dt").hide();
+  }
+}
+
+</script>
+</body>
+</html>

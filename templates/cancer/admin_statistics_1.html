@@ -1,0 +1,3298 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>Statistics</title>
+  <link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style>
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;
+overflow-x: hidden;
+}
+
+.chip {
+  position: absolute;
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: lightgrey;
+  top:70px;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+/* Style the tab */
+.tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: whitesmoke;
+  width: 30%;
+  height: 450px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 30px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 20px;
+  font-family: Quicksand;
+
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #d1dadc;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #9b9999;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 40px 0px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 450px;
+}
+
+
+.tab2 {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: whitesmoke;
+  width: 30%;
+  height: 450px;
+}
+
+/* Style the buttons inside the tab */
+.tab2 button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 30px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 20px;
+  font-family: Quicksand;
+
+}
+
+/* Change background color of buttons on hover */
+.tab2 button:hover {
+  background-color: #d1dadc;
+}
+
+/* Create an active/current "tab button" class */
+.tab2 button.active {
+  background-color: #9b9999;
+}
+
+/* Style the tab content */
+.tabcontent2 {
+  float: left;
+  padding: 40px 0px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 450px;
+}
+
+
+
+.tab3 {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: whitesmoke;
+  width: 30%;
+  height: 450px;
+}
+
+/* Style the buttons inside the tab */
+.tab3 button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 30px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 20px;
+  font-family: Quicksand;
+
+}
+
+/* Change background color of buttons on hover */
+.tab3 button:hover {
+  background-color: #d1dadc;
+}
+
+/* Create an active/current "tab button" class */
+.tab3 button.active {
+  background-color: #9b9999;
+}
+
+/* Style the tab content */
+.tabcontent3 {
+  float: left;
+  padding: 40px 0px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 450px;
+}
+
+
+
+.tab1 {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: whitesmoke;
+  width: 30%;
+  height: 450px;
+}
+
+/* Style the buttons inside the tab */
+.tab1 button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 30px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 20px;
+  font-family: Quicksand;
+
+}
+
+/* Change background color of buttons on hover */
+.tab1 button:hover {
+  background-color: #d1dadc;
+}
+
+/* Create an active/current "tab button" class */
+.tab1 button.active {
+  background-color: #9b9999;
+}
+.content6 {
+  position: absolute;
+  bottom: 0;
+  background:  rgb(1, 1, 1);
+  background: rgba(209,218,220,0.5);
+  left:35px;
+  width:5.5%;
+  height: 100%;
+  position: fixed;
+}
+.content7 {
+  position: absolute;
+  top:60px;
+  background:  rgb(1, 1, 1);
+  background: rgba(128,128,128,0.4);
+  left:0;
+  width:13.5%;
+  height: 10%;
+}
+
+/* Style the tab content */
+.tabcontent1 {
+  float: left;
+  padding: 40px 0px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 450px;
+}
+</style>
+</head>
+<body>
+  <br>
+  <div class="content6">
+  </div>
+  <div class="container">
+    <div class="jumbotron" style="background-color:whitesmoke">
+      <div class="container">
+        <div class="chip">
+          <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+          <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong></div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id= "span_css" style="font-family:Acme;font-size:25px;position:absolute;top:80px;">STATISTICS</span>
+        </div>
+      </div>
+  </div>
+  <div class="content7">
+  </div>
+  <div class="content7" style="left:1314px;width:15%;">
+    <div style="padding-left:70px;padding-top:23px;">
+      <button type="button" name="button" class="btn btn-sm" style="background-color:whitesmoke;color:black;" onclick="window.location='http://127.0.0.1:8000/cancer_app/admin_statistics/'"><i style='font-size:20px' class='fas'>&#xf30a;</i>&nbsp&nbspBACK</button>
+    </div>
+  </div>
+
+<div class="container" style="padding-left:15px;">
+  <h4 align="center" style="font-family:Acme" id="breast_cancer">Breast Cancer Accuracies</h4><br>
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'svm')" id="defaultOpen">Support Vector Machine</button>
+    <button class="tablinks" onclick="openCity(event, 'dt')">Decision Tree</button>
+    <button class="tablinks" onclick="openCity(event, 'lr')">Logistic Regression</button>
+    <button class="tablinks" onclick="openCity(event, 'rf')">Random Forest </button>
+    <button class="tablinks" onclick="openCity(event, 'nb')"> Naive Bayes</button>
+  </div>
+
+  <div id="svm" class="tabcontent" align="center" style="padding-top:25px;">
+    <div class="container">
+      <div id="chartContainer" style="height: 390px; width: 68%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="" style="position:absolute;top:670px;left:640px;width:100px;height:15px;background-color:white;"></div>
+      <div class="" style="position:absolute;top:670px;left:1116px;width:100px;height:15px;background-color:white;"></div>
+    </div>
+  </div>
+
+  <div id="dt" class="tabcontent" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer1" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:680px;left:627px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:680px;left:1110px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="lr" class="tabcontent" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer2" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:680px;left:627px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:680px;left:1110px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="rf" class="tabcontent" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer3" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:680px;left:627px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:680px;left:1110px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="nb" class="tabcontent" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer4" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:680px;left:627px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:680px;left:1110px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+  <div class="" style="color:white;">
+    Shilpa and Priyanshi tried their best.
+    <br><br></div>
+
+
+    <h4 align="center" style="font-family:Acme">Dimentionally Reduced Breast Cancer Accuracies</h4><br>
+    <div class="tab2">
+      <button class="tablinks2" onclick="openCity2(event, 'svm2')" id="defaultOpen2">Support Vector Machine</button>
+      <button class="tablinks2" onclick="openCity2(event, 'dt2')">Decision Tree</button>
+      <button class="tablinks2" onclick="openCity2(event, 'lr2')">Logistic Regression</button>
+      <button class="tablinks2" onclick="openCity2(event, 'rf2')">Random Forest </button>
+      <button class="tablinks2" onclick="openCity2(event, 'nb2')"> Naive Bayes</button>
+    </div>
+
+    <div id="svm2" class="tabcontent2" align="center" style="padding-top:25px;">
+      <div class="container">
+        <div id="chartContainer10" style="height: 390px; width: 68%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <div class="" style="position:absolute;top:1230px;left:630px;width:100px;height:15px;background-color:white;"></div>
+        <div class="" style="position:absolute;top:1230px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+      </div>
+    </div>
+
+    <div id="dt2" class="tabcontent2" align="center" style="padding-top:25px;padding-left:20px;">
+      <div id="chartContainer11" style="height: 370px; width: 70%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="" style="position:absolute;top:1240px;left:633px;width:100px;height:15px;background-color:white;"></div>
+      <div class="" style="position:absolute;top:1240px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+    </div>
+
+    <div id="lr2" class="tabcontent2" align="center" style="padding-top:25px;padding-left:20px;">
+      <div id="chartContainer12" style="height: 370px; width: 70%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="" style="position:absolute;top:1240px;left:633px;width:100px;height:15px;background-color:white;"></div>
+      <div class="" style="position:absolute;top:1240px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+    </div>
+
+    <div id="rf2" class="tabcontent2" align="center" style="padding-top:25px;padding-left:20px;">
+      <div id="chartContainer13" style="height: 370px; width: 70%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="" style="position:absolute;top:1240px;left:633px;width:100px;height:15px;background-color:white;"></div>
+      <div class="" style="position:absolute;top:1240px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+    </div>
+
+    <div id="nb2" class="tabcontent2" align="center" style="padding-top:25px;padding-left:20px;">
+      <div id="chartContainer14" style="height: 370px; width: 70%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="" style="position:absolute;top:1240px;left:633px;width:100px;height:15px;background-color:white;"></div>
+      <div class="" style="position:absolute;top:1240px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+    </div>
+    <div class="" style="color:white;">
+      Shilpa and Priyanshi tried their best.
+      <br><br></div>
+
+
+  <h4 align="center" style="font-family:Acme;" id="prostate_cancer">Prostate Cancer Accuracies</h4><br>
+  <div class="tab1">
+    <button class="tablinks1" onclick="openCity1(event, 'svm1')" id="defaultOpen1">Support Vector Machine</button>
+    <button class="tablinks1" onclick="openCity1(event, 'dt1')">Decision Tree</button>
+    <button class="tablinks1" onclick="openCity1(event, 'lr1')">Logistic Regression</button>
+    <button class="tablinks1" onclick="openCity1(event, 'rf1')">Random Forest </button>
+    <button class="tablinks1" onclick="openCity1(event, 'nb1')"> Naive Bayes</button>
+  </div>
+
+  <div id="svm1" class="tabcontent1" align="center" style="padding-top:25px;">
+    <div class="container">
+      <div id="chartContainer5" style="height: 390px; width: 68%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="" style="position:absolute;top:1790px;left:630px;width:100px;height:15px;background-color:white;"></div>
+      <div class="" style="position:absolute;top:1790px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+    </div>
+  </div>
+
+  <div id="dt1" class="tabcontent1" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer6" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:1800px;left:633px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:1800px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="lr1" class="tabcontent1" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer7" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:1800px;left:633px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:1800px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="rf1" class="tabcontent1" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer8" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:1800px;left:633px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:1800px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="nb1" class="tabcontent1" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer9" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:1800px;left:633px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:1800px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div class="" style="color:white;">
+    Shilpa and Priyanshi tried their best.
+    <br><br></div>
+
+  <h4 align="center" style="font-family:Acme;">Dimentionally Reduced Prostate Cancer Accuracies</h4><br>
+  <div class="tab3">
+    <button class="tablinks3" onclick="openCity3(event, 'svm3')" id="defaultOpen3">Support Vector Machine</button>
+    <button class="tablinks3" onclick="openCity3(event, 'dt3')">Decision Tree</button>
+    <button class="tablinks3" onclick="openCity3(event, 'lr3')">Logistic Regression</button>
+    <button class="tablinks3" onclick="openCity3(event, 'rf3')">Random Forest </button>
+    <button class="tablinks3" onclick="openCity3(event, 'nb3')"> Naive Bayes</button>
+  </div>
+
+  <div id="svm3" class="tabcontent3" align="center" style="padding-top:25px;">
+    <div class="container">
+      <div id="chartContainer15" style="height: 390px; width: 68%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="" style="position:absolute;top:2350px;left:630px;width:100px;height:15px;background-color:white;"></div>
+      <div class="" style="position:absolute;top:2350px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+    </div>
+  </div>
+
+  <div id="dt3" class="tabcontent3" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer16" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:2358px;left:633px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:2360px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="lr3" class="tabcontent3" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer17" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:2358px;left:633px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:2360px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="rf3" class="tabcontent3" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer18" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:2358px;left:633px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:2360px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+
+  <div id="nb3" class="tabcontent3" align="center" style="padding-top:25px;padding-left:20px;">
+    <div id="chartContainer19" style="height: 370px; width: 70%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div class="" style="position:absolute;top:2358px;left:633px;width:100px;height:15px;background-color:white;"></div>
+    <div class="" style="position:absolute;top:2360px;left:1115px;width:100px;height:15px;background-color:white;"></div>
+  </div>
+</div>
+<div class="" style="background-color:white;color:white">
+  <p>qwertyuiojhgfdsxcvbnmjhgfdsrtyuihgcxcvbnmkjytre<br><br></p>
+</div>
+
+
+
+
+<script>
+window.onload = function () {
+
+  CanvasJS.addColorSet("greyShades",
+             [
+             "#e17e76",
+             "#e3baa8",
+             "#aa7b6f",
+             "#fed797",
+             "#2e8364"
+             ]);
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme:"light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize:13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 59.00 },
+			{ label: "2", y: 53.00 },
+			{ label: "3", y: 63.00 },
+			{ label: "4", y: 57.00 },
+			{ label: "5", y: 65.00 },
+			{ label: "6", y: 67.00 },
+			{ label: "7", y: 58.00 },
+			{ label: "8", y: 56.00 },
+			{ label: "9", y: 66.00 },
+			{ label: "10", y: 61.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 63.00 },
+			{ label: "2", y: 63.00 },
+			{ label: "3", y: 63.00 },
+			{ label: "4", y: 63.00 },
+			{ label: "5", y: 63.00 },
+			{ label: "6", y: 63.00 },
+			{ label: "7", y: 63.00 },
+			{ label: "8", y: 63.00 },
+			{ label: "9", y: 63.00 },
+			{ label: "10", y: 63.00 }
+		]
+	},
+	{
+		type: "spline",
+    // toolTipContent: "<a href = {name}> {label}</a><hr/>Views: {y}",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 63.00 },
+			{ label: "2", y: 63.00 },
+			{ label: "3", y: 63.00 },
+			{ label: "4", y: 63.00 },
+			{ label: "5", y: 63.00 },
+			{ label: "6", y: 63.00 },
+			{ label: "7", y: 63.00 },
+			{ label: "8", y: 63.00 },
+			{ label: "9", y: 63.00 },
+			{ label: "10", y: 63.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 63.00 },
+			{ label: "2", y: 63.00 },
+			{ label: "3", y: 63.00 },
+			{ label: "4", y: 63.00 },
+			{ label: "5", y: 63.00 },
+			{ label: "6", y: 63.00 },
+			{ label: "7", y: 63.00 },
+			{ label: "8", y: 63.00 },
+			{ label: "9", y: 63.00 },
+			{ label: "10", y: 63.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 63.00 },
+			{ label: "2", y: 63.00 },
+			{ label: "3", y: 63.00 },
+			{ label: "4", y: 63.00 },
+			{ label: "5", y: 63.00 },
+			{ label: "6", y: 63.00 },
+			{ label: "7", y: 63.00 },
+			{ label: "8", y: 63.00 },
+			{ label: "9", y: 63.00 },
+			{ label: "10", y: 63.00 }
+		]
+	},
+]
+});
+chart.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+
+
+
+var chart1 = new CanvasJS.Chart("chartContainer1", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 92.00 },
+			{ label: "2", y: 92.00 },
+			{ label: "3", y: 92.00 },
+			{ label: "4", y: 93.00 },
+			{ label: "5", y: 89.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 94.00 },
+			{ label: "8", y: 93.00 },
+			{ label: "9", y: 91.00 },
+			{ label: "10", y: 92.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 92.00 },
+			{ label: "2", y: 92.00 },
+			{ label: "3", y: 92.00 },
+			{ label: "4", y: 92.00 },
+			{ label: "5", y: 92.00 },
+			{ label: "6", y: 91.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 92.00 },
+			{ label: "9", y: 92.00 },
+			{ label: "10", y: 91.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 92.00 },
+			{ label: "2", y: 92.00 },
+			{ label: "3", y: 91.00 },
+			{ label: "4", y: 91.00 },
+			{ label: "5", y: 92.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 91.00 },
+			{ label: "9", y: 92.00 },
+			{ label: "10", y: 91.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 91.00 },
+			{ label: "2", y: 92.00 },
+			{ label: "3", y: 92.00 },
+			{ label: "4", y: 93.00 },
+			{ label: "5", y: 92.00 },
+			{ label: "6", y: 91.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 91.00 },
+			{ label: "9", y: 92.00 },
+			{ label: "10", y: 92.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 92.00 },
+			{ label: "2", y: 92.00 },
+			{ label: "3", y: 92.00 },
+			{ label: "4", y: 91.00 },
+			{ label: "5", y: 92.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 91.00 },
+			{ label: "9", y: 92.00 },
+			{ label: "10", y: 93.00 }
+		]
+	},
+	]
+});
+chart1.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart1.render();
+}
+
+
+
+
+
+
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 98.00 },
+			{ label: "2", y: 89.00 },
+			{ label: "3", y: 93.00 },
+			{ label: "4", y: 94.00 },
+			{ label: "5", y: 97.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 96.00 },
+			{ label: "8", y: 95.00 },
+			{ label: "9", y: 90.00 },
+			{ label: "10", y: 91.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 96.00 },
+			{ label: "2", y: 96.00 },
+			{ label: "3", y: 96.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 96.00 },
+			{ label: "7", y: 96.00 },
+			{ label: "8", y: 96.00 },
+			{ label: "9", y: 96.00 },
+			{ label: "10", y: 96.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 95.00 },
+			{ label: "2", y: 95.00 },
+			{ label: "3", y: 95.00 },
+			{ label: "4", y: 95.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 95.00 },
+			{ label: "7", y: 95.00 },
+			{ label: "8", y: 95.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 95.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 96.00 },
+			{ label: "2", y: 96.00 },
+			{ label: "3", y: 96.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 96.00 },
+			{ label: "7", y: 96.00 },
+			{ label: "8", y: 96.00 },
+			{ label: "9", y: 96.00 },
+			{ label: "10", y: 96.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 95.00 },
+			{ label: "2", y: 95.00 },
+			{ label: "3", y: 95.00 },
+			{ label: "4", y: 95.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 95.00 },
+			{ label: "7", y: 95.00 },
+			{ label: "8", y: 95.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 95.00 }
+		]
+	},
+	]
+});
+chart2.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart2.render();
+}
+
+
+
+
+
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 96.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 97.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 96.00 },
+			{ label: "8", y: 96.00 },
+			{ label: "9", y: 98.00 },
+			{ label: "10", y: 97.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 96.00 },
+			{ label: "2", y: 97.00 },
+			{ label: "3", y: 96.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 96.00 },
+			{ label: "7", y: 95.00 },
+			{ label: "8", y: 96.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 96.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 97.00 },
+			{ label: "2", y: 96.00 },
+			{ label: "3", y: 96.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 96.00 },
+			{ label: "7", y: 96.00 },
+			{ label: "8", y: 97.00 },
+			{ label: "9", y: 96.00 },
+			{ label: "10", y: 96.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 96.00 },
+			{ label: "2", y: 96.00 },
+			{ label: "3", y: 96.00 },
+			{ label: "4", y: 95.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 97.00 },
+			{ label: "7", y: 96.00 },
+			{ label: "8", y: 96.00 },
+			{ label: "9", y: 96.00 },
+			{ label: "10", y: 96.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 96.00 },
+			{ label: "2", y: 96.00 },
+			{ label: "3", y: 97.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 96.00 },
+			{ label: "7", y: 97.00 },
+			{ label: "8", y: 97.00 },
+			{ label: "9", y: 96.00 },
+			{ label: "10", y: 96.00 }
+		]
+	},
+	]
+});
+chart3.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart3.render();
+}
+
+
+
+
+
+var chart4 = new CanvasJS.Chart("chartContainer4", {
+  theme: "light2",
+	animationEnabled: true,
+	axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 96.00 },
+			{ label: "2", y: 93.00 },
+			{ label: "3", y: 97.00 },
+			{ label: "4", y: 94.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 91.00 },
+			{ label: "8", y: 90.00 },
+			{ label: "9", y: 93.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 94.00 },
+			{ label: "4", y: 94.00 },
+			{ label: "5", y: 94.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 94.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 94.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 94.00 },
+			{ label: "4", y: 94.00 },
+			{ label: "5", y: 94.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 94.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 94.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 94.00 },
+			{ label: "4", y: 94.00 },
+			{ label: "5", y: 94.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 94.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 94.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 94.00 },
+			{ label: "4", y: 94.00 },
+			{ label: "5", y: 94.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 94.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 94.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	]
+});
+chart4.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart4.render();
+}
+
+
+
+var chart15 = new CanvasJS.Chart("chartContainer15", {
+	theme:"light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize:13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 42.00 },
+			{ label: "2", y: 45.00 },
+			{ label: "3", y: 55.00 },
+			{ label: "4", y: 52.00 },
+			{ label: "5", y: 45.00 },
+			{ label: "6", y: 42.00 },
+			{ label: "7", y: 39.00 },
+			{ label: "8", y: 52.00 },
+			{ label: "9", y: 45.00 },
+			{ label: "10", y: 48.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 54.86 },
+			{ label: "2", y: 54.86 },
+			{ label: "3", y: 54.86 },
+			{ label: "4", y: 54.86 },
+			{ label: "5", y: 54.86 },
+			{ label: "6", y: 55.00 },
+			{ label: "7", y: 55.00 },
+			{ label: "8", y: 55.00 },
+			{ label: "9", y: 55.00 },
+			{ label: "10", y: 55.00 }
+		]
+	},
+	{
+		type: "spline",
+    // toolTipContent: "<a href = {name}> {label}</a><hr/>Views: {y}",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 54.82 },
+			{ label: "2", y: 54.82 },
+			{ label: "3", y: 54.82 },
+			{ label: "4", y: 54.82 },
+			{ label: "5", y: 54.82 },
+			{ label: "6", y: 55.00 },
+			{ label: "7", y: 55.00 },
+			{ label: "8", y: 55.00 },
+			{ label: "9", y: 55.00 },
+			{ label: "10", y: 55.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 54.00 },
+			{ label: "2", y: 54.00 },
+			{ label: "3", y: 54.00 },
+			{ label: "4", y: 54.00 },
+			{ label: "5", y: 54.00 },
+			{ label: "6", y: 54.00 },
+			{ label: "7", y: 54.00 },
+			{ label: "8", y: 54.00 },
+			{ label: "9", y: 54.00 },
+			{ label: "10", y: 54.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 50.00 },
+			{ label: "2", y: 50.00 },
+			{ label: "3", y: 50.00 },
+			{ label: "4", y: 50.00 },
+			{ label: "5", y: 55.00 },
+			{ label: "6", y: 55.00 },
+			{ label: "7", y: 55.00 },
+			{ label: "8", y: 55.00 },
+			{ label: "9", y: 55.00 },
+			{ label: "10", y: 55.00 }
+		]
+	},
+]
+});
+chart15.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart15.render();
+}
+
+
+
+
+var chart16 = new CanvasJS.Chart("chartContainer16", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 81.00 },
+			{ label: "2", y: 81.00 },
+			{ label: "3", y: 65.00 },
+			{ label: "4", y: 77.00 },
+			{ label: "5", y: 84.00 },
+			{ label: "6", y: 65.00 },
+			{ label: "7", y: 87.00 },
+			{ label: "8", y: 84.00 },
+			{ label: "9", y: 74.00 },
+			{ label: "10", y: 77.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 71.00 },
+			{ label: "2", y: 75.00 },
+			{ label: "3", y: 73.00 },
+			{ label: "4", y: 73.00 },
+			{ label: "5", y: 73.00 },
+			{ label: "6", y: 73.00 },
+			{ label: "7", y: 73.00 },
+			{ label: "8", y: 74.00 },
+			{ label: "9", y: 74.00 },
+			{ label: "10", y: 74.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 74.00 },
+			{ label: "2", y: 74.00 },
+			{ label: "3", y: 70.00 },
+			{ label: "4", y: 73.00 },
+			{ label: "5", y: 71.00 },
+			{ label: "6", y: 73.00 },
+			{ label: "7", y: 71.00 },
+			{ label: "8", y: 69.00 },
+			{ label: "9", y: 73.00 },
+			{ label: "10", y: 70.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 67.00 },
+			{ label: "2", y: 70.00 },
+			{ label: "3", y: 68.00 },
+			{ label: "4", y: 71.00 },
+			{ label: "5", y: 67.00 },
+			{ label: "6", y: 71.00 },
+			{ label: "7", y: 68.00 },
+			{ label: "8", y: 72.00 },
+			{ label: "9", y: 69.00 },
+			{ label: "10", y: 68.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 75.00 },
+			{ label: "2", y: 73.00 },
+			{ label: "3", y: 74.00 },
+			{ label: "4", y: 74.00 },
+			{ label: "5", y: 75.00 },
+			{ label: "6", y: 71.00 },
+			{ label: "7", y: 71.00 },
+			{ label: "8", y: 73.00 },
+			{ label: "9", y: 65.00 },
+			{ label: "10", y: 75.00 }
+		]
+	},
+	]
+});
+chart16.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart16.render();
+}
+
+
+
+
+
+
+var chart17 = new CanvasJS.Chart("chartContainer17", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 68.00 },
+			{ label: "2", y: 77.00 },
+			{ label: "3", y: 71.00 },
+			{ label: "4", y: 87.00 },
+			{ label: "5", y: 81.00 },
+			{ label: "6", y: 84.00 },
+			{ label: "7", y: 90.00 },
+			{ label: "8", y: 89.00 },
+			{ label: "9", y: 87.00 },
+			{ label: "10", y: 91.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 87.00 },
+			{ label: "2", y: 87.00 },
+			{ label: "3", y: 87.00 },
+			{ label: "4", y: 87.00 },
+			{ label: "5", y: 87.00 },
+			{ label: "6", y: 87.00 },
+			{ label: "7", y: 87.00 },
+			{ label: "8", y: 87.00 },
+			{ label: "9", y: 87.00 },
+			{ label: "10", y: 87.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 95.00 },
+			{ label: "2", y: 95.00 },
+			{ label: "3", y: 95.00 },
+			{ label: "4", y: 95.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 95.00 },
+			{ label: "7", y: 95.00 },
+			{ label: "8", y: 95.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 95.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 90.00 },
+			{ label: "2", y: 90.00 },
+			{ label: "3", y: 90.00 },
+			{ label: "4", y: 90.00 },
+			{ label: "5", y: 90.00 },
+			{ label: "6", y: 90.00 },
+			{ label: "7", y: 90.00 },
+			{ label: "8", y: 90.00 },
+			{ label: "9", y: 90.00 },
+			{ label: "10", y: 90.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 90.00 },
+			{ label: "2", y: 90.00 },
+			{ label: "3", y: 90.00 },
+			{ label: "4", y: 90.00 },
+			{ label: "5", y: 90.00 },
+			{ label: "6", y: 90.00 },
+			{ label: "7", y: 90.00 },
+			{ label: "8", y: 90.00 },
+			{ label: "9", y: 90.00 },
+			{ label: "10", y: 90.00 }
+		]
+	},
+	]
+});
+chart17.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart17.render();
+}
+
+
+
+
+
+var chart18 = new CanvasJS.Chart("chartContainer18", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 81.00 },
+			{ label: "2", y: 84.00 },
+			{ label: "3", y: 77.00 },
+			{ label: "4", y: 74.00 },
+			{ label: "5", y: 84.00 },
+			{ label: "6", y: 74.00 },
+			{ label: "7", y: 77.00 },
+			{ label: "8", y: 74.00 },
+			{ label: "9", y: 81.00 },
+			{ label: "10", y: 71.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 81.00 },
+			{ label: "2", y: 81.00 },
+			{ label: "3", y: 85.00 },
+			{ label: "4", y: 78.00 },
+			{ label: "5", y: 85.00 },
+			{ label: "6", y: 84.00 },
+			{ label: "7", y: 79.00 },
+			{ label: "8", y: 82.00 },
+			{ label: "9", y: 83.00 },
+			{ label: "10", y: 85.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 81.00 },
+			{ label: "2", y: 83.00 },
+			{ label: "3", y: 74.00 },
+			{ label: "4", y: 81.00 },
+			{ label: "5", y: 83.00 },
+			{ label: "6", y: 83.00 },
+			{ label: "7", y: 81.00 },
+			{ label: "8", y: 80.00 },
+			{ label: "9", y: 83.00 },
+			{ label: "10", y: 82.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 83.00 },
+			{ label: "2", y: 79.00 },
+			{ label: "3", y: 82.00 },
+			{ label: "4", y: 80.00 },
+			{ label: "5", y: 82.00 },
+			{ label: "6", y: 80.00 },
+			{ label: "7", y: 83.00 },
+			{ label: "8", y: 80.00 },
+			{ label: "9", y: 79.00 },
+			{ label: "10", y: 81.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 83.00 },
+			{ label: "2", y: 83.00 },
+			{ label: "3", y: 86.00 },
+			{ label: "4", y: 83.00 },
+			{ label: "5", y: 82.00 },
+			{ label: "6", y: 84.00 },
+			{ label: "7", y: 82.00 },
+			{ label: "8", y: 81.00 },
+			{ label: "9", y: 85.00 },
+			{ label: "10", y: 80.00 }
+		]
+	},
+	]
+});
+chart18.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart18.render();
+}
+
+
+
+
+
+var chart19 = new CanvasJS.Chart("chartContainer19", {
+  theme: "light2",
+	animationEnabled: true,
+	axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 61.00 },
+			{ label: "3", y: 77.00 },
+			{ label: "4", y: 87.00 },
+			{ label: "5", y: 81.00 },
+			{ label: "6", y: 84.00 },
+			{ label: "7", y: 65.00 },
+			{ label: "8", y: 68.00 },
+			{ label: "9", y: 74.00 },
+			{ label: "10", y: 82.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 76.00 },
+			{ label: "2", y: 76.00 },
+			{ label: "3", y: 76.00 },
+			{ label: "4", y: 76.00 },
+			{ label: "5", y: 76.00 },
+			{ label: "6", y: 76.00 },
+			{ label: "7", y: 76.00 },
+			{ label: "8", y: 76.00 },
+			{ label: "9", y: 76.00 },
+			{ label: "10", y: 76.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 77.00 },
+			{ label: "2", y: 77.00 },
+			{ label: "3", y: 77.00 },
+			{ label: "4", y: 77.00 },
+			{ label: "5", y: 77.00 },
+			{ label: "6", y: 77.00 },
+			{ label: "7", y: 77.00 },
+			{ label: "8", y: 77.00 },
+			{ label: "9", y: 77.00 },
+			{ label: "10", y: 77.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 79.00 },
+			{ label: "2", y: 79.00 },
+			{ label: "3", y: 79.00 },
+			{ label: "4", y: 79.00 },
+			{ label: "5", y: 79.00 },
+			{ label: "6", y: 79.00 },
+			{ label: "7", y: 79.00 },
+			{ label: "8", y: 79.00 },
+			{ label: "9", y: 79.00 },
+			{ label: "10", y: 79.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 78.00 },
+			{ label: "2", y: 78.00 },
+			{ label: "3", y: 78.00 },
+			{ label: "4", y: 78.00 },
+			{ label: "5", y: 78.00 },
+			{ label: "6", y: 78.00 },
+			{ label: "7", y: 78.00 },
+			{ label: "8", y: 78.00 },
+			{ label: "9", y: 78.00 },
+			{ label: "10", y: 78.00 }
+		]
+	},
+	]
+});
+chart19.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart19.render();
+}
+
+
+
+var chart10 = new CanvasJS.Chart("chartContainer10", {
+	theme:"light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize:13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 97.00 },
+			{ label: "2", y: 92.00 },
+			{ label: "3", y: 98.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 93.00 },
+			{ label: "7", y: 89.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 97.00 },
+			{ label: "10", y: 92.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 95.00 },
+			{ label: "2", y: 95.00 },
+			{ label: "3", y: 95.00 },
+			{ label: "4", y: 95.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 95.00 },
+			{ label: "7", y: 95.00 },
+			{ label: "8", y: 95.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 95.00 }
+		]
+	},
+	{
+		type: "spline",
+    // toolTipContent: "<a href = {name}> {label}</a><hr/>Views: {y}",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 96.00 },
+			{ label: "2", y: 96.00 },
+			{ label: "3", y: 96.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 96.00 },
+			{ label: "7", y: 96.00 },
+			{ label: "8", y: 96.00 },
+			{ label: "9", y: 96.00 },
+			{ label: "10", y: 96.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 97.00 },
+			{ label: "2", y: 97.00 },
+			{ label: "3", y: 97.00 },
+			{ label: "4", y: 97.00 },
+			{ label: "5", y: 97.00 },
+			{ label: "6", y: 97.00 },
+			{ label: "7", y: 97.00 },
+			{ label: "8", y: 97.00 },
+			{ label: "9", y: 97.00 },
+			{ label: "10", y: 97.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 98.00 },
+			{ label: "2", y: 98.00 },
+			{ label: "3", y: 98.00 },
+			{ label: "4", y: 98.00 },
+			{ label: "5", y: 98.00 },
+			{ label: "6", y: 98.00 },
+			{ label: "7", y: 98.00 },
+			{ label: "8", y: 98.00 },
+			{ label: "9", y: 98.00 },
+			{ label: "10", y: 98.00 }
+		]
+	},
+]
+});
+chart10.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart10.render();
+}
+
+
+
+
+var chart11 = new CanvasJS.Chart("chartContainer11", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 92.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 96.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 92.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 93.00 },
+			{ label: "9", y: 88.00 },
+			{ label: "10", y: 95.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 92.00 },
+			{ label: "2", y: 93.00 },
+			{ label: "3", y: 93.00 },
+			{ label: "4", y: 92.00 },
+			{ label: "5", y: 92.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 93.00 },
+			{ label: "8", y: 93.00 },
+			{ label: "9", y: 93.00 },
+			{ label: "10", y: 92.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 94.00 },
+			{ label: "4", y: 93.00 },
+			{ label: "5", y: 94.00 },
+			{ label: "6", y: 93.00 },
+			{ label: "7", y: 93.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 94.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 95.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 95.00 },
+			{ label: "4", y: 94.00 },
+			{ label: "5", y: 93.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 93.00 },
+			{ label: "8", y: 93.00 },
+			{ label: "9", y: 94.00 },
+			{ label: "10", y: 93.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 93.00 },
+			{ label: "2", y: 95.00 },
+			{ label: "3", y: 94.00 },
+			{ label: "4", y: 93.00 },
+			{ label: "5", y: 94.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 93.00 },
+			{ label: "9", y: 93.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	]
+});
+chart11.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart11.render();
+}
+
+
+
+
+
+
+var chart12 = new CanvasJS.Chart("chartContainer12", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 100.00 },
+			{ label: "3", y: 99.00 },
+			{ label: "4", y: 97.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 95.00 },
+			{ label: "7", y: 98.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 92.00 },
+			{ label: "10", y: 97.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 97.00 },
+			{ label: "2", y: 97.00 },
+			{ label: "3", y: 97.00 },
+			{ label: "4", y: 97.00 },
+			{ label: "5", y: 97.00 },
+			{ label: "6", y: 97.00 },
+			{ label: "7", y: 97.00 },
+			{ label: "8", y: 97.00 },
+			{ label: "9", y: 97.00 },
+			{ label: "10", y: 97.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 98.00 },
+			{ label: "2", y: 98.00 },
+			{ label: "3", y: 98.00 },
+			{ label: "4", y: 98.00 },
+			{ label: "5", y: 98.00 },
+			{ label: "6", y: 98.00 },
+			{ label: "7", y: 98.00 },
+			{ label: "8", y: 98.00 },
+			{ label: "9", y: 98.00 },
+			{ label: "10", y: 98.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 98.00 },
+			{ label: "2", y: 98.00 },
+			{ label: "3", y: 98.00 },
+			{ label: "4", y: 98.00 },
+			{ label: "5", y: 98.00 },
+			{ label: "6", y: 98.00 },
+			{ label: "7", y: 98.00 },
+			{ label: "8", y: 98.00 },
+			{ label: "9", y: 98.00 },
+			{ label: "10", y: 98.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 98.00 },
+			{ label: "2", y: 98.00 },
+			{ label: "3", y: 98.00 },
+			{ label: "4", y: 98.00 },
+			{ label: "5", y: 98.00 },
+			{ label: "6", y: 98.00 },
+			{ label: "7", y: 98.00 },
+			{ label: "8", y: 98.00 },
+			{ label: "9", y: 98.00 },
+			{ label: "10", y: 98.00 }
+		]
+	},
+	]
+});
+chart12.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart12.render();
+}
+
+
+
+
+
+var chart13 = new CanvasJS.Chart("chartContainer13", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 97.00 },
+			{ label: "2", y: 95.00 },
+			{ label: "3", y: 97.00 },
+			{ label: "4", y: 95.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 97.00 },
+			{ label: "7", y: 94.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 92.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 95.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 95.00 },
+			{ label: "4", y: 96.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 95.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 95.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 96.00 },
+			{ label: "4", y: 95.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 95.00 },
+			{ label: "7", y: 95.00 },
+			{ label: "8", y: 95.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 95.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 94.00 },
+			{ label: "4", y: 93.00 },
+			{ label: "5", y: 95.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 94.00 },
+			{ label: "8", y: 95.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.00 },
+			{ label: "2", y: 94.00 },
+			{ label: "3", y: 94.00 },
+			{ label: "4", y: 93.00 },
+			{ label: "5", y: 94.00 },
+			{ label: "6", y: 94.00 },
+			{ label: "7", y: 95.00 },
+			{ label: "8", y: 94.00 },
+			{ label: "9", y: 95.00 },
+			{ label: "10", y: 93.00 }
+		]
+	},
+	]
+});
+chart13.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart13.render();
+}
+
+
+
+
+
+var chart14 = new CanvasJS.Chart("chartContainer14", {
+  theme: "light2",
+	animationEnabled: true,
+	axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 97.00 },
+			{ label: "2", y: 86.00 },
+			{ label: "3", y: 89.00 },
+			{ label: "4", y: 95.00 },
+			{ label: "5", y: 96.00 },
+			{ label: "6", y: 90.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 93.00 },
+			{ label: "9", y: 87.00 },
+			{ label: "10", y: 94.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 92.00 },
+			{ label: "2", y: 92.00 },
+			{ label: "3", y: 92.00 },
+			{ label: "4", y: 92.00 },
+			{ label: "5", y: 92.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 92.00 },
+			{ label: "9", y: 92.00 },
+			{ label: "10", y: 92.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 92.00 },
+			{ label: "2", y: 92.00 },
+			{ label: "3", y: 92.00 },
+			{ label: "4", y: 92.00 },
+			{ label: "5", y: 92.00 },
+			{ label: "6", y: 92.00 },
+			{ label: "7", y: 92.00 },
+			{ label: "8", y: 92.00 },
+			{ label: "9", y: 92.00 },
+			{ label: "10", y: 92.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 91.00 },
+			{ label: "2", y: 91.00 },
+			{ label: "3", y: 91.00 },
+			{ label: "4", y: 91.00 },
+			{ label: "5", y: 91.00 },
+			{ label: "6", y: 91.00 },
+			{ label: "7", y: 91.00 },
+			{ label: "8", y: 91.00 },
+			{ label: "9", y: 91.00 },
+			{ label: "10", y: 91.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 88.00 },
+			{ label: "2", y: 88.00 },
+			{ label: "3", y: 88.00 },
+			{ label: "4", y: 88.00 },
+			{ label: "5", y: 88.00 },
+			{ label: "6", y: 88.00 },
+			{ label: "7", y: 88.00 },
+			{ label: "8", y: 88.00 },
+			{ label: "9", y: 88.00 },
+			{ label: "10", y: 88.00 }
+		]
+	},
+	]
+});
+chart14.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart14.render();
+}
+
+
+
+
+
+var chart5 = new CanvasJS.Chart("chartContainer5", {
+	theme:"light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize:13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 77.42 },
+			{ label: "2", y: 83.87 },
+			{ label: "3", y: 87.10 },
+			{ label: "4", y: 93.55 },
+			{ label: "5", y: 90.32 },
+			{ label: "6", y: 96.77 },
+			{ label: "7", y: 89.25 },
+			{ label: "8", y: 92.34 },
+			{ label: "9", y: 94.50 },
+			{ label: "10", y: 95.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 90.24 },
+			{ label: "2", y: 90.24 },
+			{ label: "3", y: 90.24 },
+			{ label: "4", y: 90.24 },
+			{ label: "5", y: 90.24 },
+			{ label: "6", y: 90.24 },
+			{ label: "7", y: 90.24 },
+			{ label: "8", y: 90.24 },
+			{ label: "9", y: 90.24 },
+			{ label: "10", y: 90.24 }
+		]
+	},
+	{
+		type: "spline",
+    // toolTipContent: "<a href = {name}> {label}</a><hr/>Views: {y}",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 87.36 },
+			{ label: "2", y: 87.36 },
+			{ label: "3", y: 87.36 },
+			{ label: "4", y: 87.36 },
+			{ label: "5", y: 87.36 },
+			{ label: "6", y: 87.36 },
+			{ label: "7", y: 87.36 },
+			{ label: "8", y: 87.36 },
+			{ label: "9", y: 87.36 },
+			{ label: "10", y: 87.36 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 89.37 },
+			{ label: "2", y: 89.37 },
+			{ label: "3", y: 89.37 },
+			{ label: "4", y: 89.37 },
+			{ label: "5", y: 89.37 },
+			{ label: "6", y: 89.37 },
+			{ label: "7", y: 89.37 },
+			{ label: "8", y: 89.37 },
+			{ label: "9", y: 89.37 },
+			{ label: "10", y: 89.37 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 89.00 },
+			{ label: "2", y: 89.00 },
+			{ label: "3", y: 89.00 },
+			{ label: "4", y: 89.00 },
+			{ label: "5", y: 89.00 },
+			{ label: "6", y: 89.00 },
+			{ label: "7", y: 89.00 },
+			{ label: "8", y: 89.00 },
+			{ label: "9", y: 89.00 },
+			{ label: "10", y: 89.00 }
+		]
+	},
+]
+});
+chart5.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart5.render();
+}
+
+
+
+
+var chart6 = new CanvasJS.Chart("chartContainer6", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 80.65 },
+			{ label: "2", y: 83.87 },
+			{ label: "3", y: 74.19 },
+			{ label: "4", y: 83.87 },
+			{ label: "5", y: 87.10 },
+			{ label: "6", y: 83.87 },
+			{ label: "7", y: 83.87 },
+			{ label: "8", y: 80.65 },
+			{ label: "9", y: 83.87 },
+			{ label: "10", y: 80.65 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 84.33 },
+			{ label: "2", y: 84.29 },
+			{ label: "3", y: 84.29 },
+			{ label: "4", y: 85.29 },
+			{ label: "5", y: 84.38 },
+			{ label: "6", y: 88.33 },
+			{ label: "7", y: 84.29 },
+			{ label: "8", y: 84.29 },
+			{ label: "9", y: 86.29 },
+			{ label: "10", y: 87.29 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 83.27 },
+			{ label: "2", y: 83.36 },
+			{ label: "3", y: 82.36 },
+			{ label: "4", y: 82.36 },
+			{ label: "5", y: 78.27 },
+			{ label: "6", y: 78.45 },
+			{ label: "7", y: 81.36 },
+			{ label: "8", y: 83.18 },
+			{ label: "9", y: 83.27 },
+			{ label: "10", y: 83.27 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 81.43 },
+			{ label: "2", y: 82.38 },
+			{ label: "3", y: 82.38 },
+			{ label: "4", y: 80.48 },
+			{ label: "5", y: 82.38 },
+			{ label: "6", y: 77.46 },
+			{ label: "7", y: 80.32 },
+			{ label: "8", y: 77.62 },
+			{ label: "9", y: 76.35 },
+			{ label: "10", y: 81.43 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 83.17 },
+			{ label: "2", y: 80.17 },
+			{ label: "3", y: 80.17 },
+			{ label: "4", y: 79.33 },
+			{ label: "5", y: 79.17 },
+			{ label: "6", y: 78.33 },
+			{ label: "7", y: 77.33 },
+			{ label: "8", y: 80.00 },
+			{ label: "9", y: 79.50 },
+			{ label: "10", y: 80.00 }
+		]
+	},
+	]
+});
+chart6.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart6.render();
+}
+
+
+
+
+
+
+var chart7 = new CanvasJS.Chart("chartContainer7", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+    maximum: 101,
+    interval: 2,
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 85.71 },
+			{ label: "2", y: 80.15 },
+			{ label: "3", y: 90.48 },
+			{ label: "4", y: 100.00 },
+			{ label: "5", y: 95.24 },
+			{ label: "6", y: 96.32 },
+			{ label: "7", y: 92.12 },
+			{ label: "8", y: 94.77 },
+			{ label: "9", y: 95.24 },
+			{ label: "10", y: 100.00 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 90.19 },
+			{ label: "2", y: 90.19 },
+			{ label: "3", y: 90.19 },
+			{ label: "4", y: 90.19 },
+			{ label: "5", y: 90.19 },
+			{ label: "6", y: 90.19 },
+			{ label: "7", y: 90.19 },
+			{ label: "8", y: 90.19 },
+			{ label: "9", y: 90.19 },
+			{ label: "10", y: 90.19 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 90.18 },
+			{ label: "2", y: 90.18 },
+			{ label: "3", y: 90.18 },
+			{ label: "4", y: 90.18 },
+			{ label: "5", y: 90.18 },
+			{ label: "6", y: 90.18 },
+			{ label: "7", y: 90.18 },
+			{ label: "8", y: 90.18 },
+			{ label: "9", y: 90.18 },
+			{ label: "10", y: 90.18 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 92.38 },
+			{ label: "2", y: 92.38 },
+			{ label: "3", y: 92.38 },
+			{ label: "4", y: 92.38 },
+			{ label: "5", y: 92.38 },
+			{ label: "6", y: 92.38 },
+			{ label: "7", y: 92.38 },
+			{ label: "8", y: 92.38 },
+			{ label: "9", y: 92.38 },
+			{ label: "10", y: 92.38}
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 93.00 },
+			{ label: "2", y: 93.00 },
+			{ label: "3", y: 93.00 },
+			{ label: "4", y: 93.00 },
+			{ label: "5", y: 93.00 },
+			{ label: "6", y: 93.00 },
+			{ label: "7", y: 93.00 },
+			{ label: "8", y: 93.00 },
+			{ label: "9", y: 93.00 },
+			{ label: "10", y: 93.00 }
+		]
+	},
+	]
+});
+chart7.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart7.render();
+}
+
+
+
+
+
+var chart8 = new CanvasJS.Chart("chartContainer8", {
+  theme: "light2",
+	animationEnabled: true,
+  axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+    maximum: 98,
+    interval: 2,
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 95.24 },
+			{ label: "2", y: 95.24 },
+			{ label: "3", y: 95.24 },
+			{ label: "4", y: 95.24 },
+			{ label: "5", y: 95.24 },
+			{ label: "6", y: 80.91 },
+			{ label: "7", y: 90.48 },
+			{ label: "8", y: 80.95 },
+			{ label: "9", y: 90.48 },
+			{ label: "10", y: 80.19 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 94.10 },
+			{ label: "2", y: 90.14 },
+			{ label: "3", y: 87.24 },
+			{ label: "4", y: 88.24 },
+			{ label: "5", y: 90.19 },
+			{ label: "6", y: 88.14 },
+			{ label: "7", y: 88.24 },
+			{ label: "8", y: 91.14 },
+			{ label: "9", y: 89.19 },
+			{ label: "10", y: 91.19 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 91.09 },
+			{ label: "2", y: 90.09 },
+			{ label: "3", y: 90.09 },
+			{ label: "4", y: 89.18 },
+			{ label: "5", y: 89.09 },
+			{ label: "6", y: 93.00 },
+			{ label: "7", y: 90.09 },
+			{ label: "8", y: 91.09 },
+			{ label: "9", y: 90.18 },
+			{ label: "10", y: 87.18 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 88.25 },
+			{ label: "2", y: 90.16 },
+			{ label: "3", y: 90.32 },
+			{ label: "4", y: 91.27 },
+			{ label: "5", y: 92.22 },
+			{ label: "6", y: 89.21 },
+			{ label: "7", y: 88.25 },
+			{ label: "8", y: 89.21 },
+			{ label: "9", y: 89.37 },
+			{ label: "10", y: 88.25 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 90.00 },
+			{ label: "2", y: 91.00 },
+			{ label: "3", y: 92.00 },
+			{ label: "4", y: 92.00 },
+			{ label: "5", y: 90.00 },
+			{ label: "6", y: 91.00 },
+			{ label: "7", y: 90.00 },
+			{ label: "8", y: 89.00 },
+			{ label: "9", y: 93.00 },
+			{ label: "10", y: 88.00 }
+		]
+	},
+	]
+});
+chart8.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart8.render();
+}
+
+
+
+
+
+var chart9 = new CanvasJS.Chart("chartContainer9", {
+  theme: "light2",
+	animationEnabled: true,
+	axisY :{
+		includeZero: false,
+		title: "Accuracy",
+		suffix: "%",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor: "black",
+	},
+  axisX :{
+    title:"nth Run",
+    labelFontSize: 10,
+    titleFontSize: 15,
+    titleFontColor: "black",
+    labelFontColor:"black",
+  },
+  colorSet: "greyShades",
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries,
+    fontSize: 13,
+    labelFontColor:"black",
+    horizontalAlign: "center",
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "0 Fold",
+		dataPoints: [
+			{ label: "1", y: 61.29 },
+			{ label: "2", y: 80.65 },
+			{ label: "3", y: 67.74 },
+			{ label: "4", y: 77.42 },
+			{ label: "5", y: 74.19 },
+			{ label: "6", y: 90.32 },
+			{ label: "7", y: 83.87 },
+			{ label: "8", y: 64.52 },
+			{ label: "9", y: 70.97 },
+			{ label: "10", y: 87.10 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "5 Folds",
+		dataPoints: [
+			{ label: "1", y: 93.48 },
+			{ label: "2", y: 93.48 },
+			{ label: "3", y: 93.48 },
+			{ label: "4", y: 93.48 },
+			{ label: "5", y: 93.48 },
+			{ label: "6", y: 93.48 },
+			{ label: "7", y: 93.48 },
+			{ label: "8", y: 93.48 },
+			{ label: "9", y: 93.48 },
+			{ label: "10", y: 93.48 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "10 Folds",
+		dataPoints: [
+			{ label: "1", y: 73.36 },
+			{ label: "2", y: 73.36 },
+			{ label: "3", y: 73.36 },
+			{ label: "4", y: 73.36 },
+			{ label: "5", y: 73.36 },
+			{ label: "6", y: 73.36 },
+			{ label: "7", y: 73.36 },
+			{ label: "8", y: 73.36 },
+			{ label: "9", y: 73.36 },
+			{ label: "10", y: 73.36 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "15 Folds",
+		dataPoints: [
+			{ label: "1", y: 74.13 },
+			{ label: "2", y: 74.13 },
+			{ label: "3", y: 74.13 },
+			{ label: "4", y: 74.13 },
+			{ label: "5", y: 74.13 },
+			{ label: "6", y: 74.13 },
+			{ label: "7", y: 74.13 },
+			{ label: "8", y: 74.13 },
+			{ label: "9", y: 74.13 },
+			{ label: "10", y: 74.13 }
+		]
+	},
+	{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00'%'",
+		name: "20 Folds",
+		dataPoints: [
+			{ label: "1", y: 75.17 },
+			{ label: "2", y: 75.17 },
+			{ label: "3", y: 75.17 },
+			{ label: "4", y: 75.17 },
+			{ label: "5", y: 75.17 },
+			{ label: "6", y: 75.17 },
+			{ label: "7", y: 75.17 },
+			{ label: "8", y: 75.17 },
+			{ label: "9", y: 75.17 },
+			{ label: "10", y: 75.17 }
+		]
+	},
+	]
+});
+chart9.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart9.render();
+}
+
+
+
+
+}
+
+
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+function openCity1(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent1");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks1");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+document.getElementById("defaultOpen1").click();
+
+
+function openCity2(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent2");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks2");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+document.getElementById("defaultOpen2").click();
+
+
+function openCity3(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent3");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks3");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+document.getElementById("defaultOpen3").click();
+</script>
+
+</body>
+</html>

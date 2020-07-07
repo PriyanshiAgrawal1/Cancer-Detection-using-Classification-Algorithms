@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Result</title>
+    <link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+    <style>
+      body {
+        overflow-x : hidden;
+        background-color: snow;
+      }
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      .heading {
+        border-top:1px solid #232323;
+        border-bottom:1px solid #232323;
+        height: 45px;
+        width:1268px;
+        position:relative;
+        left:130px;
+        background-color: #ecebf6;
+      }
+      .chip {
+        position: absolute;
+        display: inline-block;
+        padding: 0 25px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 50px;
+        border-radius: 25px;
+        background-color: lightgrey;
+        top:70px;
+      }
+
+      .chip img {
+        float: left;
+        margin: 0 10px 0 -25px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+
+      .content6 {
+        position: absolute;
+        bottom: 0;
+        background:  rgb(1, 1, 1);
+        background: rgba(236,183,191,0.4);
+        left:35px;
+        width:5.5%;
+        height: 100%;
+        position: fixed;
+      }
+      .content7 {
+        position: absolute;
+        top:60px;
+        background:  rgb(1, 1, 1);
+        background: rgba(18,73,102,0.5);
+        left:0;
+        width:13.5%;
+        height: 10%;
+      }
+      .hide_canvas1{
+        position: absolute;
+        top:732px;
+        width:85px;
+        background-color: snow;
+        height:10px;
+        left:1190px;
+        right:0;
+      }
+      .hide_canvas{
+        position: absolute;
+        top:731px;
+        width:85px;
+        background-color: snow;
+        height:10px;
+        left:250px;
+    }
+      .hide_canvas2{
+        position: absolute;
+        top:1315px;
+        width:85px;
+        background-color: snow;
+        height:10px;
+        left:1190px;
+        right:0;
+      }
+      .hide_canvas3{
+        position: absolute;
+        top:1313px;
+        width:85px;
+        background-color: snow;
+        height:10px;
+        left:250px;
+      }
+      .hide_canvas4{
+        position: absolute;
+        top:1898px;
+        width:85px;
+        background-color: snow;
+        height:10px;
+        left:1190px;
+        right:0;
+      }
+
+      .hide_canvas5{
+        position: absolute;
+        top:1895px;
+        width:85px;
+        background-color: snow;
+        height:10px;
+        left:250px;
+      }
+    </style>
+  </head>
+  <body>
+    <br>
+    <div class="content6">
+    </div>
+    <div class="container">
+    <div class="jumbotron">
+    <div class="container">
+      <div class="chip">
+        <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+        <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong></div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id= "span_css" style="font-family:Acme;font-size:25px;position:absolute;top:85px;font-weight:bold">RESULTS</span>
+    </div>
+  </div>
+  </div>
+  <div class="content7">
+  </div>
+  <div class="content7" style="left:1314px;width:15%;">
+    <div style="padding-left:70px;padding-top:23px;">
+      <button type="button" name="button" class="btn btn-sm" style="background-color:whitesmoke;color:black;" onclick="window.location='http://127.0.0.1:8000/cancer_app/welcomeLab/'"><i style='font-size:20px' class='fas'>&#xf30a;</i>&nbsp&nbspBACK</button>
+    </div>
+  </div>
+  <div class="container" align="center">
+    <br>
+    <h4 style="padding-left:35px;font-family:'Acme'">Tested for <span style="color:#ecb7bf">Breast</span> Cancer&nbsp&nbsp&nbspvs&nbsp&nbsp&nbspTested for <span style="color:#296d98">Prostate</span> Cancer</h4>
+    <br>
+    <div id="chartContainer2" style="height: 450px; width: 90%;"></div>
+    <div class="hide_canvas">
+    </div>
+    <div class="hide_canvas1">
+    </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  </div>
+  <br><br>
+  <div class="container" align="center">
+    <br>
+    <h4 style="padding-left:35px;font-family:'Acme'">Tested <span style="color:#c62121">Malignant</span>&nbsp&nbsp&nbspvs&nbsp&nbsp&nbspTested <span style="color:#999999">Benign</span></h4>
+    <br>
+    <div id="chartContainer1" style="height: 450px; width: 90%;"></div>
+    <div class="hide_canvas2">
+    </div>
+    <div class="hide_canvas3">
+    </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  </div>
+  <br><br>
+  <div class="container" align="center">
+    <br>
+    <h4 style="padding-left:25px;font-family:'Acme'">Final Outcome</h4>
+    <br>
+    <div id="chartContainer" style="height: 450px; width: 90%;"></div>
+    <div class="hide_canvas4">
+    </div>
+    <div class="hide_canvas5">
+    </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  </div>
+  <br><br>
+  <script>
+  window.onload = function () {
+    CanvasJS.addColorSet("greyShades",
+               [
+               "#1c4966",
+               "#ecb7bf",
+               "#999999"
+               ]);
+
+  var chart = new CanvasJS.Chart("chartContainer", {
+    // exportEnabled: true,
+    animationEnabled: true,
+    colorSet: "greyShades",
+    backgroundColor: "snow",
+    // title:{
+    // 	text: "State Operating Funds"
+    // },
+    legend:{
+      // cursor: "pointer",
+      itemclick: explodePie
+    },
+    data: [{
+      type: "pie",
+      showInLegend: true,
+      toolTipContent: "{name}: <strong>{y}%</strong>",
+      indexLabel: "{name} - {y}%",
+      dataPoints: [
+        { y: {{test_P_M1}}, name: "Tested for Prostate Cancer - Malignant", exploded: true },
+        { y: {{test_B_M1}}, name: "Tested for Breast Cancer - Malignant",  exploded: true },
+        { y: {{test_B}}, name: "Benign" }
+      ]
+    }]
+  });
+  chart.render();
+
+  function explodePie (e) {
+    if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+    } else {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+    }
+    e.chart.render();
+
+  }
+
+  CanvasJS.addColorSet("greyShades",
+             [
+             "#c62121",
+             "#333333"
+             ]);
+  var chart1 = new CanvasJS.Chart("chartContainer1", {
+    // exportEnabled: true,
+    animationEnabled: true,
+    colorSet: "greyShades",
+    backgroundColor: "snow",
+    // title:{
+    // 	text: "State Operating Funds"
+    // },
+    legend:{
+      // cursor: "pointer",
+      itemclick: explodePie
+    },
+    data: [{
+      type: "pie",
+      showInLegend: true,
+      toolTipContent: "{name}: <strong>{y}%</strong>",
+      indexLabel: "{name} - {y}%",
+      dataPoints: [
+        { y: {{test_M}}, name: "Malignant", exploded: true },
+        { y: 100-{{test_M}}, name: "Benign" }
+      ]
+    }]
+  });
+  chart1.render();
+
+  function explodePie (e) {
+    if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+    } else {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+    }
+    e.chart1.render();
+
+  }
+
+  CanvasJS.addColorSet("greyShades",
+             [
+             "#1c4966",
+             "#ecb7bf"
+             ]);
+  var chart2 = new CanvasJS.Chart("chartContainer2", {
+    // exportEnabled: true,
+    animationEnabled: true,
+    colorSet: "greyShades",
+    backgroundColor: "snow",
+    // title:{
+    // 	text: "State Operating Funds"
+    // },
+    legend:{
+      // cursor: "pointer",
+      itemclick: explodePie
+    },
+    data: [{
+      type: "pie",
+      showInLegend: true,
+      toolTipContent: "{name}: <strong>{y}%</strong>",
+      indexLabel: "{name} - {y}%",
+      dataPoints: [
+        { y: {{test_P}}, name: "Tested for Prostate", exploded: true },
+        { y: 100-{{test_P}}, name: "Tested for Breast" }
+      ]
+    }]
+  });
+  chart2.render();
+}
+  function explodePie (e) {
+    if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+    } else {
+      e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+    }
+    e.chart2.render();
+
+  }
+  </script>
+</body>
+</html>

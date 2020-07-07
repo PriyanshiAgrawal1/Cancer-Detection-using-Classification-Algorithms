@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Breast Cancer - Statistics</title>
+    <link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <style>
+      body {
+        overflow-x : hidden;
+        background-color: snow;
+      }
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      .heading {
+        border-top:1px solid #232323;
+        border-bottom:1px solid #232323;
+        height: 45px;
+        width:1268px;
+        position:relative;
+        left:130px;
+        background-color: #ecebf6;
+      }
+      .chip {
+        position: absolute;
+        display: inline-block;
+        padding: 0 25px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 50px;
+        border-radius: 25px;
+        background-color: lightgrey;
+        top:70px;
+      }
+
+      .chip img {
+        float: left;
+        margin: 0 10px 0 -25px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+
+      .content6 {
+        position: absolute;
+        bottom: 0;
+        background:  rgb(1, 1, 1);
+        background: rgba(251,210,215,0.5);
+        left:35px;
+        width:5.5%;
+        height: 100%;
+        position: fixed;
+      }
+      .content7 {
+        position: absolute;
+        top:60px;
+        background:  rgb(1, 1, 1);
+        background: rgba(234,211,215,0.7);
+        left:0;
+        width:13.5%;
+        height: 10%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <br>
+    <div class="content6">
+    </div>
+    <div class="container">
+    <div class="jumbotron">
+    <div class="container">
+      <div class="chip">
+        <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+        <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong></div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id= "span_css" style="font-family:Acme;font-size:25px;position:absolute;top:85px;font-weight:bold;">STATISTICS</span>
+    </div>
+  </div>
+  </div>
+  <div class="content7">
+  </div>
+  <div class="content7" style="left:1314px;width:15%;">
+    <div style="padding-left:70px;padding-top:23px;">
+      <button type="button" name="button" class="btn btn-sm" style="background-color:whitesmoke;color:black;" onclick="window.location='http://127.0.0.1:8000/cancer_app/breastAccuracy/'"><i style='font-size:20px' class='fas'>&#xf30a;</i>&nbsp&nbspBACK</button>
+    </div>
+  </div>
+  <div class="container" align="center">
+    <br>
+    <h4 style="padding-left:35px;font-family:'Acme'">Average Accuracies - Fold wise</h4>
+    <br>
+    <div id="chartContainer1" style="height: 450px; width: 90%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  </div>
+  <br><br>
+  <div class="container" align="center">
+    <br>
+    <h4 style="padding-left:25px;font-family:'Acme'">Final Average Accuracy</h4>
+    <br>
+    <div id="chartContainer" style="height: 450px; width: 50%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  </div>
+  <br><br>
+  <script>
+  window.onload = function() {
+    CanvasJS.addColorSet("greyShades",
+               [
+               "#D3D3D3",
+               "#C0C0C0",
+               "#A9A9A9",
+               "#808080",
+               "#696969"
+               ]);
+  var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    exportEnabled: true,
+    dataPointWidth: 30,
+    axisY: {
+    title: "Accuracy %",
+    minimum: 50,
+    },
+    colorSet: "greyShades",
+    data: [
+    {
+      type: "column",
+      toolTipContent: "{label} : {y} %",
+      dataPoints: [
+        { label: "Support Vector",  y: {{svm_final_avg_B}} },
+        { label: "Decision Tree", y: {{dt_final_avg_B}}  },
+        { label: "Logistic Regression", y: {{lr_final_avg_B}}  },
+        { label: "Random Forest",  y: {{rf_final_avg_B}}  },
+        { label: "Naive Bayes",  y: {{nb_final_avg_B}}  }
+      ]
+    }
+    ]
+  });
+  chart.render();
+  var chart1 = new CanvasJS.Chart("chartContainer1", {
+    animationEnabled: true,
+    dataPointWidth: 25,
+    exportEnabled: true,
+    axisY: {
+      title: "Accuracy %",
+      minimum:50,
+    },
+    legend: {
+      cursor:"pointer",
+      itemclick : toggleDataSeries,
+    },
+    toolTip: {
+      shared: true,
+      content: toolTipFormatter,
+      fontSize: 10,
+    },
+    data: [{
+      type: "column",
+      showInLegend: true,
+      name: "0-Fold",
+      color: "#E4A199",
+      dataPoints: [
+        { y: {{avg_svmB_0}}, label: "Support Vector Machine" },
+        { y: {{avg_dtB_0}}, label: "Decision Tree" },
+        { y: {{avg_lrB_0}}, label: "Logistic Regression" },
+        { y: {{avg_rfB_0}}, label: "Random Forest" },
+        { y: {{avg_nbB_0}}, lebel: "Naive Bayes" },
+      ]
+    },
+    {
+      type: "column",
+      showInLegend: true,
+      name: "5-Folds",
+      color: "#CE897B",
+      dataPoints: [
+        { y: {{avg_svmB_5}}, label: "Support Vector Machine" },
+        { y: {{avg_dtB_5}}, label: "Decision Tree" },
+        { y: {{avg_lrB_5}}, label: "Logistic Regression" },
+        { y: {{avg_rfB_5}}, label: "Random Forest" },
+        { y: {{avg_nbB_5}}, label: "Naive Bayes" },
+      ]
+    },
+
+    {
+      type: "column",
+      showInLegend: true,
+      name: "10-Folds",
+      color: "#FBD2D7",
+      dataPoints: [
+        { y: {{avg_svmB_10}}, label: "Support Vector Machine" },
+        { y: {{avg_dtB_10}}, label: "Decision Tree" },
+        { y: {{avg_lrB_10}}, label: "Logistic Regression" },
+        { y: {{avg_rfB_10}}, label: "Random Forest" },
+        { y: {{avg_nbB_10}}, label: "Naive Bayes" },
+      ]
+    },
+
+    {
+      type: "column",
+      showInLegend: true,
+      name: "15-Folds",
+      color: "#ECB7BF",
+      dataPoints: [
+        { y: {{avg_svmB_15}}, label: "Support Vector Machine" },
+        { y: {{avg_dtB_15}}, label: "Decision Tree" },
+        { y: {{avg_lrB_15}}, label: "Logistic Regression" },
+        { y: {{avg_rfB_15}}, label: "Random Forest" },
+        { y: {{avg_nbB_15}}, label: "Naive Bayes" },
+      ]
+    },
+
+    {
+      type: "column",
+      showInLegend: true,
+      name: "20-Folds",
+      color: "#EAD3D7",
+      dataPoints: [
+        { y: {{avg_svmB_20}}, label: "Support Vector Machine" },
+        { y: {{avg_dtB_20}}, label: "Decision Tree" },
+        { y: {{avg_lrB_20}}, label: "Logistic Regression" },
+        { y: {{avg_rfB_20}}, label: "Random Forest" },
+        { y: {{avg_nbB_20}}, label: "Naive Bayes" },
+      ]
+    },
+  ]
+  });
+  chart1.render();
+
+  function toolTipFormatter(e) {
+    var str = "";
+    var total = 0 ;
+    var str3;
+    var str2 ;
+    for (var i = 0; i < e.entries.length; i++){
+      var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "% </strong><br/>" ;
+      total = e.entries[i].dataPoint.y + total;
+      str = str.concat(str1);
+    }
+    str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
+    str3 = "<span style = \"color:Tomato\">Average: </span><strong>" + Math.round(total/5) + "% </strong><br/>";
+    return (str2.concat(str)).concat(str3);
+  }
+
+  function toggleDataSeries(e) {
+    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+    }
+    else {
+      e.dataSeries.visible = true;
+    }
+    chart.render();
+  }
+
+  }
+  </script>
+</body>
+</html>

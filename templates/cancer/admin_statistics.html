@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<title>Comparison Stats!</title>
+<link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<style>
+body {
+  overflow-x: hidden;
+}
+.content6 {
+  position: absolute;
+  bottom: 0;
+  background:  rgb(1, 1, 1);
+  background: rgba(128,128,128,0.4);
+  left:35px;
+  width:5.5%;
+  height: 100%;
+  position: fixed;
+}
+.content7 {
+  position: absolute;
+  top:60px;
+  background:  rgb(1, 1, 1);
+  background: rgba(128,128,128,0.6);
+  left:0;
+  width:13.5%;
+  height: 10%;
+}
+.chip {
+  position: absolute;
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: lightgrey;
+  top:70px;
+}
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.hide_canvas {
+  position: absolute;
+  top: 1185px;
+  left: 450px;
+  height: 10px;
+  width: 100px;
+  background-color: white;
+}
+.hide_canvas1 {
+  position: absolute;
+  top: 1185px;
+  left: 1080px;
+  height: 10px;
+  width: 100px;
+  background-color: white;
+}
+.hide_canvas2 {
+  position: absolute;
+  top: 1700px;
+  left: 450px;
+  height: 10px;
+  width: 100px;
+  background-color: white;
+}
+.hide_canvas3 {
+  position: absolute;
+  top: 1700px;
+  left: 1080px;
+  height: 10px;
+  width: 100px;
+  background-color: white;
+}
+</style>
+<script>
+window.onload = function () {
+  CanvasJS.addColorSet("greyShades",
+             [
+             "#c62121",
+             "#333333"
+             ]);
+var chart1 = new CanvasJS.Chart("chartContainer1", {
+	animationEnabled: true,
+  colorSet: "greyShades",
+	legend:{
+		cursor: "pointer",
+		itemclick: explodePie
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "{name}: <strong>{y}%</strong>",
+		indexLabel: "{name} - {y}%",
+		dataPoints: [
+			{ y: 62, name: "Malignant", exploded: true },
+			{ y: 38, name: "Benign" },
+		]
+	}]
+});
+chart1.render();
+
+function explodePie (e) {
+	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+	} else {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+	}
+	e.chart1.render();
+}
+
+CanvasJS.addColorSet("greyShades",
+           [
+           "#c62121",
+           "#333333"
+           ]);
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+	animationEnabled: true,
+  colorSet: "greyShades",
+	legend:{
+		cursor: "pointer",
+		itemclick: explodePie
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "{name}: <strong>{y}%</strong>",
+		indexLabel: "{name} - {y}%",
+		dataPoints: [
+			{ y: 37, name: "Malignant", exploded: true },
+			{ y: 63, name: "Benign" },
+		]
+	}]
+});
+chart2.render();
+
+function explodePie (e) {
+	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+	} else {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+	}
+	e.chart2.render();
+}
+
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+  animationEnabled: true,
+  dataPointWidth: 25,
+  exportEnabled: true,
+  axisY: {
+    title: "Accuracy %",
+    minimum:40,
+  },
+  legend: {
+    cursor:"pointer",
+    itemclick : toggleDataSeries,
+  },
+  toolTip: {
+    shared: true,
+    content: toolTipFormatter,
+    fontSize: 10,
+  },
+  data: [{
+    type: "column",
+    showInLegend: true,
+    name: "Normal Accuracy",
+    color: "#45b6fe",
+    dataPoints: [
+      { y: {{svm_final_avg}}, label: "Support Vector Machine" },
+      { y: {{dt_final_avg}}, label: "Decision Tree" },
+      { y: {{lr_final_avg}}, label: "Logistic Regression" },
+      { y: {{rf_final_avg}}, label: "Random Forest" },
+      { y: {{nb_final_avg}}, lebel: "Naive Bayes" },
+    ]
+  },
+  {
+    type: "column",
+    showInLegend: true,
+    name: "Dimentionally Reduced Accuracy",
+    color: "#3792cb",
+    dataPoints: [
+      { y: {{svm_final_avg_PD}}, label: "Support Vector Machine" },
+      { y: {{dt_final_avg_PD}}, label: "Decision Tree" },
+      { y: {{lr_final_avg_PD}}, label: "Logistic Regression" },
+      { y: {{rf_final_avg_PD}}, label: "Random Forest" },
+      { y: {{nb_final_avg_PD}}, label: "Naive Bayes" },
+    ]
+  },
+]
+});
+chart3.render();
+
+function toolTipFormatter(e) {
+  var str = "";
+  var total = 0 ;
+  var str3;
+  var str2 ;
+  for (var i = 0; i < e.entries.length; i++){
+    var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "% </strong><br/>" ;
+    total = e.entries[i].dataPoint.y + total;
+    str = str.concat(str1);
+  }
+  str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
+  // str3 = "<span style = \"color:Tomato\">Average: </span><strong>" + Math.round(total/5) + "% </strong><br/>";
+  return (str2.concat(str));
+}
+
+function toggleDataSeries(e) {
+  if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+    e.dataSeries.visible = false;
+  }
+  else {
+    e.dataSeries.visible = true;
+  }
+  chart3.render();
+}
+
+var chart4 = new CanvasJS.Chart("chartContainer4", {
+  animationEnabled: true,
+  dataPointWidth: 25,
+  exportEnabled: true,
+  axisY: {
+    title: "Accuracy %",
+    minimum:40,
+  },
+  legend: {
+    cursor:"pointer",
+    itemclick : toggleDataSeries,
+  },
+  toolTip: {
+    shared: true,
+    content: toolTipFormatter,
+    fontSize: 10,
+  },
+  data: [{
+    type: "column",
+    showInLegend: true,
+    name: "Normal Accuracy",
+    color: "#ECB7BF",
+    dataPoints: [
+      { y: {{svm_final_avg_B}}, label: "Support Vector Machine" },
+      { y: {{dt_final_avg_B}}, label: "Decision Tree" },
+      { y: {{lr_final_avg_B}}, label: "Logistic Regression" },
+      { y: {{rf_final_avg_B}}, label: "Random Forest" },
+      { y: {{nb_final_avg_B}}, lebel: "Naive Bayes" },
+    ]
+  },
+  {
+    type: "column",
+    showInLegend: true,
+    name: "Dimentionally Reduced Accuracy",
+    color: "#CE897B",
+    dataPoints: [
+      { y: {{svm_final_avg_BD}}, label: "Support Vector Machine" },
+      { y: {{dt_final_avg_BD}}, label: "Decision Tree" },
+      { y: {{lr_final_avg_BD}}, label: "Logistic Regression" },
+      { y: {{rf_final_avg_BD}}, label: "Random Forest" },
+      { y: {{nb_final_avg_BD}}, label: "Naive Bayes" },
+    ]
+  },
+]
+});
+chart4.render();
+
+function toolTipFormatter(e) {
+  var str = "";
+  var total = 0 ;
+  var str3;
+  var str2 ;
+  for (var i = 0; i < e.entries.length; i++){
+    var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "% </strong><br/>" ;
+    total = e.entries[i].dataPoint.y + total;
+    str = str.concat(str1);
+  }
+  str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
+  // str3 = "<span style = \"color:Tomato\">Average: </span><strong>" + Math.round(total/5) + "% </strong><br/>";
+  return (str2.concat(str));
+}
+
+function toggleDataSeries(e) {
+  if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+    e.dataSeries.visible = false;
+  }
+  else {
+    e.dataSeries.visible = true;
+  }
+  chart4.render();
+}
+
+}
+</script>
+</head>
+<body>
+  <br>
+  <div class="content6">
+  </div>
+  <div class="container">
+  <div class="jumbotron">
+  <div class="container">
+    <div class="chip">
+      <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+      <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong></div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id= "span_css" style="font-family:Acme;font-size:25px;position:absolute;top:80px;">COMPARISON STATS</span>
+  </div>
+</div>
+</div>
+<div class="content7">
+</div>
+<div class="content7" style="left:1314px;width:15%;">
+  <div style="padding-left:70px;padding-top:23px;">
+    <button type="button" name="button" class="btn btn-sm" style="background-color:whitesmoke;color:black;" onclick="window.location='http://127.0.0.1:8000/cancer_app/welcomeAdmin/'"><i style='font-size:20px' class='fas'>&#xf30a;</i>&nbsp&nbspBACK</button>
+  </div>
+</div>
+    <br><br><br><br>
+    <div class="container" style="padding-left:250px;">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 style="padding-left:50px;">Prostate Dataset Class Division</h5>
+          <br><br>
+          <div id="chartContainer1" style="height: 300px; width: 80%;"></div>
+          <div class="" style="position:absolute;background-color:white;top:370px;left:280px;height:10px;width:100px;">
+          </div>
+          <div class="" style="position:absolute;background-color:white;top:367px;left:0px;height:10px;width:100px;">
+          </div>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        </div>
+        <div class="col-md-6">
+          <h5 style="padding-left:50px;">Breast Dataset Class Division</h5>
+          <br><br>
+          <div id="chartContainer2" style="height: 300px; width: 80%;"></div>
+          <div class="" style="position:absolute;background-color:white;top:370px;left:280px;height:10px;width:100px;">
+          </div>
+          <div class="" style="position:absolute;background-color:white;top:367px;left:0px;height:10px;width:100px;">
+          </div>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        </div>
+      </div>
+    </div>
+  <br><br><br><br>
+  <div class="container">
+    <div class="row" style="padding-left:270px;">
+      <h5 style="padding-left:80px;">Accuracy Comparison for Prostate Cancer &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a href="http://127.0.0.1:8000/cancer_app/admin_statistics1/#prostate_cancer" style="font-size:15px;">Detailed View?</a>
+      </h5><br><br>
+      <div id="chartContainer3" style="height: 370px; width: 80%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="hide_canvas">
+      </div>
+      <div class="hide_canvas1">
+      </div>
+    </div>
+  </div>
+  <br><br><br><br>
+  <div class="container">
+    <div class="row" style="padding-left:270px;">
+      <h5 style="padding-left:80px;">Accuracy Comparison for Breast Cancer &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <a href="http://127.0.0.1:8000/cancer_app/admin_statistics1/#breast_cancer" style="font-size:15px;">Detailed View?</a>
+      </h5><br><br>
+      <div id="chartContainer4" style="height: 370px; width: 80%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <div class="hide_canvas2">
+      </div>
+      <div class="hide_canvas3">
+      </div>
+    </div>
+  </div>
+  <br><br>
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>Welcome Admin!</title>
+  <link rel="icon" type="image/png" sizes="36x36" href="{% static "images/title_bar_logo.png" %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+
+<style>
+body {
+  font-family: "Lato", sans-serif;
+  background-color: lavender;
+  overflow-x: hidden;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+  border-right: 5px solid #232323;
+  border-bottom: 5px solid #232323;
+}
+.img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+}
+.sidenav {
+  height: 100%;
+  width: 230px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  /* padding-top: 20px; */
+}
+.sidenav a {
+  /* padding: 6px 8px 6px 16px; */
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+}
+.sidenav a:hover {
+  color: rgba(71, 61, 107, 0.8);
+}
+.main {
+  margin-left: 230px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  /* padding: 0px 15px; */
+}
+@media screen and (max-height: 450px) {
+  /* .sidenav {padding-top: 15px;} */
+  .sidenav a {font-size: 18px;}
+}
+
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.hide_canvas{
+  position: absolute;
+  top:109px;
+  width:200px;
+  background-color: white;
+  height:10px;
+  right:0;
+}
+
+.heading {
+  font-family: Acme;
+  text-align:center;
+  font-size:20px;
+}
+
+.content1 {
+  position: absolute;
+  top:0px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(13, 48, 79, 0.6);
+  width: 29.5%;
+  height:70%;
+  padding: 20px;
+}
+
+.content2 {
+  position: absolute;
+  bottom:0px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(197, 190, 244, 0.4);
+  /* background: rgba(238, 139, 197, 0.4); */
+  width: 64%;
+  height:57%;
+  padding: 20px;
+}
+
+.content3 {
+  position: absolute;
+  top:0px;
+  left:810px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(215, 165, 194, 0.5);
+  width: 17%;
+  height:66%;
+  padding: 20px;
+}
+
+.content4 {
+  position: absolute;
+  top:250px;
+  left:985px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(13, 48, 79, 0.4); /* Black background with 0.5 opacity */
+  width: 37%;
+  height:32.8%;
+  padding: 20px;
+}
+
+.content5 {
+  position: absolute;
+  top:0px;
+  left:985px;
+  background: rgb(1, 1, 1); /* Fallback color */
+  background: rgba(238, 139, 197, 0.4); /* Black background with 0.5 opacity */
+  width: 37%;
+  height:50%;
+  padding: 20px;
+}
+
+.content6 {
+  position: absolute;
+  left:0;
+  background:  rgb(1, 1, 1);
+  background: rgba(244,244,243,0.4);
+  top:190px;
+  width:100%;
+  height: 15%;
+}
+
+
+</style>
+</head>
+<body>
+<div class="sidenav">
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-10">
+      <div class="chip">
+        <img src="{% static "images/logo1.jpg" %}" alt="Person" width="96" height="96">
+        <strong style="font-size:12px;font-family:'Acme'">Choose Hope</strong>
+      </div>
+    </div>
+  </div>
+  <br><br>
+<br><br><br>
+  <a href="#about" style="text-align:center;font-family:'Acme';font-size:20px;" data-toggle="modal" data-target="#trending_modal"><i class="material-icons">&#xe8e5;</i>&nbsp&nbspTRENDING</a><br><br>
+  <a href="{% url 'patientInfo' %}" style="text-align:center;font-family:'Acme';font-size:20px"><i class='fas'>&#xf0f0;</i>&nbsp&nbspPATIENTS</a><br><br>
+  <a href="{% url 'admin_statistics' %}" style="text-align:center;font-family:'Acme';font-size:20px"><i  class="fa">&#xf080;</i>&nbsp&nbspSTATISTICS</a><br><br><br><br><br><br><br>
+  <a href="'http://127.0.0.1:8000/cancer_app/login/'" style="text-align:center;font-family:'Acme';font-size:20px"><i style='font-size:20px' class='fas'>&#xf30a;</i>&nbsp&nbspSIGN OUT</a>
+</div>
+
+
+<div class="modal" id="trending_modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="font-family:Acme">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspWHAT'S NEW?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="card" style="border-bottom:none;border-right:none;">
+              <div class="row" style="padding-top:20px;padding-bottom:20px;">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-4">
+                  <img src="{% static "images/trending_1.webp" %}" alt="" height="150" width="200">
+                </div>
+                <div class="col-md-6">
+                  <br>
+                  <p style="font-family:Quicksand">Breast cancer affects men too! People with diabetes, obesity at higher risk</p>
+                  <p> <a href="https://economictimes.indiatimes.com/magazines/panache/breast-cancer-affects-men-too-look-out-for-any-lump-in-armpit-neck-people-with-diabetes-obesity-at-higher-risk/articleshow/72393512.cms" style="font-size:13px;text-decoration:underline;color:#1c4966">https://economictimes.indiatimes.com/topic/breast-cancer</a>
+                  </p>
+                </div>
+                <div class="col-md-1">
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="card" style="border-bottom:none;border-right:none;">
+              <div class="row" style="padding-top:20px;padding-bottom:20px;">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-4">
+                  <img src="{% static "images/trending_2.webp" %}" alt="" height="150" width="200">
+                </div>
+                <div class="col-md-6">
+                  <br>
+                  <p style="font-family:Quicksand">Ray of hope for cancer patients: New technique may prevent chemotherapy-related hair loss</p>
+                  <p> <a href="https://economictimes.indiatimes.com/magazines/panache/ray-of-hope-for-cancer-patients-new-technique-may-prevent-chemotherapy-related-hair-loss/articleshow/71111832.cms" style="font-size:13px;text-decoration:underline;color:#1c4966">https://economictimes.indiatimes.com/magazines/panache/ray-of-hope</a>
+                  </p>
+                </div>
+                <div class="col-md-1">
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="card" style="border-bottom:none;border-right:none;">
+              <div class="row" style="padding-top:20px;padding-bottom:20px;">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-4">
+                  <img src="{% static "images/pos2.jpg" %}" alt="" height="150" width="200">
+                </div>
+                <div class="col-md-6">
+                  <br>
+                  <p style="font-family:Quicksand">Now, a novel AI system will help radiologists improve ability to diagnose prostate cancer</p>
+                  <p> <a href="https://economictimes.indiatimes.com/magazines/panache/now-a-novel-ai-system-will-help-radiologists-improve-ability-to-diagnose-prostate-cancer/articleshow/68937930.cms" style="font-size:13px;text-decoration:underline;color:#1c4966">https://economictimes.indiatimes.com/magazines/panache/now-a-novel-ai-system</a>
+                  </p>
+                </div>
+                <div class="col-md-1">
+                </div>
+              </div>
+          </div>
+          <br>
+          <div class="card" style="border-bottom:none;border-right:none;">
+              <div class="row" style="padding-top:20px;padding-bottom:20px;">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-4">
+                  <img src="{% static "images/trending_4.webp" %}" alt="" height="150" width="200">
+                </div>
+                <div class="col-md-6">
+                  <br>
+                  <p style="font-family:Quicksand">One dollar test to detect prostate cancer early</p>
+                  <p> <a href="https://economictimes.indiatimes.com/news/science/one-dollar-test-to-detect-prostate-cancer-early/articleshow/46813898.cms" style="font-size:13px;">https://economictimes.indiatimes.com/news/science/one-dollar-test</a>
+                  </p>
+                </div>
+                <div class="col-md-1">
+                </div>
+              </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="main">
+  <img src="{% static "images/b12.jpg" %}" alt="" width="100%">
+  <!-- <div class="content1">
+  </div> -->
+  <!-- <div class="content2">
+  </div> -->
+  <div class="content3">
+  </div>
+  <div class="content4">
+  </div>
+  <div class="content5">
+  </div>
+  <div class="content6">
+  </div>
+  <p style="font-size:18px;font-family:Acme;position:absolute;top:228px;left:400px;">Together, we are tougher than Cancer!
+    <img src="{% static "images/logo1.jpg" %}" alt="" width="50" height="50">
+    </p>
+  <br>
+  <div class="container" style="background-color:lavender;">
+    <br>
+    <div class="heading">
+      <p>Breast Cancer Accuracy Check</p>
+    </div>
+    <div class="card" style="background-color:white;border-bottom:none; border-right:none;height:150px;">
+    <div class="row" style="padding-top:10px;">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-2">
+        <div class="container" style="padding-left:12px;">
+          <div id="chartContainer1" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{svm_final_avg_B}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="container" style="padding-left:12px;">
+          <div id="chartContainer2" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{dt_final_avg_B}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="container" style="padding-left:12px;">
+          <div id="chartContainer3" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{lr_final_avg_B}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="container" style="padding-left:12px;">
+          <div id="chartContainer4" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{rf_final_avg_B}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="container" style="padding-left:12px;">
+          <div id="chartContainer5" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{nb_final_avg_B}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+      </div>
+    </div>
+  </div>
+    <br><br>
+    <div class="heading">
+      <p>Prostate Cancer Accuracy Check</p>
+    </div>
+    <div class="card" style="border-bottom:none;border-right:none;height:150px;">
+    <div class="row"  style="padding-top:10px;">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-2">
+        <div class="container" style="padding-left:12px;">
+          <div id="chartContainer6" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{svm_final_avg}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="container" style="padding-left:12px;">
+          <div id="chartContainer7" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{dt_final_avg}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2" style="padding-left:12px;">
+        <div class="container">
+          <div id="chartContainer8" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{lr_final_avg}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2" style="padding-left:12px;">
+        <div class="container">
+          <div id="chartContainer9" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{rf_final_avg}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="container" style="padding-left:12px;">
+          <div id="chartContainer10" style="height: 120px; width: 100%;"></div>
+          <p style="font-size:15px;position:absolute;top:40%;left:37%;">{{nb_final_avg}}%</p>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <div class="hide_canvas">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- <div class="container" align="right" style="padding-top:20px;">
+    <button type="button" class="btn btn-sm" style="background-color:#f1f1f1;height:30px;border:1px solid black;" onclick="location.href='http://127.0.0.1:8000/cancer_app/login/'"><p style="color:black;font-size:12px;"><strong>Sign Out</strong></p></button>
+  </div> -->
+  <div class="row" style="padding-top:100px; padding-left:230px;">
+    <div class="col-md-5">
+      <div class="card" style="width:350px; border:1px solid black;">
+        <img class="card-img-top" src="{% static "images/c3.jpg" %}" alt="Card image" style="height:230px;">
+        <div class="card-body">
+          <h6 class="card-title" style="text-align:center"><strong>Breast Cancer</strong></h6>
+          <p class="card-text"></p>
+          <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+              <a href="{% url 'breastAccuracy' %}" class="btn" style="background-color:lavenderblush; border:1px solid black; font-family:'Acme'">Examine</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-4">
+        <div class="card" style="width:350px; border:1px solid black;">
+          <img class="card-img-top" src="{% static "images/prostate_card_admin.jpg" %}" alt="Card image" style="height:230px;">
+          <div class="card-body">
+            <h6 class="card-title" style="text-align:center"><strong>Prostate Cancer<strong></h6>
+            <p class="card-text"></p>
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-8">
+                <a href="{% url 'prostateAccuracy' %}" class="btn" style="background-color:lavender; border:1px solid black; font-family:'Acme'">Examine</a>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+      </div>
+  </div>
+</div>
+<br><br>
+<script>
+window.onload = function () {
+  CanvasJS.addColorSet("greyShades",
+             [
+             "#E4A199",
+             "white"
+             ]);
+
+var chart1 = new CanvasJS.Chart("chartContainer1", {
+	animationEnabled: true,
+  backgroundColor: "white",
+  colorSet: "greyShades",
+	data: [{
+		type: "doughnut",
+		startAngle: 120,
+    innerRadius: 33,
+		toolTipContent: "{label} : {y} %",
+		dataPoints: [
+			{ y: {{svm_final_avg_B}}, label: "SVM" },
+			{ y: 100-{{svm_final_avg_B}}, label: " " }
+		]
+	}]
+});
+chart1.render();
+
+
+CanvasJS.addColorSet("greyShades",
+           [
+           "#CE897B",
+           "white"
+           ]);
+
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+  type: "doughnut",
+  startAngle: 50,
+  innerRadius: 33,
+  toolTipContent: "{label} : {y} %",
+  dataPoints: [
+    { y: {{dt_final_avg_B}}, label: "DT" },
+    { y: 100-{{dt_final_avg_B}}, label: " " }
+  ]
+}]
+});
+chart2.render();
+
+CanvasJS.addColorSet("greyShades",
+           [
+           "#FBB2B7",
+           "white"
+           ]);
+
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+  type: "doughnut",
+  startAngle: 50,
+  innerRadius: 33,
+  toolTipContent: "{label} : {y} %",
+  dataPoints: [
+    { y: {{lr_final_avg_B}}, label: "LR" },
+    { y: 100-{{lr_final_avg_B}}, label: " " }
+  ]
+}]
+});
+chart3.render();
+
+
+CanvasJS.addColorSet("greyShades",
+           [
+           "#ECB7BF",
+           "white"
+           ]);
+
+var chart4 = new CanvasJS.Chart("chartContainer4", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+  type: "doughnut",
+  startAngle: 50,
+  innerRadius: 33,
+  toolTipContent: "{label} : {y} %",
+  dataPoints: [
+    { y: {{rf_final_avg_B}}, label: "RF" },
+    { y: 100-{{rf_final_avg_B}}, label: " " }
+  ]
+}]
+});
+chart4.render();
+
+
+CanvasJS.addColorSet("greyShades",
+           [
+           "#EAD3B7",
+           "white"
+           ]);
+
+var chart5 = new CanvasJS.Chart("chartContainer5", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+  type: "doughnut",
+  startAngle: 50,
+  innerRadius: 33,
+  toolTipContent: "{label} : {y} %",
+  dataPoints: [
+    { y: {{nb_final_avg_B}}, label: "NB" },
+    { y: 100-{{nb_final_avg_B}}, label: " " }
+  ]
+}]
+});
+chart5.render();
+
+CanvasJS.addColorSet("greyShades",
+           [
+           "#45B6FE",
+           "white"
+           ]);
+
+var chart6 = new CanvasJS.Chart("chartContainer6", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+  type: "doughnut",
+  startAngle: 70,
+  innerRadius: 33,
+  toolTipContent: "{label} : {y} %",
+  dataPoints: [
+    { y: {{svm_final_avg}}, label: "SVM" },
+    { y: 100-{{svm_final_avg}}, label: " " }
+  ]
+}]
+});
+chart6.render();
+
+
+CanvasJS.addColorSet("greyShades",
+         [
+         "#3792CB",
+         "white"
+         ]);
+
+var chart7 = new CanvasJS.Chart("chartContainer7", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+type: "doughnut",
+startAngle: 80,
+innerRadius: 33,
+toolTipContent: "{label} : {y} %",
+dataPoints: [
+  { y: {{dt_final_avg}}, label: "DT" },
+  { y: 100-{{dt_final_avg}}, label: " " }
+]
+}]
+});
+chart7.render();
+
+CanvasJS.addColorSet("greyShades",
+         [
+         "#296D98",
+         "white"
+         ]);
+
+var chart8 = new CanvasJS.Chart("chartContainer8", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+type: "doughnut",
+startAngle: 50,
+innerRadius: 33,
+toolTipContent: "{label} : {y} %",
+dataPoints: [
+  { y: {{lr_final_avg}}, label: "LR" },
+  { y: 100-{{lr_final_avg}}, label: " " }
+]
+}]
+});
+chart8.render();
+
+
+CanvasJS.addColorSet("greyShades",
+         [
+         "#1C4966",
+         "white"
+         ]);
+
+var chart9 = new CanvasJS.Chart("chartContainer9", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+type: "doughnut",
+startAngle: 50,
+innerRadius: 33,
+toolTipContent: "{label} : {y} %",
+dataPoints: [
+  { y: {{rf_final_avg}}, label: "RF" },
+  { y: 100-{{rf_final_avg}}, label: " " }
+]
+}]
+});
+chart9.render();
+
+
+CanvasJS.addColorSet("greyShades",
+         [
+         "#0E2433",
+         "white"
+         ]);
+
+var chart10 = new CanvasJS.Chart("chartContainer10", {
+animationEnabled: true,
+backgroundColor: "white",
+colorSet: "greyShades",
+data: [{
+type: "doughnut",
+startAngle: 100,
+innerRadius: 33,
+toolTipContent: "{label} : {y} %",
+dataPoints: [
+  { y: {{nb_final_avg}}, label: "NB" },
+  { y: 100-{{nb_final_avg}}, label: " " }
+]
+}]
+});
+chart10.render();
+}
+</script>
+</body>
+</html>
